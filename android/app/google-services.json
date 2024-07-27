@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "644296224596",
+    "project_id": "tapcard-986f2",
+    "storage_bucket": "tapcard-986f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644296224596:android:0306dfc15b964890fc22c1",
+        "android_client_info": {
+          "package_name": "com.example.tapcard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd_arR6DaxDHnmgpoVf3k3jKjGXIwH9SM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
