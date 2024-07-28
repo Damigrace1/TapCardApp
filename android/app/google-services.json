@@ -1,26 +1,51 @@
 {
   "project_info": {
-    "project_number": "644296224596",
-    "project_id": "tapcard-986f2",
-    "storage_bucket": "tapcard-986f2.appspot.com"
+    "project_number": "805397727927",
+    "project_id": "tapcad-7cfb3",
+    "storage_bucket": "tapcad-7cfb3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:644296224596:android:0306dfc15b964890fc22c1",
+        "mobilesdk_app_id": "1:805397727927:android:9fa1db32ab36e7b76bdb32",
         "android_client_info": {
-          "package_name": "com.example.tapcard"
+          "package_name": "com.tapcad.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "805397727927-ccm223qoap8s8j5oh6cb7g1bsl4rnps5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tapcad.app",
+            "certificate_hash": "cbd88a3982a0a8697567b0cd56126498699ad013"
+          }
+        },
+        {
+          "client_id": "805397727927-3efrti7j9khldkooved393iui08a1rt5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyCd_arR6DaxDHnmgpoVf3k3jKjGXIwH9SM"
+          "current_key": "AIzaSyAkC6x7hxr8qmG0jlKwyd06_gzzs2n_onE"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "805397727927-3efrti7j9khldkooved393iui08a1rt5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "805397727927-nd4pbu0v0js0o1lkil2gjgk1p7h40nuc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tapcard"
+              }
+            }
+          ]
         }
       }
     }
