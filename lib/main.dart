@@ -4,7 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/utils/themes.dart';
+<<<<<<< HEAD
 import 'package:tapcard/views/sign_up/signup.dart';
+=======
+// import 'package:tapcard/views/settings/settings_view.dart';
+
+import 'views/settings_screen.dart';
+>>>>>>> 719f4c88853c3217bc7875f00b1c07b975e48171
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

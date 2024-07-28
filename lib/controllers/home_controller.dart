@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../services/local_storage_services.dart';
 
 class HomeController extends GetxController {
