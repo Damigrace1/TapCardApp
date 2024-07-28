@@ -1,15 +1,11 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:tapcard/utils/themes.dart';
 
 import '../../controllers/home_controller.dart';
 import '../widgets/common_widgets.dart';
-
-
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -28,8 +24,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         _darkMode = false;
         _usePhoneSettings = false;
         HomeController.it.themeMode = ThemeMode.light;
-      }
-      else {
+      } else {
         HomeController.it.themeMode = ThemeMode.dark;
       }
       HomeController.it.update();
@@ -43,8 +38,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         _lightMode = false;
         _usePhoneSettings = false;
         HomeController.it.themeMode = ThemeMode.dark;
-      }
-      else {
+      } else {
         HomeController.it.themeMode = ThemeMode.light;
       }
       HomeController.it.update();
@@ -73,21 +67,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
         leading: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(width: 20.w,),
+            SizedBox(
+              width: 20.w,
+            ),
             ColorFiltered(
-                colorFilter: ColorFilter.mode( currentTheme.dividerColor,
-                BlendMode.srcATop),
-                child: Image.asset('assets/icons/left_arrow.png', width: 13.w,)),
-            SizedBox(width: 3.w,),
-            Text('Settings', style: TextStyle(fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                color: currentTheme.dividerColor),
+                colorFilter: ColorFilter.mode(
+                    currentTheme.dividerColor, BlendMode.srcATop),
+                child: Image.asset(
+                  'assets/icons/left_arrow.png',
+                  width: 13.w,
+                )),
+            SizedBox(
+              width: 3.w,
+            ),
+            Text(
+              'Settings',
+              style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                  color: currentTheme.dividerColor),
             )
           ],
         ),
-        title: Text('App Theme', style: TextStyle(
-            fontWeight: FontWeight.w600, fontSize: 16.sp
-        ),),
+        title: Text(
+          'App Theme',
+          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.sp),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 0),
@@ -115,11 +120,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   onChanged: _onUsePhoneSettingsChanged,
                 ),
               ),
-
-            ]
-        ),
+            ]),
       ),
     );
   }
-
 }

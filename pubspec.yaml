@@ -37,18 +37,29 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_screenutil: ^5.9.0
   get: ^4.6.6
+  google_sign_in: ^6.2.1
+  firebase_core: ^3.2.0
+  firebase_auth: ^5.1.2 
+  cloud_firestore: ^5.1.0 
+  firebase_storage: ^12.1.1
   localstore: ^1.4.0
+  flutter_native_splash: ^2.4.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
+ 
   flutter_lints: ^3.0.0
+
+
+
+  # If you have changed the name(s) of your info.plist file(s), you can specify the filename(s)
+  # with the info_plist_files parameter.  Remove only the # characters in the three lines below,
+  # do not remove any spaces:
+  #info_plist_files:
+  #  - 'ios/Runner/Info-Debug.plist'
+  #  - 'ios/Runner/Info-Release.plist'
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -69,10 +80,30 @@ flutter:
           weight: 500
         - asset: assets/fonts/SFPRODISPLAYREGULAR.OTF
           weight: 400
+          
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter/Inter-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Inter/Inter-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Inter/Inter-SemiBold.ttf
+          weight: 700
+        - asset: assets/fonts/Inter/Inter-Bold.ttf
+          weight: 600
+        - asset: assets/fonts/Inter/Inter-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Inter/Inter-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Inter/Inter-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Inter/Inter-ExtraLight.ttf
+          weight: 200
 
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/icons/
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
