@@ -1,9 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
+import 'package:tapcard/controllers/home_controller.dart';
+import 'package:tapcard/utils/themes.dart';
+import 'package:tapcard/views/settings/settings_view.dart';
 
 void main() async {
+  Get.put(HomeController());
   runApp(const TapCardApp());
   // firebse initialization
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,20 +20,19 @@ class TapCardApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(393, 852),
+        designSize: const Size(430, 932),
         builder: (_, child) {
-          return GetMaterialApp(
-            builder: (context, child) {
-              return Overlay(
-                initialEntries: [OverlayEntry(builder: (context) => child!)],
+          return GetBuilder<HomeController>(
+            builder: (controller) {
+              return GetMaterialApp(
+                title: 'Tap Card',
+                theme: TapCardThemes.lightTheme,
+                darkTheme: TapCardThemes.darkTheme,
+                themeMode: HomeController.it.themeMode,
+                debugShowCheckedModeBanner: false,
+                home: SettingsScreen(),
               );
             },
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              useMaterial3: true,
-              scaffoldBackgroundColor: Colors.white,
-            ),
-            home: Container(),
           );
         });
   }
