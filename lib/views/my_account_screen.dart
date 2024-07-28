@@ -90,6 +90,7 @@ class MyAccountScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
+
                 onPressed: () {
                   // Implement delete account logic
                 },
