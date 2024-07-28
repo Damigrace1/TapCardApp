@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 import 'package:tapcard/utils/themes.dart';
 
 import '../../controllers/home_controller.dart';
@@ -11,12 +11,14 @@ import '../widgets/common_widgets.dart';
 
 
 
-class SettingsScreen extends StatefulWidget {
+// ignore: use_key_in_widget_constructors
+class SettingsView extends StatefulWidget {
   @override
-  _SettingsScreenState createState() => _SettingsScreenState();
+  // ignore: library_private_types_in_public_api
+  _SettingsViewState createState() => _SettingsViewState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _SettingsViewState extends State<SettingsView> {
   bool _lightMode = false;
   bool _darkMode = false;
   bool _usePhoneSettings = true;

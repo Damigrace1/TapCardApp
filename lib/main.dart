@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/utils/themes.dart';
-import 'package:tapcard/views/settings/settings_view.dart';
+// import 'package:tapcard/views/settings/settings_view.dart';
+
+import 'views/settings_screen.dart';
 
 void main() {
   Get.put(HomeController());
