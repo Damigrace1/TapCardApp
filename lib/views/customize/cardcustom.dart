@@ -76,8 +76,13 @@ class CustomCard extends StatelessWidget {
             ),
             addVerticalSpacing(8),
             BusinessCard(
-                // color: Colors.yellow,
-                ),
+              name: 'Jonas Broms',
+              jobTitle: 'UX/UI Designer',
+              website: 'www.jonasbroms.com',
+              email: 'jonas.broms@jonasbroms.com',
+              phoneNumber: '+234 805 456 321',
+              color: Color(0xff002214),
+            ),
             addVerticalSpacing(30),
             Container(
               height: 50,

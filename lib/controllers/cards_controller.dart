@@ -1,29 +1,30 @@
 import 'dart:ui';
 
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 // import 'dart:convert';
 
 class CardsController extends GetxController {
   final cards = <BusinessCard>[].obs;
   final isSharing = false.obs;
   final isSharingSuccess = false.obs;
-  final storage = GetStorage();
+  //final storage = GetStorage();
 
   @override
   void onInit() {
     super.onInit();
-    loadCards();
+   // loadCards();
   }
 
   void loadCards() {
-    final storedCards = storage.read<List>('cards') ?? [];
+    final storedCards =
+       // storage.read<List>('cards') ??
+            [];
     cards.value =
         storedCards.map((card) => BusinessCard.fromJson(card)).toList();
   }
 
   void saveCards() {
-    storage.write('cards', cards.map((card) => card.toJson()).toList());
+ //   storage.write('cards', cards.map((card) => card.toJson()).toList());
   }
 
   void addCard(BusinessCard card) {

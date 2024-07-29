@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SharingDialog extends StatelessWidget {
   const SharingDialog({super.key});
@@ -34,11 +35,13 @@ class SharingDialog extends StatelessWidget {
                     height: 40,
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xff8e60dd),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16)),
+                            borderRadius: BorderRadius.circular(16.r)),
                       ),
                       child: const Text(
                         'Cancel Sharing',

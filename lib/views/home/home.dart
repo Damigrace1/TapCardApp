@@ -3,6 +3,7 @@ import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tapcard/controllers/home_controller.dart';
+import 'package:tapcard/views/widgets/business_card.dart';
 import '../../utils/themes.dart';
 import '../widgets/card2__widget.dart';
 
@@ -112,7 +113,7 @@ class MyCardsTab extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-           Card2Widget(
+           BusinessCard(
             name: 'Jonas Broms',
             jobTitle: 'UX/UI Designer',
             website: 'www.jonasbroms.com',
@@ -120,7 +121,7 @@ class MyCardsTab extends StatelessWidget {
             phoneNumber: '+234 805 456 321',
             color: Color(0xff002214),
           ),
-           Card2Widget(
+           BusinessCard(
             name: 'Jonas Brom',
             jobTitle: 'UX/UI Designer',
             website: 'www.jonasbroms.com',

@@ -10,8 +10,10 @@ import 'package:tapcard/views/splash_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //await Firebase.initializeApp();
+
   Get.put(HomeController());
   runApp(const TapCardApp());
+  // firebse initialization
 }
 
 class TapCardApp extends StatelessWidget {
@@ -19,6 +21,7 @@ class TapCardApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return ScreenUtilInit(
         designSize: const Size(430, 932),
         builder: (_, child) {

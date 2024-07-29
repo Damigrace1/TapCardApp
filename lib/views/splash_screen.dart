@@ -5,13 +5,14 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:tapcard/utils/themes.dart';
 import 'package:tapcard/views/home/home.dart';
 
+
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: currentTheme.primaryColor,
+      backgroundColor: Color(0xff8E60DD),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -35,6 +36,7 @@ class SplashScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: (){
                     Get.to(()=> HomeScreen());
+
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
