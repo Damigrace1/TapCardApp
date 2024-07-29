@@ -6,8 +6,12 @@ import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
 import '../../utils/themes.dart';
 import '../widgets/card2__widget.dart';
+import 'home_tabs/mycards.dart';
+import 'home_tabs/mycontacts.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -56,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen>
                 'assets/icons/SunDim.png',width: 19.12,),
                 inactiveChild: Image.asset( _controller.value ? 'assets/icons/Moon.png' :
                 'assets/icons/SunDim.png',width: 19.12,),
-                borderRadius: BorderRadius.all(const Radius.circular(15)),
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
                 width: 68.w,
                 height: 36.h,
                 enabled: true,
@@ -89,14 +93,19 @@ class _HomeScreenState extends State<HomeScreen>
               unselectedLabelStyle: TextStyle(color: Colors.grey.shade400,
                   fontWeight: FontWeight.w400,fontSize: 16.sp),
               unselectedLabelColor: Colors.grey,
-              tabs: [
+              tabs: const [
                 Tab(text: 'My Cards'),
                 Tab(text: 'Contacts'),
               ],
             ),
           ) ,
-          body: TabBarView(
+          body: const TabBarView(
             children: [
+
+              // Note Team: 
+              // My Cards and Contacts Tab statelesswidgets have been 
+              // put in the home folder. 
+              // Author: Toz. 
               MyCardsTab(),
               ContactsTab()
             ],
@@ -107,46 +116,12 @@ class _HomeScreenState extends State<HomeScreen>
   }
 }
 
-class MyCardsTab extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-           BusinessCard(
-            name: 'Jonas Broms',
-            jobTitle: 'UX/UI Designer',
-            website: 'www.jonasbroms.com',
-            email: 'jonas.broms@jonasbroms.com',
-            phoneNumber: '+234 805 456 321',
-            color: Color(0xff002214),
-          ),
-           BusinessCard(
-            name: 'Jonas Brom',
-            jobTitle: 'UX/UI Designer',
-            website: 'www.jonasbroms.com',
-            email: 'jonas.broms@jonasbroms.com',
-            phoneNumber: '+234 805 456 321',
-            color: Color(0xff503dd4),
-          ),
-          AddNewCard(),
-          
-        ],
-      ),
-    );
-  }
-}
 
-class ContactsTab extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Contacts'),
-    );
-  }
-}
+
 
 class AddNewCard extends StatelessWidget {
+  const AddNewCard({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -33,7 +33,7 @@ class TapCardApp extends StatelessWidget {
                 darkTheme: TapCardThemes.darkTheme,
                 themeMode: HomeController.it.themeMode,
                 debugShowCheckedModeBanner: false,
-                home: SplashScreen(),
+                home: const SplashScreen(),
               );
             },
           );
