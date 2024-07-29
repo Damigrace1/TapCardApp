@@ -43,7 +43,7 @@ dependencies:
   cloud_firestore: ^5.1.0 
   firebase_storage: ^12.1.1
   localstore: ^1.4.0
-  flutter_native_splash: ^2.4.1
+  flutter_advanced_switch: ^3.1.0
 
 dev_dependencies:
   flutter_test:

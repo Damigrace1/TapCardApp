@@ -12,10 +12,10 @@ import 'package:tapcard/views/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  //await Firebase.initializeApp();
   Get.put(HomeController());
+
   runApp(const TapCardApp());
-  // firebse initialization
 }
 
 class TapCardApp extends StatelessWidget {

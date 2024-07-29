@@ -33,6 +33,7 @@ class BusinessCard extends StatelessWidget {
               ),
               SizedBox(height: 10.h),
               Text(
+
                 'Jonas Broms',
                 style: TextStyle(
                   color: Colors.white,
