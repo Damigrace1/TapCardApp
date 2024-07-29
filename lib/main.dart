@@ -4,16 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/utils/themes.dart';
-import 'package:tapcard/views/customize/cardcustom.dart';
-import 'package:tapcard/views/home.dart';
+
 import 'package:tapcard/views/splash_screen.dart';
-// import 'package:tapcard/views/settings/settings_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //await Firebase.initializeApp();
   Get.put(HomeController());
-
   runApp(const TapCardApp());
 }
 
@@ -33,7 +30,7 @@ class TapCardApp extends StatelessWidget {
                 darkTheme: TapCardThemes.darkTheme,
                 themeMode: HomeController.it.themeMode,
                 debugShowCheckedModeBanner: false,
-                home: const CustomCard(),
+                home: SplashScreen(),
               );
             },
           );

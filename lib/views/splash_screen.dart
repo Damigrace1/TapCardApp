@@ -3,8 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:tapcard/utils/themes.dart';
-
-import 'home.dart';
+import 'package:tapcard/views/home/home.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -35,7 +34,7 @@ class SplashScreen extends StatelessWidget {
                 width: 382.w,
                 child: ElevatedButton(
                   onPressed: (){
-                    Get.to(()=> Home());
+                    Get.to(()=> HomeScreen());
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
