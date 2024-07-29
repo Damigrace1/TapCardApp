@@ -5,7 +5,9 @@ import 'package:get/get.dart';
 import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/utils/themes.dart';
 import 'package:tapcard/views/customize/cardcustom.dart';
-import 'package:tapcard/views/sign_up/signup.dart';
+import 'package:tapcard/views/home.dart';
+import 'package:tapcard/views/splash_screen.dart';
+// import 'package:tapcard/views/settings/settings_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
