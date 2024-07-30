@@ -227,8 +227,9 @@ class ContactDetails extends StatelessWidget {
           
 
             CustomButton(
-              text: 'Added to Contact', 
-              filled: false,
+              text: 'Add to Contact', 
+              filled: false, 
+              fillColor: Colors.white, 
               
             onPressed: (){})
           ],
