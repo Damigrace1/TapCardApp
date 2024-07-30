@@ -4,27 +4,12 @@ import 'package:tapcard/views/widgets/sharing_dialog.dart';
 
 import '../../controllers/home_controller.dart';
 import '../../custom_button.dart';
-import 'package:tapcard/utils/const.dart';
+import '../../models/business_model.dart';
 
 class BusinessCard extends StatelessWidget {
-  /// Create a model that contains the details of the business card and replace it with all these placeholders
-  final Color? color;
+  final BusinessCardModel business;
 
-  final String name;
-  final String? jobTitle;
-  final String? website;
-  final String? email;
-  final String phoneNumber;
-
-  BusinessCard({
-    super.key,
-    required this.name,
-    this.jobTitle,
-    this.website,
-    this.email,
-    required this.phoneNumber,
-    required this.color,
-  });
+  BusinessCard({required this.business});
   ValueNotifier<bool> isTapped = ValueNotifier<bool>(false);
 
   @override
@@ -39,7 +24,7 @@ class BusinessCard extends StatelessWidget {
             child: SizedBox(
               width: 390.w,
               child: Card(
-                color: color ?? Color(0xFF002B27), // Custom dark green color
+                color: business.color, // Custom dark green color
 
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16.r),
@@ -55,7 +40,7 @@ class BusinessCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            website ?? '',
+                            business.website ?? '',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 8.sp,
@@ -69,7 +54,7 @@ class BusinessCard extends StatelessWidget {
                       ),
                       SizedBox(height: 10.h),
                       Text(
-                        name ?? '',
+                        business.name ?? '',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18.sp,
@@ -79,7 +64,7 @@ class BusinessCard extends StatelessWidget {
 
                       // SizedBox(height: 8.h),
                       Text(
-                        jobTitle ?? '',
+                        business.jobTitle ?? '',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 10.sp,
@@ -90,14 +75,14 @@ class BusinessCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            email ?? '',
+                            business.email ?? '',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 8.sp),
                           ),
                           Text(
-                            phoneNumber ?? '',
+                            business.phoneNumber ?? '',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w300,

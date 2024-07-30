@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tapcard/models/business_model.dart';
 import 'package:tapcard/views/edit_card.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
 
@@ -13,15 +14,18 @@ class Home extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             BusinessCard(
-              name: 'Jonas Broms',
-              jobTitle: 'UX/UI Designer',
-              website: 'www.jonasbroms.com',
-              email: 'jonas.broms@jonasbroms.com',
-              phoneNumber: '+234 805 456 321',
-              color: Color(0xff002214),
+             business: BusinessCardModel(
+               name: 'Jonas Broms',
+               jobTitle: 'UX/UI Designer',
+               website: 'www.jonasbroms.com',
+               email: 'jonas.broms@jonasbroms.com',
+               phoneNumber: '+234 805 456 321',
+               color: Color(0xff002214),
+             ),
             ),
             GestureDetector(
               onTap: (){
+                Navigator.pop(context);
                 Navigator.push(context, MaterialPageRoute(builder: (context) => EditCard()));
               },
               child: Container(

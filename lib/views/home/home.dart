@@ -3,9 +3,8 @@ import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tapcard/controllers/home_controller.dart';
-import 'package:tapcard/views/widgets/business_card.dart';
+import 'package:tapcard/views/add_card.dart';
 import '../../utils/themes.dart';
-import '../widgets/card2__widget.dart';
 import 'home_tabs/mycards.dart';
 import 'home_tabs/mycontacts.dart';
 
@@ -120,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ],
               ),
             ),
-            body: const TabBarView(
+            body: TabBarView(
               children: [
                 // Note Team:
                 // My Cards and Contacts Tab statelesswidgets have been
@@ -142,18 +141,24 @@ class AddNewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey[400]!, style: BorderStyle.solid),
-      ),
-      child: const Center(
-        heightFactor: 2,
+    return InkWell(
+      onTap: () {
+        Get.to(() => AddCard());
+      },
+      child: Container(
+        height: 200.h,
+        width: double.infinity,
+        margin: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(12),
+          border:
+              Border.all(color: Colors.grey[400]!, style: BorderStyle.solid),
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.add_circle_outline, size: 48, color: Color(0xff8e60dd)),
             SizedBox(height: 8),

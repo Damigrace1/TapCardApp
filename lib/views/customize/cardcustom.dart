@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:tapcard/controllers/cardcustom_controller.dart';
 import 'package:tapcard/controllers/home_controller.dart';
+import 'package:tapcard/models/business_model.dart';
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/home/home.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
@@ -96,12 +97,14 @@ class CustomCard extends StatelessWidget {
             addVerticalSpacing(8),
             Obx(
               () => BusinessCard(
-                name: 'Jonas Broms',
-                jobTitle: 'UX/UI Designer',
-                website: 'www.jonasbroms.com',
-                email: 'jonas.broms@jonasbroms.com',
-                phoneNumber: '+234 805 456 321',
-                color: cardcustomcontroller.pickerColor.value,
+                business: BusinessCardModel(
+                  name: 'Jonas Broms',
+                  jobTitle: 'UX/UI Designer',
+                  website: 'www.jonasbroms.com',
+                  email: 'jonas.broms@jonasbroms.com',
+                  phoneNumber: '+234 805 456 321',
+                  color: cardcustomcontroller.pickerColor.value,
+                ),
               ),
             ),
             // Obx(
