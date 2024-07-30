@@ -99,14 +99,14 @@ class _HomeScreenState extends State<HomeScreen>
               ],
             ),
           ) ,
-          body: const TabBarView(
+          body:  TabBarView(
             children: [
 
               // Note Team: 
               // My Cards and Contacts Tab statelesswidgets have been 
               // put in the home folder. 
               // Author: Toz. 
-              MyCardsTab(),
+              const MyCardsTab(),
               ContactsTab()
             ],
           ) ,
