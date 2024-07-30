@@ -8,6 +8,8 @@ class CardCustomController extends GetxController {
   var pickerColor = kpurple.obs;
   var currentColor = kpurple.obs;
 
+  RxBool newcolorpicked = false.obs;
+
   // void changeColor(Color color) {
   //   pickerColor.value = color;
   //   print(pickerColor.value.value);
@@ -23,8 +25,6 @@ class CardCustomController extends GetxController {
 
   Future<void> setColor(Color color) async {
     String colorString = color.value.toRadixString(16);
-    await LocalStorageService.instance.saveColorValue(colorString);
-    print(colorString);
 
     print(
         'SavedColor is ${LocalStorageService.instance.saveColorValue.toString()}');

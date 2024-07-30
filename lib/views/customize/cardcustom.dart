@@ -12,9 +12,16 @@ import 'package:tapcard/views/home/home.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
 import 'package:tapcard/views/widgets/spacing.dart';
 
-class CustomCard extends StatelessWidget {
-  const CustomCard({super.key});
+class CustomCard extends StatefulWidget {
+  const CustomCard({super.key, required this.business});
 
+  final BusinessCardModel business;
+
+  @override
+  State<CustomCard> createState() => _CustomCardState();
+}
+
+class _CustomCardState extends State<CustomCard> {
   @override
   Widget build(BuildContext context) {
     final CardCustomController cardcustomcontroller =
@@ -82,7 +89,7 @@ class CustomCard extends StatelessWidget {
         elevation: 20,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+        padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,23 +102,16 @@ class CustomCard extends StatelessWidget {
                   fontWeight: FontWeight.w600),
             ),
             addVerticalSpacing(8),
-            Obx(
-              () => BusinessCard(
-                business: BusinessCardModel(
-                  name: 'Jonas Broms',
-                  jobTitle: 'UX/UI Designer',
-                  website: 'www.jonasbroms.com',
-                  email: 'jonas.broms@jonasbroms.com',
-                  phoneNumber: '+234 805 456 321',
-                  color: cardcustomcontroller.pickerColor.value,
-                ),
-              ),
+            BusinessCard(
+              business: BusinessCardModel(
+                  name: widget.business.name,
+                  jobTitle: widget.business.jobTitle,
+                  website: widget.business.website,
+                  email: widget.business.email,
+                  phoneNumber: widget.business.phoneNumber,
+                  color: widget.business.color),
             ),
-            // Obx(
-            //   () => BusinessCard(
-            //     color: cardcustomcontroller.pickerColor.value,
-            //   ),
-            // ),
+
             addVerticalSpacing(30),
             // GestureDetector(
             //   onTap: () {},
@@ -161,7 +161,11 @@ class CustomCard extends StatelessWidget {
                   color: cardcustomcontroller.pickerColor.value,
                   onColorChanged: (Color color) async {
                     cardcustomcontroller.pickerColor.value = color;
-                    await cardcustomcontroller.setColor(color);
+                    setState(() {
+                      widget.business.color = color;
+                    });
+
+                    // await cardcustomcontroller.setColor(color);
                   },
                   spacing: 15.w,
                   width: 40,

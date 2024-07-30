@@ -12,37 +12,79 @@ import '../home.dart';
 class MyCardsTab extends StatefulWidget {
   MyCardsTab({super.key});
 
+  @override
+  State<MyCardsTab> createState() => _MyCardsTabState();
+}
+
+class _MyCardsTabState extends State<MyCardsTab> {
   final CardReceiverController controller = Get.put(CardReceiverController());
+  List myCards = [];
+  bool isLoading = true;
+  getCards() async {
+    isLoading = true;
+    myCards = await LocalStorageService.instance.getMyCards() ?? [];
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getCards();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          BusinessCard(
-            business: BusinessCardModel(
-              name: 'Jonas Broms',
-              jobTitle: 'UX/UI Designer',
-              website: 'www.jonasbroms.com',
-              email: 'jonas.broms@jonasbroms.com',
-              phoneNumber: '+234 805 456 321',
-              color: const Color(0xff002214),
+    return isLoading
+        ? Center(
+            child: CircularProgressIndicator(),
+          )
+        : SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListView.separated(
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return BusinessCard(
+                          business: BusinessCardModel.fromMap(myCards[index]));
+                    },
+                    shrinkWrap: true,
+                    separatorBuilder: (c, _) => SizedBox(
+                          height: 15.h,
+                        ),
+                    itemCount: myCards.length),
+                //  BusinessCard(
+                //  business: BusinessCardModel(
+                //    name: 'Jonas Broms',
+                //    jobTitle: 'UX/UI Designer',
+                //    website: 'www.jonasbroms.com',
+                //    email: 'jonas.broms@jonasbroms.com',
+                //    phoneNumber: '+234 805 456 321',
+                //    color: const Color(0xff002214),
+                //  ),
+                // ),
+                //  BusinessCard(
+                // business: BusinessCardModel(
+                //   name: 'Jonas Brom',
+                //   jobTitle: 'UX/UI Designer',
+                //   website: 'www.jonasbroms.com',
+                //   email: 'jonas.broms@jonasbroms.com',
+                //   phoneNumber: '+234 805 456 321',
+                //
+                //   color: const Color(0xff503dd4),
+                // ),
+                // ),
+                AddNewCard(
+                  rebuilder: () {
+                    getCards();
+                  },
+                ),
+              ],
             ),
-          ),
-          BusinessCard(
-            business: BusinessCardModel(
-              name: 'Jonas Brom',
-              jobTitle: 'UX/UI Designer',
-              website: 'www.jonasbroms.com',
-              email: 'jonas.broms@jonasbroms.com',
-              phoneNumber: '+234 805 456 321',
-              color: const Color(0xff503dd4),
-            ),
-          ),
-          const AddNewCard(),
-        ],
-      ),
-    );
+          );
   }
 }
 

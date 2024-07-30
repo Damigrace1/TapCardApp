@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:tapcard/models/business_model.dart';
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/customize/cardcustom.dart';
 import 'package:tapcard/views/edit_card.dart';
@@ -53,7 +54,7 @@ class HomeController extends GetxController {
     return Color(colorInt);
   }
 
-  void showEditCardDialog(BuildContext context) {
+  void showEditCardDialog(BuildContext context, BusinessCardModel business) {
     Get.dialog(AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
@@ -87,7 +88,7 @@ class HomeController extends GetxController {
             ),
             title: Text('Customize Card'),
             onTap: () {
-              Get.to(() => const CustomCard());
+              Get.to(() => CustomCard(business: business));
             },
           ),
           ListTile(
