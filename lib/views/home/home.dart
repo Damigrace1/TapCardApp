@@ -157,7 +157,7 @@ class AddNewCard extends StatelessWidget {
           border:
               Border.all(color: Colors.grey[400]!, style: BorderStyle.solid),
         ),
-        child: Column(
+        child: const Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

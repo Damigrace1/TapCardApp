@@ -40,7 +40,7 @@ class _CustomCardState extends State<CustomCard> {
           children: [
             GestureDetector(
               onTap: () {
-                homecontroller.getColor();
+//                homecontroller.getColor();
                 Navigator.pop(context);
               },
               child: Image.asset(
@@ -203,7 +203,6 @@ class _CustomCardState extends State<CustomCard> {
           color: Colors.transparent,
           border: Border.all(color: kgrey5),
           onPressed: () {
-            homecontroller.getColor();
             (Get.to(HomeScreen()));
           },
           width: 250,

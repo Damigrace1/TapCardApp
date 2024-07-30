@@ -21,7 +21,7 @@ class HomeController extends GetxController {
     super.onInit();
     String mode = await LocalStorageService.instance.getThemeVal();
     themeMode = mode == 'dark' ? ThemeMode.dark : ThemeMode.light;
-    getColor();
+//    getColor();
   }
 
   ThemeMode _themeMode = ThemeMode.system;
@@ -40,19 +40,19 @@ class HomeController extends GetxController {
     update();
   }
 
-  Future<Color?> getColor() async {
-    String? colorString = await LocalStorageService.instance.getColorVal();
-    print(' $colorString is this');
-    // int colorValue = int.parse(colorString, radix: 16);
-    // Ensure the string starts with `#`
-    if (colorString.startsWith('#')) {
-      colorString = colorString.substring(1);
-    }
-
-    int colorInt = int.parse(colorString, radix: 16);
-    pickerColor.value = colorInt;
-    return Color(colorInt);
-  }
+  // Future<Color?> getColor() async {
+  //   String? colorString = await LocalStorageService.instance.getColorVal();
+  //   print(' $colorString is this');
+  //   // int colorValue = int.parse(colorString, radix: 16);
+  //   // Ensure the string starts with `#`
+  //   if (colorString.startsWith('#')) {
+  //     colorString = colorString.substring(1);
+  //   }
+  //
+  //   int colorInt = int.parse(colorString, radix: 16);
+  //   pickerColor.value = colorInt;
+  //   return Color(colorInt);
+  // }
 
   void showEditCardDialog(BuildContext context, BusinessCardModel business) {
     Get.dialog(AlertDialog(

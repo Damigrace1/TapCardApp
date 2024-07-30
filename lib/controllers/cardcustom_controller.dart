@@ -23,12 +23,13 @@ class CardCustomController extends GetxController {
   //   return localStorage.getItem(key);
   // }
 
-  Future<void> setColor(Color color) async {
-    String colorString = color.value.toRadixString(16);
-
-    print(
-        'SavedColor is ${LocalStorageService.instance.saveColorValue.toString()}');
-  }
+  // Future<void> setColor(Color color) async {
+  //   String colorString = color.value.toRadixString(16);
+  //   print(colorString);
+  //
+  //   print(
+  //       'SavedColor is ${LocalStorageService.instance.saveColorValue.toString()}');
+  // }
 
   // Future<Color?> getColor(String key) async {
   //   String? colorValue = await localStorageServicee.getInt(key);

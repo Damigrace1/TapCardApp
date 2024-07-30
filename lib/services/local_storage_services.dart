@@ -6,7 +6,6 @@ class LocalStorageService {
 
   static CollectionRef themeRef = _storageService.collection('themeRef');
   static CollectionRef myCards = _storageService.collection('myCards');
-  static CollectionRef cardcolor = _storageService.collection('cardcolor');
 
   saveThemeValue(String val) async {
     await themeRef.doc('themeRef').set({"theme": val}).then((value) {
@@ -16,47 +15,28 @@ class LocalStorageService {
     });
   }
 
-  // saveMyCard(Map<String, dynamic> cardDoc) async {
-  //   await myCards.doc('myCards').set(cardDoc).then((value) {
-  //     print('value saved');
-  //   }).catchError((err) {
-  //     print('Error caught while saving data to localstore,$err');
-  //   });
-  // }
-
   Future<String> getThemeVal() async {
     final corDoc = themeRef.doc('themeRef');
     final r = await corDoc.get();
     return r == null ? 'light' : r.values.firstOrNull;
   }
 
-  saveColorValue(String val) async {
-    await cardcolor.doc('cardcolor').set({"color": val}).then((value) {
-      print('value saved');
-    }).catchError((err) {
-      print('Error caught while saving data to localstore,$err');
-    });
-  }
-
-  Future<String> getColorVal() async {
-    final corDoc = cardcolor.doc('cardcolor');
-    final r = await corDoc.get();
-    print('get color ${r?.values.first}');
-    return r == null ? 'ff607d8b' : r.values.firstOrNull;
-  }
-
-// Future  getMyCards() async {
-//   final corDoc =  myCards.doc('myCards');
-//   final r = await corDoc.get();
-//   print(r);
-//
-// }
-
-  saveMyCards(Map<String, dynamic> cardDoc, String id) {
-    myCards.doc(id).set(cardDoc).then((value) {
+  saveMyCards(Map<String, dynamic> cardDoc) {
+    myCards.doc(cardDoc['id'].toString()).set(cardDoc).then((value) {
       print('doc saved to local:$value');
     }).catchError((err) {
       print('Error caught while saving data to firestore,$err');
+    });
+  }
+
+  void updateMyCard(Map<String, dynamic> updatedCardDoc) {
+    myCards
+        .doc(updatedCardDoc['id'].toString())
+        .set(updatedCardDoc, SetOptions(merge: true))
+        .then((value) {
+      print('doc updated in local: $value');
+    }).catchError((err) {
+      print('Error caught while updating data in localstore: $err');
     });
   }
 
@@ -64,6 +44,11 @@ class LocalStorageService {
     final notes = await myCards.get();
     print(notes?.values.toList());
     return notes?.values.toList();
+  }
+
+  void deleteCard(String id) {}
+  void clearCards() {
+    myCards.delete();
   }
 
   LocalStorageService._internal();
