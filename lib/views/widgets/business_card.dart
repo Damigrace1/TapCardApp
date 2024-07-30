@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tapcard/utils/const.dart';
 
 class BusinessCard extends StatelessWidget {
   const BusinessCard({super.key, this.color});
@@ -32,15 +33,21 @@ class BusinessCard extends StatelessWidget {
                         fontSize: 8.sp,
                         fontWeight: FontWeight.w500),
                   ),
-                  Image.asset(
-                    'assets/images/default_card_logo.png',
-                    width: 44.w,
+                  Container(
+                    height: 64.h,
+                    width: 60.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15), color: kwhite),
+                    child: Image.asset(
+                      'assets/images/default_card_logo.png',
+                      width: 29.w,
+                      height: 20.h,
+                    ),
                   )
                 ],
               ),
               SizedBox(height: 10.h),
               Text(
-
                 'Jonas Broms',
                 style: TextStyle(
                   color: Colors.white,

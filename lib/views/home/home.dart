@@ -21,87 +21,106 @@ class _HomeScreenState extends State<HomeScreen>
     _tabController = TabController(length: 2, vsync: this);
   }
 
-
-
-
   @override
   void dispose() {
     _tabController.dispose();
     super.dispose();
   }
+
   final _controller = ValueNotifier<bool>(false);
   @override
   Widget build(BuildContext context) {
-    return  DefaultTabController(
+    return DefaultTabController(
       length: 2,
-      child: GetBuilder<HomeController>(builder: ( controller) {
-        return Scaffold(
-          appBar:  AppBar
-            (
-            leadingWidth: 200.w,
-            leading:     Row(
-              children: [
-                SizedBox(width: 16.w,),
-                Image.asset('assets/images/app_logo.png',width: 41.61,),
-                Text('tapcard',style: TextStyle(fontSize: 22.2.sp),)
-              ],
-            ),
-            actions: [
-              AdvancedSwitch(
-                controller: _controller,
-                activeColor: currentTheme.primaryColor,
-                inactiveColor: currentTheme.primaryColor,
-                activeChild: Image.asset( _controller.value ? 'assets/icons/Moon.png' :
-                'assets/icons/SunDim.png',width: 19.12,),
-                inactiveChild: Image.asset( _controller.value ? 'assets/icons/Moon.png' :
-                'assets/icons/SunDim.png',width: 19.12,),
-                borderRadius: BorderRadius.all(const Radius.circular(15)),
-                width: 68.w,
-                height: 36.h,
-                enabled: true,
-                onChanged: (v){
-                  controller.themeMode = v ? ThemeMode.light : ThemeMode.dark;
-                  setState(() {
-
-                  });
-                },
-                thumb:  CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: ColorFiltered(
-                      colorFilter: ColorFilter.mode(currentTheme.primaryColor,
-                          BlendMode.srcATop),
-                      child: Image.asset(
-                        !_controller.value ? 'assets/icons/Moon.png' :
-                        'assets/icons/SunDim.png',width: 19.12,),
-                    )),
-                disabledOpacity: 0.5,
+      child: GetBuilder<HomeController>(
+        builder: (controller) {
+          return Scaffold(
+            appBar: AppBar(
+              leadingWidth: 200.w,
+              leading: Row(
+                children: [
+                  SizedBox(
+                    width: 16.w,
+                  ),
+                  Image.asset(
+                    'assets/images/app_logo.png',
+                    width: 41.61,
+                  ),
+                  Text(
+                    'tapcard',
+                    style: TextStyle(fontSize: 22.2.sp),
+                  )
+                ],
               ),
-              SizedBox(width: 16.w,),
-            ],
-            bottom: TabBar(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              tabAlignment: TabAlignment.fill,
-              indicatorSize: TabBarIndicatorSize.tab,
-              labelColor: Colors.purple,
-              labelStyle: TextStyle(color: currentTheme.primaryColor,
-              fontWeight: FontWeight.bold,fontSize: 16.sp),
-              unselectedLabelStyle: TextStyle(color: Colors.grey.shade400,
-                  fontWeight: FontWeight.w400,fontSize: 16.sp),
-              unselectedLabelColor: Colors.grey,
-              tabs: [
-                Tab(text: 'My Cards'),
-                Tab(text: 'Contacts'),
+              actions: [
+                AdvancedSwitch(
+                  controller: _controller,
+                  activeColor: currentTheme.primaryColor,
+                  inactiveColor: currentTheme.primaryColor,
+                  activeChild: Image.asset(
+                    _controller.value
+                        ? 'assets/icons/Moon.png'
+                        : 'assets/icons/SunDim.png',
+                    width: 19.12,
+                  ),
+                  inactiveChild: Image.asset(
+                    _controller.value
+                        ? 'assets/icons/Moon.png'
+                        : 'assets/icons/SunDim.png',
+                    width: 19.12,
+                  ),
+                  borderRadius: BorderRadius.all(const Radius.circular(15)),
+                  width: 68.w,
+                  height: 36.h,
+                  enabled: true,
+                  onChanged: (v) {
+                    controller.themeMode = v ? ThemeMode.light : ThemeMode.dark;
+                    setState(() {});
+                  },
+                  thumb: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: ColorFiltered(
+                        colorFilter: ColorFilter.mode(
+                            currentTheme.primaryColor, BlendMode.srcATop),
+                        child: Image.asset(
+                          !_controller.value
+                              ? 'assets/icons/Moon.png'
+                              : 'assets/icons/SunDim.png',
+                          width: 19.12,
+                        ),
+                      )),
+                  disabledOpacity: 0.5,
+                ),
+                SizedBox(
+                  width: 16.w,
+                ),
               ],
+              bottom: TabBar(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                tabAlignment: TabAlignment.fill,
+                indicatorSize: TabBarIndicatorSize.tab,
+                labelColor: Colors.purple,
+                labelStyle: TextStyle(
+                    color: currentTheme.primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.sp),
+                unselectedLabelStyle: TextStyle(
+                    color: Colors.grey.shade400,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16.sp),
+                unselectedLabelColor: Colors.grey,
+                tabs: [
+                  Tab(text: 'My Cards'),
+                  Tab(text: 'Contacts'),
+                ],
+              ),
             ),
-          ) ,
-          body: TabBarView(
-            children: [
-              MyCardsTab(),
-              ContactsTab()
-            ],
-          ) ,
-        );
-      },),
+            body: TabBarView(
+              children: [MyCardsTab(), ContactsTab()],
+            ),
+          );
+        },
+      ),
     );
   }
 }
@@ -109,18 +128,22 @@ class _HomeScreenState extends State<HomeScreen>
 class MyCardsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final HomeController homecontroller = Get.put(HomeController());
     return SingleChildScrollView(
       child: Column(
         children: [
-           Card2Widget(
-            name: 'Jonas Broms',
-            jobTitle: 'UX/UI Designer',
-            website: 'www.jonasbroms.com',
-            email: 'jonas.broms@jonasbroms.com',
-            phoneNumber: '+234 805 456 321',
-            color: Color(0xff002214),
+          Obx(
+            () => Card2Widget(
+                name: 'Jonas Broms',
+                jobTitle: 'UX/UI Designer',
+                website: 'www.jonasbroms.com',
+                email: 'jonas.broms@jonasbroms.com',
+                phoneNumber: '+234 805 456 321',
+                color: homecontroller.pickerColor == null
+                    ? Color(0xff503dd4)
+                    : Color(homecontroller.pickerColor.value)),
           ),
-           Card2Widget(
+          Card2Widget(
             name: 'Jonas Brom',
             jobTitle: 'UX/UI Designer',
             website: 'www.jonasbroms.com',
@@ -129,7 +152,6 @@ class MyCardsTab extends StatelessWidget {
             color: Color(0xff503dd4),
           ),
           AddNewCard(),
-          
         ],
       ),
     );
@@ -161,7 +183,6 @@ class AddNewCard extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-        
             Icon(Icons.add_circle_outline, size: 48, color: Color(0xff8e60dd)),
             SizedBox(height: 8),
             Text(
