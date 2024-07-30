@@ -118,7 +118,8 @@ child: const Text('Accept'),
             phoneNumber: '+234 805 456 321',
             color: const Color(0xff002214),
           ) ,
-          title: const Text('You received a business card!'),
+          title: const Text('You received a business card!', 
+          style: TextStyle(fontSize: 16),),
           actions:  [
             TextButton(
     onPressed: () => Get.back(), 
@@ -150,7 +151,7 @@ child: const Text('Add to Contact'),
   }
 
   void completeSuccess(){
-    Get.to(
+    Get.dialog(
      AlertDialog(
         content: Container(
           width: 120.h, height: 120.h,
@@ -165,6 +166,7 @@ child: const Text('Add to Contact'),
 
         ],
       ), 
+      barrierDismissible: false, 
       
     ); 
   }
