@@ -35,6 +35,7 @@ class MyCardsTab extends StatelessWidget {
             website: 'www.jonasbroms.com',
             email: 'jonas.broms@jonasbroms.com',
             phoneNumber: '+234 805 456 321',
+
             color: const Color(0xff503dd4),
           ),
           ),

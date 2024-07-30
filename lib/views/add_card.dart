@@ -7,6 +7,8 @@ import 'package:tapcard/models/business_model.dart';
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
 
+import '../services/local_storage_services.dart';
+
 class AddCard extends StatefulWidget {
   AddCard({super.key});
 
@@ -194,6 +196,7 @@ class _AddCardState extends State<AddCard> {
   }
   @override
   Widget build(BuildContext context) {
+    LocalStorageService.instance.getMyCards();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -208,177 +211,201 @@ class _AddCardState extends State<AddCard> {
         ),
 
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Preview',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              BusinessCard(
-               business: BusinessCardModel(
-                 name: name.text,
-                 jobTitle: jobTitle.text,
-                 website: website.text,
-                 email: email.text,
-                 phoneNumber: phone.text,
-                 color: Color(0xff002214),
-               ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: kgrey4,
-                    radius: 50,
-                    child: SizedBox(
-                        height: 50,
-                        width: 50,
-                        child:
-                        Image.asset('assets/images/default_card_logo.png')),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Upload your Logo',
-                        style:
-                        TextStyle(color: kpurple, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        width: 207.w,
-                        child: Text(
-                            'Accepted file types: JPG, PNG. Maximum file size: 2MB.',
-                          style: (TextStyle(fontSize: 12.sp,color: Colors.grey.shade600)),
-                        ),
-                      )
-                    ],
-                  ),
-
-                ],
-              ),
-              SizedBox(height: 20,),
-              Form(
-                key: _formKey,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Preview',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            BusinessCard(
+             business: BusinessCardModel(
+               name: name.text,
+               jobTitle: jobTitle.text,
+               website: website.text,
+               email: email.text,
+               phoneNumber: phone.text,
+               company: company.text,
+               color: Color(0xff002214),
+             ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Full Name'),
-                    TextFormField(
-                      controller: name,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    SizedBox(height: 16),
                     Row(
                       children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        CircleAvatar(
+                          backgroundColor: kgrey4,
+                          radius: 50,
+                          child: SizedBox(
+                              height: 50,
+                              width: 50,
+                              child:
+                              Image.asset('assets/images/default_card_logo.png')),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Upload your Logo',
+                              style:
+                              TextStyle(color: kpurple, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: 207.w,
+                              child: Text(
+                                  'Accepted file types: JPG, PNG. Maximum file size: 2MB.',
+                                style: (TextStyle(fontSize: 12.sp,color: Colors.grey.shade600)),
+                              ),
+                            )
+                          ],
+                        ),
+                    
+                      ],
+                    ),
+                    SizedBox(height: 20,),
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Full Name'),
+                          TextFormField(
+                            controller: name,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                          SizedBox(height: 16),
+                          Row(
                             children: [
-                              Text('Company'),
-                              TextFormField(
-                                controller: company,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Company'),
+                                    TextFormField(
+                                      controller: company,
+                                      decoration: InputDecoration(
+                                        border: OutlineInputBorder(),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(width: 16),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Title'),
+                                    TextFormField(
+                                      controller: jobTitle,
+                                      decoration: InputDecoration(
+                                        border: OutlineInputBorder(),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                        SizedBox(width: 16),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Title'),
-                              TextFormField(
-                                controller: jobTitle,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                ),
-                              ),
-                            ],
+                          SizedBox(height: 16),
+                          Text('Email Address'),
+                          TextFormField(
+                            controller: email,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 16),
-                    Text('Email Address'),
-                    TextFormField(
-                      controller: email,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    Text('Phone Number'),
-                    TextFormField(
-                      controller: phone,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    Text('Website'),
-                    TextFormField(
-                      controller: website,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    Text('Social Links'),
-                    Column(
-                      children: [
-                        TextFormField(
-                          controller: twitter,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            prefixIcon: Icon(Icons.link),
+                          SizedBox(height: 16),
+                          Text('Phone Number'),
+                          TextFormField(
+                            controller: phone,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 16),
-                        TextFormField(
-                          controller: linkedln,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            prefixIcon: Icon(Icons.link),
+                          SizedBox(height: 16),
+                          Text('Website'),
+                          TextFormField(
+                            controller: website,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 16),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: kgrey4),
-                        borderRadius: BorderRadius.circular(20),
+                          // SizedBox(height: 16),
+                          // Text('Social Links'),
+                          // Column(
+                          //   children: [
+                          //     TextFormField(
+                          //       controller: twitter,
+                          //       decoration: InputDecoration(
+                          //         border: OutlineInputBorder(),
+                          //         prefixIcon: Icon(Icons.link),
+                          //       ),
+                          //     ),
+                          //     SizedBox(height: 16),
+                          //     TextFormField(
+                          //       controller: linkedln,
+                          //       decoration: InputDecoration(
+                          //         border: OutlineInputBorder(),
+                          //         prefixIcon: Icon(Icons.link),
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
+                          // SizedBox(height: 16),
+                          // Container(
+                          //   decoration: BoxDecoration(
+                          //     border: Border.all(color: kgrey4),
+                          //     borderRadius: BorderRadius.circular(20),
+                          //   ),
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.all(8.0),
+                          //     child: Text('Add social link'),
+                          //   ),
+                          // ),
+                          SizedBox(height: 24.h,),
+                          CustomButton(
+                            enabled:
+                            (name.text == '' || phone.text == '') ?
+                             false : true,
+                            text: 'Save Card', onPressed: (){
+                            LocalStorageService.instance.saveMyCard(
+                              BusinessCardModel(
+                                name: name.text,
+                                jobTitle: jobTitle.text,
+                                website: website.text,
+                                email: email.text,
+                                phoneNumber: phone.text,
+                                color: const Color(0xff503dd4),
+                                company: company.text
+                              ).toMap()
+                            );
+                          },
+                            fillColor: kpurple,
+                          )
+                        ],
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Add social link'),
-                      ),
                     ),
-                    SizedBox(height: 24.h,),
-                    CustomButton(text: 'Save Card', onPressed: (){},
-                    )
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
