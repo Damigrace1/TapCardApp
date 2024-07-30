@@ -113,7 +113,7 @@ class BusinessCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                        SizedBox(height: 24.h),
-                      Divider(),
+                      const Divider(),
                       SizedBox(height: 24.h,),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 8.h,vertical:4.h ),
