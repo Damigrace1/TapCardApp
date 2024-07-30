@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tapcard/models/business_model.dart';
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
 import 'package:tapcard/views/widgets/spacing.dart';
@@ -76,12 +77,14 @@ class CustomCard extends StatelessWidget {
             ),
             addVerticalSpacing(8),
             BusinessCard(
-              name: 'Jonas Broms',
-              jobTitle: 'UX/UI Designer',
-              website: 'www.jonasbroms.com',
-              email: 'jonas.broms@jonasbroms.com',
-              phoneNumber: '+234 805 456 321',
-              color: Color(0xff002214),
+              business: BusinessCardModel(
+                name: 'Jonas Broms',
+                jobTitle: 'UX/UI Designer',
+                website: 'www.jonasbroms.com',
+                email: 'jonas.broms@jonasbroms.com',
+                phoneNumber: '+234 805 456 321',
+                color: Color(0xff002214),
+              ),
             ),
             addVerticalSpacing(30),
             Container(

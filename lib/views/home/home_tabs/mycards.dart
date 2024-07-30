@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tapcard/models/business_model.dart';
 
 import '../../widgets/business_card.dart';
 import '../home.dart';
@@ -18,20 +19,24 @@ class MyCardsTab extends StatelessWidget {
       child: Column(
         children: [
            BusinessCard(
-            name: 'Jonas Broms',
-            jobTitle: 'UX/UI Designer',
-            website: 'www.jonasbroms.com',
-            email: 'jonas.broms@jonasbroms.com',
-            phoneNumber: '+234 805 456 321',
-            color: const Color(0xff002214),
+           business: BusinessCardModel(
+             name: 'Jonas Broms',
+             jobTitle: 'UX/UI Designer',
+             website: 'www.jonasbroms.com',
+             email: 'jonas.broms@jonasbroms.com',
+             phoneNumber: '+234 805 456 321',
+             color: const Color(0xff002214),
+           ),
           ),
            BusinessCard(
+          business: BusinessCardModel(
             name: 'Jonas Brom',
             jobTitle: 'UX/UI Designer',
             website: 'www.jonasbroms.com',
             email: 'jonas.broms@jonasbroms.com',
             phoneNumber: '+234 805 456 321',
             color: const Color(0xff503dd4),
+          ),
           ),
           const AddNewCard(),
           
@@ -111,12 +116,14 @@ child: const Text('Accept'),
     Get.dialog(
        AlertDialog(
         content: BusinessCard(
-            name: 'Jonas Broms',
-            jobTitle: 'UX/UI Designer',
-            website: 'www.jonasbroms.com',
-            email: 'jonas.broms@jonasbroms.com',
-            phoneNumber: '+234 805 456 321',
-            color: const Color(0xff002214),
+         business: BusinessCardModel(
+           name: 'Jonas Broms',
+           jobTitle: 'UX/UI Designer',
+           website: 'www.jonasbroms.com',
+           email: 'jonas.broms@jonasbroms.com',
+           phoneNumber: '+234 805 456 321',
+           color: const Color(0xff002214),
+         ),
           ) ,
           title: const Text('You received a business card!', 
           style: TextStyle(fontSize: 16),),

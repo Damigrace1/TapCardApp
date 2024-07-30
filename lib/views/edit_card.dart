@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tapcard/models/business_model.dart';
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
 
@@ -220,12 +221,14 @@ class _EditCardState extends State<EditCard> {
                 height: 10,
               ),
               BusinessCard(
-                name: 'Jonas Broms',
-                jobTitle: 'UX/UI Designer',
-                website: 'www.jonasbroms.com',
-                email: 'jonas.broms@jonasbroms.com',
-                phoneNumber: '+234 805 456 321',
-                color: Color(0xff002214),
+               business: BusinessCardModel(
+                 name: 'Jonas Broms',
+                 jobTitle: 'UX/UI Designer',
+                 website: 'www.jonasbroms.com',
+                 email: 'jonas.broms@jonasbroms.com',
+                 phoneNumber: '+234 805 456 321',
+                 color: Color(0xff002214),
+               ),
               ),
               SizedBox(
                 height: 20,

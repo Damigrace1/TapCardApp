@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tapcard/custom_button.dart';
+import 'package:tapcard/models/business_model.dart';
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
 
@@ -174,9 +176,22 @@ class _AddCardState extends State<AddCard> {
   final TextEditingController email = TextEditingController();
   final TextEditingController phone = TextEditingController();
   final TextEditingController website = TextEditingController();
-  final TextEditingController title = TextEditingController();
+  final TextEditingController jobTitle = TextEditingController();
   final TextEditingController twitter = TextEditingController();
   final TextEditingController linkedln = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    name.addListener((){setState(() {});});
+    website.addListener((){setState(() {});});
+    email.addListener((){setState(() {});});
+    company.addListener((){setState(() {});});
+    phone.addListener((){setState(() {});});
+    jobTitle.addListener((){setState(() {});});
+    twitter.addListener((){setState(() {});});
+    linkedln.addListener((){setState(() {});});
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -207,12 +222,14 @@ class _AddCardState extends State<AddCard> {
                 height: 10,
               ),
               BusinessCard(
-                name: 'Jonas Broms',
-                jobTitle: 'UX/UI Designer',
-                website: 'www.jonasbroms.com',
-                email: 'jonas.broms@jonasbroms.com',
-                phoneNumber: '+234 805 456 321',
-                color: Color(0xff002214),
+               business: BusinessCardModel(
+                 name: name.text,
+                 jobTitle: jobTitle.text,
+                 website: website.text,
+                 email: email.text,
+                 phoneNumber: phone.text,
+                 color: Color(0xff002214),
+               ),
               ),
               SizedBox(
                 height: 20,
@@ -259,7 +276,7 @@ class _AddCardState extends State<AddCard> {
                   children: [
                     Text('Full Name'),
                     TextFormField(
-                      initialValue: 'Jonas Broms',
+                      controller: name,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                       ),
@@ -273,7 +290,7 @@ class _AddCardState extends State<AddCard> {
                             children: [
                               Text('Company'),
                               TextFormField(
-                                initialValue: 'Random',
+                                controller: company,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                 ),
@@ -288,7 +305,7 @@ class _AddCardState extends State<AddCard> {
                             children: [
                               Text('Title'),
                               TextFormField(
-                                initialValue: 'UI/UX Designer',
+                                controller: jobTitle,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                 ),
@@ -301,7 +318,7 @@ class _AddCardState extends State<AddCard> {
                     SizedBox(height: 16),
                     Text('Email Address'),
                     TextFormField(
-                      initialValue: 'jonas.broms@jonasbroms.com',
+                      controller: email,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                       ),
@@ -309,7 +326,7 @@ class _AddCardState extends State<AddCard> {
                     SizedBox(height: 16),
                     Text('Phone Number'),
                     TextFormField(
-                      initialValue: '09041234567',
+                      controller: phone,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                       ),
@@ -317,7 +334,7 @@ class _AddCardState extends State<AddCard> {
                     SizedBox(height: 16),
                     Text('Website'),
                     TextFormField(
-                      initialValue: 'Jonasbroms.com',
+                      controller: website,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                       ),
@@ -327,7 +344,7 @@ class _AddCardState extends State<AddCard> {
                     Column(
                       children: [
                         TextFormField(
-                          initialValue: 'Twitter.com',
+                          controller: twitter,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             prefixIcon: Icon(Icons.link),
@@ -335,7 +352,7 @@ class _AddCardState extends State<AddCard> {
                         ),
                         SizedBox(height: 16),
                         TextFormField(
-                          initialValue: 'LinkedIn.com',
+                          controller: linkedln,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             prefixIcon: Icon(Icons.link),
@@ -354,6 +371,9 @@ class _AddCardState extends State<AddCard> {
                         child: Text('Add social link'),
                       ),
                     ),
+                    SizedBox(height: 24.h,),
+                    CustomButton(text: 'Save Card', onPressed: (){},
+                    )
                   ],
                 ),
               ),
