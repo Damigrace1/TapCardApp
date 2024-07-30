@@ -5,7 +5,10 @@ import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/customize/cardcustom.dart';
+import 'package:tapcard/views/edit_card.dart';
 import 'package:tapcard/views/widgets/card2__widget.dart';
+
+import '../custom_button.dart';
 import '../services/local_storage_services.dart';
 
 class HomeController extends GetxController {
@@ -45,76 +48,77 @@ class HomeController extends GetxController {
       colorString = colorString.substring(1);
     }
 
-    // Parse the string to an integer
     int colorInt = int.parse(colorString, radix: 16);
     pickerColor.value = colorInt;
     return Color(colorInt);
   }
 
   void showEditCardDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+    Get.dialog(AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      title: Text(
+        'Edit Card',
+        style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600),
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          ListTile(
+            visualDensity: VisualDensity(vertical: -4),
+            contentPadding: EdgeInsets.zero,
+            leading: Image.asset(
+              'assets/icons/edit.png',
+              width: 18.5.w,
+            ),
+            title: Text('Change Details'),
+            onTap: () {
+              Navigator.pop(context);
+              Get.to(() => EditCard());
+            },
           ),
-          title: Text(
-            'Edit Card',
-            style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600),
+          ListTile(
+            visualDensity: VisualDensity(vertical: -4),
+            contentPadding: EdgeInsets.zero,
+            leading: Image.asset(
+              'assets/icons/palette.png',
+              width: 18.5.w,
+            ),
+            title: Text('Customize Card'),
+            onTap: () {
+              Get.to(() => const CustomCard());
+            },
           ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ListTile(
-                visualDensity: VisualDensity(vertical: -4),
-                contentPadding: EdgeInsets.zero,
-                leading: Image.asset(
-                  'assets/icons/edit.png',
-                  width: 18.5.w,
-                ),
-                title: Text('Change Details'),
-                onTap: () {
-                  // Handle change details
-                },
-              ),
-              ListTile(
-                visualDensity: VisualDensity(vertical: -4),
-                contentPadding: EdgeInsets.zero,
-                leading: Image.asset(
-                  'assets/icons/palette.png',
-                  width: 18.5.w,
-                ),
-                title: Text('Customize Card'),
-                onTap: () {
-                  Get.to(() => const CustomCard());
-                },
-              ),
-              ListTile(
-                visualDensity: VisualDensity(vertical: -4),
-                contentPadding: EdgeInsets.zero,
-                leading: Image.asset(
-                  'assets/icons/delete.png',
-                  width: 18.5.w,
-                ),
-                title: Text('Delete'),
-                onTap: () {
-                  // Handle delete
-                },
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: CustomButton(
-                    text: 'Close',
-                    filled: false,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }),
-              )
-            ],
+          ListTile(
+            visualDensity: VisualDensity(vertical: -4),
+            contentPadding: EdgeInsets.zero,
+            leading: Image.asset(
+              'assets/icons/delete.png',
+              width: 18.5.w,
+            ),
+            title: Text('Delete'),
+            onTap: () {
+              // Handle delete
+            },
           ),
-        );
-      },
-    );
+          SizedBox(
+            width: double.infinity,
+            child: CustomButton(
+                text: 'Close',
+                filled: false,
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
+            // child: CustomButton(
+            //     text: 'Close',
+            //     filled: false,
+            //     onPressed: () {
+            //       Navigator.pop(context);
+            //     }),
+          )
+        ],
+      ),
+    ));
   }
 }

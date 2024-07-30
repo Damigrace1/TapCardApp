@@ -43,8 +43,6 @@ dependencies:
   cloud_firestore: ^5.1.0 
   firebase_storage: ^12.1.1
   localstore: ^1.4.0
-
-  flutter_native_splash: ^2.4.1
   email_validator: ^3.0.0
   rflutter_alert: ^2.0.7
   flex_color_picker: ^3.5.1
@@ -52,11 +50,12 @@ dependencies:
   get_storage: ^2.1.1
   localstorage: ^5.0.0
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
- 
+
   flutter_lints: ^3.0.0
 
 
@@ -68,25 +67,25 @@ dev_dependencies:
   #  - 'ios/Runner/Info-Debug.plist'
   #  - 'ios/Runner/Info-Release.plist'
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+ 
 
-# The following section is specific to Flutter packages.
+
+
+  # If you have changed the name(s) of your info.plist file(s), you can specify the filename(s)
+  # with the info_plist_files parameter.  Remove only the # characters in the three lines below,
+  # do not remove any spaces:
+  #info_plist_files:
+  #  - 'ios/Runner/Info-Debug.plist'
+
 flutter:
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
   fonts:
-    - family: SFPRODISPLAY
-      fonts:
-        - asset: assets/fonts/SFPRODISPLAYBOLD.OTF
-          weight: 700
-        - asset: assets/fonts/SFPRODISPLAYMEDIUM.OTF
-          weight: 500
-        - asset: assets/fonts/SFPRODISPLAYREGULAR.OTF
-          weight: 400
+
           
     - family: Inter
       fonts:
@@ -107,6 +106,7 @@ flutter:
         - asset: assets/fonts/Inter/Inter-ExtraLight.ttf
           weight: 200
 
+
   # To add assets to your application, add an assets section, like this:
   assets:
 
@@ -116,6 +116,7 @@ flutter:
      - assets/icons/
      - assets/images/
      - assets/icons/IdentificationCard.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

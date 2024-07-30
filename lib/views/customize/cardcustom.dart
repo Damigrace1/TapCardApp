@@ -96,9 +96,19 @@ class CustomCard extends StatelessWidget {
             addVerticalSpacing(8),
             Obx(
               () => BusinessCard(
+                name: 'Jonas Broms',
+                jobTitle: 'UX/UI Designer',
+                website: 'www.jonasbroms.com',
+                email: 'jonas.broms@jonasbroms.com',
+                phoneNumber: '+234 805 456 321',
                 color: cardcustomcontroller.pickerColor.value,
               ),
             ),
+            // Obx(
+            //   () => BusinessCard(
+            //     color: cardcustomcontroller.pickerColor.value,
+            //   ),
+            // ),
             addVerticalSpacing(30),
             // GestureDetector(
             //   onTap: () {},
