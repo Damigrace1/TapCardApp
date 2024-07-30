@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/custom_button.dart';
 import 'package:tapcard/models/business_model.dart';
 import 'package:tapcard/utils/const.dart';
@@ -397,9 +398,11 @@ class _AddCardState extends State<AddCard> {
                                 id: Random().nextInt(1000)
                               ).toMap(),
                             );
+
                             Get.dialog(
                               CardAdded()
                             );
+
                           },
                             fillColor: kpurple,
                           )
@@ -437,6 +440,7 @@ class CardAdded extends StatelessWidget {
                 onPressed: (){
               Navigator.pop(context);
               Navigator.pop(context);
+              HomeController.it.getCards();
             })
           ],
         ),

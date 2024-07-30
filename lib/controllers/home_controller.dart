@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:tapcard/models/business_model.dart';
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/customize/cardcustom.dart';
 import 'package:tapcard/views/edit_card.dart';
@@ -14,6 +15,12 @@ import '../services/local_storage_services.dart';
 class HomeController extends GetxController {
   static HomeController get it => Get.find();
   RxInt pickerColor = 4293467747.obs;
+  List myCards = [];
+
+  getCards() async {
+    myCards = await LocalStorageService.instance.getMyCards()??[];
+    update();
+  }
 
   @override
   void onInit() async {
@@ -53,7 +60,7 @@ class HomeController extends GetxController {
   //   return Color(colorInt);
   // }
 
-  void showEditCardDialog(BuildContext context) {
+  void showEditCardDialog(BuildContext context, BusinessCardModel cardModel) {
     Get.dialog(AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
@@ -75,7 +82,7 @@ class HomeController extends GetxController {
             title: Text('Change Details'),
             onTap: () {
               Navigator.pop(context);
-              Get.to(() => EditCard());
+              Get.to(() => EditCard(cardModel: cardModel,));
             },
           ),
           ListTile(
@@ -99,7 +106,9 @@ class HomeController extends GetxController {
             ),
             title: Text('Delete'),
             onTap: () {
-              // Handle delete
+              LocalStorageService.instance.deleteCard(cardModel.id.toString());
+              HomeController.it.getCards();
+              Navigator.pop(context);
             },
           ),
           SizedBox(

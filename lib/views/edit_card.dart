@@ -1,13 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/models/business_model.dart';
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
 
-class EditCard extends StatefulWidget {
-  EditCard({super.key});
+import '../custom_button.dart';
+import '../services/local_storage_services.dart';
 
+class EditCard extends StatefulWidget {
+  EditCard({super.key, required this.cardModel});
+ final BusinessCardModel cardModel;
   @override
   State<EditCard> createState() => _EditCardState();
 }
@@ -71,7 +76,22 @@ class _EditCardState extends State<EditCard> {
                       InkWell(
                         onTap: () {
                           Navigator.of(context).pop();
+                          LocalStorageService.instance.updateMyCard(
+                            BusinessCardModel(
+                                name: name.text,
+                                jobTitle: jobTitle.text,
+                                website: website.text,
+                                email: email.text,
+                                phoneNumber: phone.text,
+                                color: widget.cardModel.color,
+                                twitter: twitter.text,
+                                linkedln: linkedln.text,
+                                company: company.text,
+                              id: widget.cardModel.id
+                            ).toMap(),
+                          );
                           _showSuccessDialog();
+
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -136,6 +156,8 @@ class _EditCardState extends State<EditCard> {
                   SizedBox(height: 20), // Add spacing between the text and the button
                   InkWell(
                     onTap: () {
+                      HomeController.it.getCards();
+                      Navigator.of(context).pop(); // Close the dialog
                       Navigator.of(context).pop(); // Close the dialog
                     },
                     child: Container(
@@ -169,6 +191,46 @@ class _EditCardState extends State<EditCard> {
   }
 
 
+
+  late TextEditingController name;
+ late   TextEditingController company;
+  late TextEditingController email;
+  late TextEditingController phone;
+  late TextEditingController website;
+  late TextEditingController jobTitle;
+  late TextEditingController twitter;
+  late TextEditingController linkedln;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    name = TextEditingController(
+      text:  widget.cardModel.name
+    )..addListener((){setState(() {});});
+    company = TextEditingController(
+        text:  widget.cardModel.company
+    )..addListener((){setState(() {});});
+    email = TextEditingController(
+        text:  widget.cardModel.email
+    )..addListener((){setState(() {});});
+    phone = TextEditingController(
+        text:  widget.cardModel.phoneNumber
+    )..addListener((){setState(() {});});
+    website = TextEditingController(
+        text:  widget.cardModel.website
+    )..addListener((){setState(() {});});
+    linkedln = TextEditingController(
+ text:  widget.cardModel.linkedln
+    )..addListener((){setState(() {});});
+    jobTitle = TextEditingController(
+        text:  widget.cardModel.jobTitle
+    )..addListener((){setState(() {});});
+    twitter = TextEditingController(
+        text:  widget.cardModel.twitter
+    )..addListener((){setState(() {});});
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -222,12 +284,15 @@ class _EditCardState extends State<EditCard> {
               ),
               BusinessCard(
                business: BusinessCardModel(
-                 name: 'Jonas Broms',
-                 jobTitle: 'UX/UI Designer',
-                 website: 'www.jonasbroms.com',
-                 email: 'jonas.broms@jonasbroms.com',
-                 phoneNumber: '+234 805 456 321',
-                 color: Color(0xff002214),
+                 name: name.text,
+                 jobTitle: jobTitle.text,
+                 website: website.text,
+                 email: email.text,
+                 phoneNumber: phone.text,
+                 color: widget.cardModel.color,
+                 twitter: twitter.text,
+                 linkedln: linkedln.text,
+                 company: company.text
                ),
               ),
               SizedBox(
@@ -262,7 +327,7 @@ class _EditCardState extends State<EditCard> {
                   children: [
                     Text('Full Name'),
                     TextFormField(
-                      initialValue: 'Jonas Broms',
+                      controller: name,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                       ),
@@ -276,7 +341,7 @@ class _EditCardState extends State<EditCard> {
                             children: [
                               Text('Company'),
                               TextFormField(
-                                initialValue: 'Random',
+                                controller: company,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                 ),
@@ -291,7 +356,7 @@ class _EditCardState extends State<EditCard> {
                             children: [
                               Text('Title'),
                               TextFormField(
-                                initialValue: 'UI/UX Designer',
+                                controller: jobTitle,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                 ),
@@ -304,7 +369,7 @@ class _EditCardState extends State<EditCard> {
                     SizedBox(height: 16),
                     Text('Email Address'),
                     TextFormField(
-                      initialValue: 'jonas.broms@jonasbroms.com',
+                      controller: email,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                       ),
@@ -312,7 +377,7 @@ class _EditCardState extends State<EditCard> {
                     SizedBox(height: 16),
                     Text('Phone Number'),
                     TextFormField(
-                      initialValue: '09041234567',
+                      controller: phone,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                       ),
@@ -320,46 +385,17 @@ class _EditCardState extends State<EditCard> {
                     SizedBox(height: 16),
                     Text('Website'),
                     TextFormField(
-                      initialValue: 'Jonasbroms.com',
+                      controller: website,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 16),
-                    Text('Social Links'),
-                    Column(
-                      children: [
-                        TextFormField(
-                          initialValue: 'Twitter.com',
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            prefixIcon: Icon(Icons.link),
-                          ),
-                        ),
-                        SizedBox(height: 16),
-                        TextFormField(
-                          initialValue: 'LinkedIn.com',
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            prefixIcon: Icon(Icons.link),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 16),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: kgrey4),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Add social link'),
-                      ),
-                    ),
+
+                    SizedBox(height: 24.h,),
+
                   ],
                 ),
-              ),
+              )
             ],
           ),
         ),

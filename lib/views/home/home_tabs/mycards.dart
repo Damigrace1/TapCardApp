@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/models/business_model.dart';
 
 import '../../../services/local_storage_services.dart';
@@ -18,61 +19,48 @@ class MyCardsTab extends StatefulWidget {
 
 class _MyCardsTabState extends State<MyCardsTab> {
   final CardReceiverController controller = Get.put(CardReceiverController());
-  List myCards = [];
+
   bool isLoading = true;
-  getCards() async {
-    isLoading = true;
-    myCards = await LocalStorageService.instance.getMyCards()??[];
-    setState(() {
-      isLoading = false;
-    });
-  }
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getCards();
+HomeController.it.getCards();
   }
 
 
 
   @override
   Widget build(BuildContext context) {
+    return GetBuilder<HomeController>(builder: (controller)
+    {
+      return SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListView.separated(
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return BusinessCard(
+                      business:
+                      BusinessCardModel.fromMap(controller.myCards[index]));
+                },
+                shrinkWrap: true,
+                separatorBuilder: (c, _) => SizedBox(
+                  height: 15.h,
+                ),
+                itemCount:controller. myCards.length),
 
-    return isLoading
-        ? Center(
-            child: CircularProgressIndicator(),
-          )
-        : SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ListView.separated(
-                  physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return BusinessCard(
-                          business:
-                              BusinessCardModel.fromMap(myCards[index]));
-                    },
-                    shrinkWrap: true,
-                    separatorBuilder: (c, _) => SizedBox(
-                          height: 15.h,
-                        ),
-                    itemCount: myCards.length),
-
-                 AddNewCard(rebuilder: (){
-                  getCards();
-                } ,),
-              ],
-            ),
-          );
+            AddNewCard(),
+          ],
+        ),
+      );
+    });
   }
 }
 
-// AM CREATING THE CARD RECEIVER USING FUTURE DELAY AS TIMER
-// TO SET UP THE NFC FUNCTIONALITY.
-// AUTHOR : TOZ.
 
 class CardReceiverController extends GetxController {
   @override

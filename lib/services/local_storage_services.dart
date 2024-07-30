@@ -1,4 +1,5 @@
 import 'package:localstore/localstore.dart';
+import 'package:tapcard/controllers/home_controller.dart';
 
 class LocalStorageService {
   static final Localstore _storageService = Localstore.instance;
@@ -49,9 +50,12 @@ class LocalStorageService {
     return notes?.values.toList();
 
   }
-  void deleteCard(String id){
 
+  void deleteCard(String id){
+    myCards.doc(id).delete();
+    HomeController.it.update();
   }
+
   void clearCards(){
     myCards.delete();
   }

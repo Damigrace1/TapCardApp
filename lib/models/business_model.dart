@@ -9,6 +9,8 @@ class BusinessCardModel {
   String? email;
   String? phoneNumber;
   String? company;
+  String? linkedln;
+  String? twitter;
 
   BusinessCardModel({
     this.id,
@@ -18,7 +20,9 @@ class BusinessCardModel {
     this.website,
     this.email,
     this.phoneNumber,
-    this.company
+    this.company,
+    this.twitter,
+    this.linkedln
   });
 
   Map<String, dynamic> toMap() {
@@ -31,6 +35,8 @@ class BusinessCardModel {
       'email': email,
       'company': company,
       'phoneNumber': phoneNumber,
+      'twitter': twitter,
+      'linkedln':linkedln
     };
   }
 
@@ -45,6 +51,8 @@ class BusinessCardModel {
       email: map['email'],
       company: map['company'],
       phoneNumber: map['phoneNumber'],
+      linkedln: map['linkedln'],
+      twitter: map['twitter']
     );
   }
 

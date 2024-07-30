@@ -137,21 +137,18 @@ class _HomeScreenState extends State<HomeScreen>
 }
 
 class AddNewCard extends StatelessWidget {
-  const AddNewCard({super.key, required this.rebuilder});
-  final Function() rebuilder;
+  const AddNewCard({super.key,});
   @override
   Widget build(BuildContext context) {
     return InkWell(
 
       onTap: ()async{
        await  Get.to(()=>AddCard());
-       rebuilder;
-
       },
       child: Container(
         height: 200.h,
         width: double.infinity,
-        margin: const EdgeInsets.all(16),
+        margin:  EdgeInsets.symmetric(vertical: 16.h,horizontal: 8.w),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.grey[200],

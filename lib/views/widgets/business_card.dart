@@ -134,7 +134,9 @@ class BusinessCard extends StatelessWidget {
                               Expanded(
                                 child: CustomButton(filled:  false,
                                   onPressed :(){
-                                    HomeController.it.showEditCardDialog(context);
+                                    HomeController.it.showEditCardDialog(context,
+                                    business);
+
                                   },
                                   text: 'Edit',),
                               )
