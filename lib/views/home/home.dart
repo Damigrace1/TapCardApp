@@ -148,7 +148,7 @@ class AddNewCard extends StatelessWidget {
       child: Container(
         height: 200.h,
         width: double.infinity,
-        margin:  EdgeInsets.symmetric(vertical: 16.h,horizontal: 8.w),
+        margin:  EdgeInsets.symmetric(vertical: 16.h,horizontal: 6.w),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.grey[200],
