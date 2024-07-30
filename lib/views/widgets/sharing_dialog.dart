@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tapcard/utils/const.dart';
 
 class SharingDialog extends StatelessWidget {
   const SharingDialog({super.key});
@@ -7,53 +8,71 @@ class SharingDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width,
       child: Center(
-        // widthFactor: double.infinity,
-        child: AlertDialog(
+        child: Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          title: const Text(
-            'Bring phones closer\nfor sharing!',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          actions: [
-            // const SizedBox(height: 20),
-            Center(
-              child: Column(
-                children: [
-                  Image.asset(
+
+          backgroundColor: Colors.white,
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.9, // Adjust the width as needed
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    'Bring phones closer\nfor sharing!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 25
+                  ),
+                  child: Image.asset(
                     'assets/images/iphone_share.png',
                     height: 100,
                     fit: BoxFit.contain,
                   ),
-                  const SizedBox(height: 15),
-                  SizedBox(
-                    height: 40,
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xff8e60dd),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16.r)),
+                ),
+                const SizedBox(height: 15),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: kpurple,
                       ),
-                      child: const Text(
-                        'Cancel Sharing',
-                        style: TextStyle(color: Colors.white),
+                      width: MediaQuery.of(context).size.width,
+                      height: 40,
+                      child: Center(
+                        child: Text(
+                          'Cancel Sharing',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
+                  )
+                ),
+                const SizedBox(height: 20),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
+
   }
 }
