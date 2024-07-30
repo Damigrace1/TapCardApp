@@ -327,4 +327,5 @@ class BusinessCard extends StatelessWidget {
         ),
       );
     });
-  }}
+  }
+}
