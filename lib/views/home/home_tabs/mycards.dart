@@ -42,7 +42,7 @@ HomeController.it.getCards();
                 physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return BusinessCard(
-                      business:
+                      businessCard:
                       BusinessCardModel.fromMap(controller.myCards[index]));
                 },
                 shrinkWrap: true,
@@ -122,7 +122,7 @@ class CardReceiverController extends GetxController {
   void addContact() {
     Get.dialog(AlertDialog(
       content: BusinessCard(
-        business: BusinessCardModel(
+        businessCard: BusinessCardModel(
           name: 'Jonas Broms',
           jobTitle: 'UX/UI Designer',
           website: 'www.jonasbroms.com',

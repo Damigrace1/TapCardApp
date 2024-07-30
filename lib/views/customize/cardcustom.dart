@@ -118,7 +118,7 @@ class _CustomCardState extends State<CustomCard> {
             ),
             addVerticalSpacing(8),
             BusinessCard(
-              business: BusinessCardModel(
+              businessCard: BusinessCardModel(
                 name: businessCardModel.name,
                 jobTitle: businessCardModel.jobTitle,
                 website: businessCardModel.website,

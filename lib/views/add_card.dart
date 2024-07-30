@@ -225,7 +225,7 @@ class _AddCardState extends State<AddCard> {
               height: 10,
             ),
             BusinessCard(
-             business: BusinessCardModel(
+             businessCard: BusinessCardModel(
                name: name.text,
                jobTitle: jobTitle.text,
                website: website.text,

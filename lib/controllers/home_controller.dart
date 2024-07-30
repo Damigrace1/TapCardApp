@@ -1,15 +1,19 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:tapcard/models/business_model.dart';
+import 'package:tapcard/models/business_model.dart' as bm;
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/customize/cardcustom.dart';
-import 'package:tapcard/views/edit_card.dart';
-import 'package:tapcard/views/widgets/card2__widget.dart';
+import 'package:localstore/localstore.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 
+import 'package:tapcard/views/edit_card.dart';
+// import 'package:tapcard/views/widgets/card2__widget.dart';
 import '../custom_button.dart';
+import '../model/nfc_service_model.dart';
 import '../services/local_storage_services.dart';
 
 class HomeController extends GetxController {
@@ -25,9 +29,10 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+
     String mode = await LocalStorageService.instance.getThemeVal();
     themeMode = mode == 'dark' ? ThemeMode.dark : ThemeMode.light;
-//    getColor();
+    readNfcTag();
   }
 
   ThemeMode _themeMode = ThemeMode.system;
@@ -46,21 +51,8 @@ class HomeController extends GetxController {
     update();
   }
 
-  // Future<Color?> getColor() async {
-  //   String? colorString = await LocalStorageService.instance.getColorVal();
-  //   print(' $colorString is this');
-  //   // int colorValue = int.parse(colorString, radix: 16);
-  //   // Ensure the string starts with `#`
-  //   if (colorString.startsWith('#')) {
-  //     colorString = colorString.substring(1);
-  //   }
-  //
-  //   int colorInt = int.parse(colorString, radix: 16);
-  //   pickerColor.value = colorInt;
-  //   return Color(colorInt);
-  // }
 
-  void showEditCardDialog(BuildContext context, BusinessCardModel cardModel) {
+  void showEditCardDialog(BuildContext context, bm.BusinessCardModel cardModel) {
 
     Get.dialog(AlertDialog(
       shape: RoundedRectangleBorder(
@@ -131,4 +123,111 @@ class HomeController extends GetxController {
       ),
     ));
   }
+
+  var businessCards = <BusinessCardModel>[].obs;
+  final _db = Localstore.instance;
+
+  void fetchCardsFromDatabase() async {
+    final items = await _db.collection('businessCards').get();
+    if (items != null) {
+      businessCards.value =
+          items.values.map((item) => BusinessCardModel.fromJson(item)).toList();
+    }
+  }
+
+  void addBusinessCard(BusinessCardModel card) async {
+    final id = _db.collection('businessCards').doc().id;
+    await _db.collection('businessCards').doc(id).set(card.toJson());
+    businessCards.add(card);
+  }
+
+  Future<void> shareBusinessCard(bm.BusinessCardModel card) async {
+    try {
+      bool isAvailable = await NfcManager.instance.isAvailable();
+      if (!isAvailable) {
+        print('NFC is not available on this device');
+        return;
+      }
+
+      NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
+        try {
+          Ndef? ndef = Ndef.from(tag);
+          if (ndef == null) {
+            print('Tag is not NDEF compatible');
+            return;
+          }
+
+          NdefMessage message = NdefMessage([
+            NdefRecord.createText(jsonEncode(card.toMap())),
+          ]);
+
+          await ndef.write(message);
+          Get.snackbar('Write Success ' , 'Card data written successfully');
+          NfcManager.instance.stopSession();
+        } catch (e) {
+          print('Error writing to NFC tag: $e');
+          NfcManager.instance.stopSession(errorMessage: e.toString());
+        }
+      });
+    } catch (e) {
+      print('Error starting NFC session: $e');
+    }
+  }
+
+  Future<void> readNfcTag() async {
+    try {
+      bool isAvailable = await NfcManager.instance.isAvailable();
+      if (!isAvailable) {
+
+        print('NFC is not available on this device');
+        return;
+      }
+
+      NfcManager.instance.startSession(
+          onDiscovered: (NfcTag tag) async
+      {
+        try {
+          Ndef? ndef = Ndef.from(tag);
+          if (ndef == null) {
+            print('Tag is not NDEF compatible');
+            return;
+          }
+
+          NdefMessage? message = await ndef.read();
+          Get.snackbar('NFC data', message.toString());
+          if (message == null) {
+            print('No NDEF message found on the tag');
+            return;
+          }
+
+          for (NdefRecord record in message.records) {
+            if (record.typeNameFormat == NdefTypeNameFormat.nfcWellknown &&
+                record.type.elementAt(0) == 0x54) {
+              // 'T' for Text
+              String payload = String.fromCharCodes(record.payload.sublist(3));
+              Get.snackbar('Read success' , 'NFC Tag Read: $payload');
+
+              try {
+                BusinessCardModel card =
+                    BusinessCardModel.fromJson(jsonDecode(payload));
+                addBusinessCard(card);
+                print('Business card added to local storage');
+              } catch (e) {
+                print('Error parsing business card data: $e');
+              }
+            }
+          }
+
+          NfcManager.instance.stopSession();
+        } catch (e) {
+          print('Error reading NFC tag: $e');
+          NfcManager.instance.stopSession(errorMessage: e.toString());
+        }
+      });
+    } catch (e) {
+      print('Error starting NFC session: $e');
+    }
+  }
+
+
 }

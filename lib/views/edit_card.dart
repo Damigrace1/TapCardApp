@@ -277,7 +277,7 @@ class _EditCardState extends State<EditCard> {
                 height: 10,
               ),
               BusinessCard(
-               business: BusinessCardModel(
+               businessCard: BusinessCardModel(
                  name: name.text,
                  jobTitle: jobTitle.text,
                  website: website.text,

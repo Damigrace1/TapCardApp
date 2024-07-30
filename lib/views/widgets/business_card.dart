@@ -183,10 +183,10 @@ import '../../models/business_model.dart';
 
 class BusinessCard extends StatelessWidget {
 
-  final BusinessCardModel business;
+  final BusinessCardModel businessCard;
 
   BusinessCard({
-    required this.business});
+    required this.businessCard});
   ValueNotifier<bool> isTapped = ValueNotifier<bool>(false);
 
   @override
@@ -200,7 +200,7 @@ class BusinessCard extends StatelessWidget {
         child: SizedBox(
           width: 390.w,
           child: Card(
-            color: business.color, // Custom dark green color
+            color: businessCard.color, // Custom dark green color
 
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16.r),
@@ -220,14 +220,14 @@ class BusinessCard extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            business.website??'',
+                            businessCard.website??'',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 8.sp,
                                 fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            business.company??'',
+                            businessCard.company??'',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 8.sp,
@@ -245,7 +245,7 @@ class BusinessCard extends StatelessWidget {
                   ),
                   SizedBox(height: 10.h),
                   Text(
-                    business.name??'',
+                    businessCard.name??'',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18.sp,
@@ -255,7 +255,7 @@ class BusinessCard extends StatelessWidget {
 
                   // SizedBox(height: 8.h),
                   Text(
-                    business.jobTitle??'',
+                    businessCard.jobTitle??'',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 10.sp,
@@ -266,7 +266,7 @@ class BusinessCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        business.email??'',
+                        businessCard.email??'',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w500,
@@ -274,7 +274,7 @@ class BusinessCard extends StatelessWidget {
 
                       ),
                       Text(
-                        business.phoneNumber??'',
+                        businessCard.phoneNumber??'',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w300,
@@ -299,6 +299,7 @@ class BusinessCard extends StatelessWidget {
                               Expanded(
                                 child: CustomButton(text: 'Share',
                                   onPressed: (){
+                                  HomeController.it.shareBusinessCard(businessCard);
                                     showDialog(
                                       context: context,
                                       builder: (context) => const SharingDialog(),
@@ -309,8 +310,7 @@ class BusinessCard extends StatelessWidget {
                               Expanded(
                                 child: CustomButton(filled:  false,
                                   onPressed :(){
-                                    HomeController.it.showEditCardDialog(context,
-                                        business);
+                                    HomeController.it.showEditCardDialog(context,businessCard);
 
                                   },
                                   text: 'Edit',),

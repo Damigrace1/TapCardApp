@@ -215,7 +215,7 @@ class ContactDetails extends StatelessWidget {
            
             SizedBox(height: 200.h,),
             BusinessCard(
-                business: BusinessCardModel(
+                businessCard: BusinessCardModel(
                   color: Colors.grey,
                   email: contact.website,
                   website: contact.website,
