@@ -144,6 +144,7 @@ class AddNewCard extends StatelessWidget {
 
       onTap: ()async{
        await  Get.to(()=>AddCard());
+
       },
       child: Container(
         height: 200.h,

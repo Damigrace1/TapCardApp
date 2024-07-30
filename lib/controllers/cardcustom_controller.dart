@@ -8,6 +8,8 @@ class CardCustomController extends GetxController {
   var pickerColor = kpurple.obs;
   var currentColor = kpurple.obs;
 
+  RxBool newcolorpicked = false.obs;
+
   // void changeColor(Color color) {
   //   pickerColor.value = color;
   //   print(pickerColor.value.value);

@@ -3,17 +3,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:tapcard/controllers/cardcustom_controller.dart';
 import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/models/business_model.dart';
+import 'package:tapcard/services/local_storage_services.dart';
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/home/home.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
 import 'package:tapcard/views/widgets/spacing.dart';
 
-class CustomCard extends StatelessWidget {
-  const CustomCard({super.key});
+class CustomCard extends StatefulWidget {
+  const CustomCard({super.key, required this.business});
+
+  final BusinessCardModel business;
+
+  @override
+  State<CustomCard> createState() => _CustomCardState();
+}
+
+class _CustomCardState extends State<CustomCard> {
+  late BusinessCardModel businessCardModel;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    businessCardModel = widget.business;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +73,14 @@ class CustomCard extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                _showalertdialog('good', context, homecontroller);
+                _showalertdialog(
+                  'good',
+                  context,
+                  homecontroller,
+                );
+
+                LocalStorageService.instance
+                    .updateMyCard(businessCardModel.toMap());
               },
               child: Row(
                 children: [
@@ -82,7 +108,7 @@ class CustomCard extends StatelessWidget {
         elevation: 20,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+        padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,23 +121,17 @@ class CustomCard extends StatelessWidget {
                   fontWeight: FontWeight.w600),
             ),
             addVerticalSpacing(8),
-            Obx(
-              () => BusinessCard(
-                business: BusinessCardModel(
-                  name: 'Jonas Broms',
-                  jobTitle: 'UX/UI Designer',
-                  website: 'www.jonasbroms.com',
-                  email: 'jonas.broms@jonasbroms.com',
-                  phoneNumber: '+234 805 456 321',
-                  color: cardcustomcontroller.pickerColor.value,
-                ),
+            BusinessCard(
+              business: BusinessCardModel(
+                name: businessCardModel.name,
+                jobTitle: businessCardModel.jobTitle,
+                website: businessCardModel.website,
+                email: businessCardModel.email,
+                phoneNumber: businessCardModel.phoneNumber,
+                color: businessCardModel.color,
               ),
             ),
-            // Obx(
-            //   () => BusinessCard(
-            //     color: cardcustomcontroller.pickerColor.value,
-            //   ),
-            // ),
+
             addVerticalSpacing(30),
             // GestureDetector(
             //   onTap: () {},
@@ -161,7 +181,11 @@ class CustomCard extends StatelessWidget {
                   color: cardcustomcontroller.pickerColor.value,
                   onColorChanged: (Color color) async {
                     cardcustomcontroller.pickerColor.value = color;
-                 //   await cardcustomcontroller.setColor(color);
+                    setState(() {
+                      businessCardModel.color = color;
+                    });
+
+                    // await cardcustomcontroller.setColor(color);
                   },
                   spacing: 15.w,
                   width: 40,
@@ -199,7 +223,6 @@ class CustomCard extends StatelessWidget {
           color: Colors.transparent,
           border: Border.all(color: kgrey5),
           onPressed: () {
-          //  homecontroller.getColor();
             (Get.to(HomeScreen()));
           },
           width: 250,

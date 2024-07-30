@@ -30,8 +30,6 @@ class _MyCardsTabState extends State<MyCardsTab> {
 HomeController.it.getCards();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (controller)

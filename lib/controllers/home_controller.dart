@@ -61,6 +61,7 @@ class HomeController extends GetxController {
   // }
 
   void showEditCardDialog(BuildContext context, BusinessCardModel cardModel) {
+
     Get.dialog(AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
@@ -94,7 +95,7 @@ class HomeController extends GetxController {
             ),
             title: Text('Customize Card'),
             onTap: () {
-              Get.to(() => const CustomCard());
+              Get.to(() => CustomCard(business: cardModel));
             },
           ),
           ListTile(
