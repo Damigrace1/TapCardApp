@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen>
               // My Cards and Contacts Tab statelesswidgets have been 
               // put in the home folder. 
               // Author: Toz. 
-              const MyCardsTab(),
+               MyCardsTab(),
               ContactsTab()
             ],
           ) ,
