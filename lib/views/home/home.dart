@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
-  final _controller = ValueNotifier<bool>(false);
+  final _controller = ValueNotifier<bool>(true);
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

@@ -27,7 +27,6 @@ class _AddCardState extends State<AddCard> {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          backgroundColor: Colors.transparent,
           insetPadding: EdgeInsets.symmetric(horizontal: 10.0),
           child: Container(
             width: MediaQuery.of(context).size.width,

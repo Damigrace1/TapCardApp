@@ -41,12 +41,8 @@ class _CustomCardState extends State<CustomCard> {
     final HomeController homecontroller = Get.put(HomeController());
 
     return Scaffold(
-      backgroundColor: kwhite,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        systemOverlayStyle:
-            const SystemUiOverlayStyle(statusBarColor: Colors.white),
-        backgroundColor: kwhite,
+
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -205,6 +201,7 @@ class _CustomCardState extends State<CustomCard> {
     return Alert(
       context: context,
       type: AlertType.success,
+
       title: 'Customization complete',
       style: AlertStyle(
         alertElevation: 100,

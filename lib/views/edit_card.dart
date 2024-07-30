@@ -25,12 +25,10 @@ class _EditCardState extends State<EditCard> {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          backgroundColor: Colors.transparent,
           insetPadding: EdgeInsets.symmetric(horizontal: 10.0),
           child: Container(
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              color: Colors.white,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -129,12 +127,10 @@ class _EditCardState extends State<EditCard> {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          backgroundColor: Colors.transparent,
           insetPadding: EdgeInsets.symmetric(horizontal: 10.0),
           child: Container(
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              color: Colors.white,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -235,10 +231,8 @@ class _EditCardState extends State<EditCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0.5,
-        backgroundColor: Colors.white,
         title: Text(
           'Change Details',
           style: TextStyle(

@@ -14,7 +14,6 @@ class SharingDialog extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          backgroundColor: Colors.white,
           title: const Text(
             'Bring phones closer\nfor sharing!',
             textAlign: TextAlign.center,
