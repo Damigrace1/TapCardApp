@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/business_card.dart';
 import '../home.dart';
@@ -33,4 +34,9 @@ class MyCardsTab extends StatelessWidget {
       ),
     );
   }
+}
+
+
+class CardReceiverController extends GetxController{
+
 }
