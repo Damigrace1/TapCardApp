@@ -201,10 +201,8 @@ class _AddCardState extends State<AddCard> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0.5,
-        backgroundColor: Colors.white,
         title: Text(
           'Add your card details',
           style: TextStyle(

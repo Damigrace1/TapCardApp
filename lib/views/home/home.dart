@@ -4,9 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/views/add_card.dart';
-import 'package:tapcard/views/widgets/business_card.dart';
 import '../../utils/themes.dart';
-import '../widgets/card2__widget.dart';
 import 'home_tabs/mycards.dart';
 import 'home_tabs/mycontacts.dart';
 
@@ -140,7 +138,7 @@ class AddNewCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: Colors.grey[400]!, style: BorderStyle.solid),
         ),
-        child: Column(
+        child: const Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
