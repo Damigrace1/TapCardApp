@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -73,7 +74,7 @@ class CardReceiverController extends GetxController{
             ),
         ),
         actionsAlignment: MainAxisAlignment.spaceBetween,
-        actionsPadding: const EdgeInsets.only(left: 18, right: 20),
+        actionsPadding: const EdgeInsets.only(left: 30, right: 30),
           actions: [
 
  TextButton(
@@ -107,7 +108,65 @@ child: const Text('Accept'),
   }
 
   void addContact(){
-    
+    Get.dialog(
+       AlertDialog(
+        content: BusinessCard(
+            name: 'Jonas Broms',
+            jobTitle: 'UX/UI Designer',
+            website: 'www.jonasbroms.com',
+            email: 'jonas.broms@jonasbroms.com',
+            phoneNumber: '+234 805 456 321',
+            color: const Color(0xff002214),
+          ) ,
+          title: const Text('You received a business card!'),
+          actions:  [
+            TextButton(
+    onPressed: () => Get.back(), 
+    style: TextButton.styleFrom(
+      foregroundColor: Colors.black,  
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0), 
+      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold), 
+      shape: RoundedRectangleBorder(
+        side: const BorderSide(color: Colors.pink),
+        borderRadius: BorderRadius.circular(8.0)), 
+    ), 
+  child: const Text('Close'), 
+  ),
+
+TextButton(
+  onPressed: () => completeSuccess(), 
+  style: TextButton.styleFrom(
+    foregroundColor: Colors.white, backgroundColor: Colors.pink, 
+    padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0), 
+    textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold), 
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)), 
+  ), 
+child: const Text('Add to Contact'), 
+)
+          ],
+        
+      )
+    );
+  }
+
+  void completeSuccess(){
+    Get.to(
+     AlertDialog(
+        content: Container(
+          width: 120.h, height: 120.h,
+          decoration: const BoxDecoration(
+            color: Colors.green, 
+            shape: BoxShape.circle
+          ),
+          child: const Align(child: Icon(Icons.check, color: Colors.white,)),
+        ),
+        title: const Text('Contact Saved!',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+        actions: const [
+
+        ],
+      ), 
+      
+    ); 
   }
 
 }
