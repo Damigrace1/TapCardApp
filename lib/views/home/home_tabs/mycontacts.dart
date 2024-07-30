@@ -354,6 +354,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tapcard/models/business_model.dart';
+import 'package:tapcard/views/widgets/business_card.dart';
 
 
 class Contact {
@@ -552,47 +554,58 @@ class ContactDetails extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20.h,),
-            Center(
-              child: Container(
-                width: 100.w,
-                height: 100.h,
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                child: Icon(Icons.person, size: 50.sp,),
-              ),
-            ),
-            SizedBox(height: 20.h,),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(contact.website, style: const TextStyle(color: Colors.grey)),
-                    Text(contact.company, style: const TextStyle(color: Colors.grey)),
-                    const SizedBox(height: 8.0),
-                    Text(contact.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                    Text(contact.role),
-                    const SizedBox(height: 8.0),
-                    Text(contact.email),
-                    Text(contact.phone),
-                  ],
-                ),
-              ),
-            ),
+           
+            // Center(
+            //   child: Container(
+            //     width: 100.w,
+            //     height: 100.h,
+            //     decoration: BoxDecoration(
+            //       color: Colors.grey[300],
+            //       borderRadius: BorderRadius.circular(50),
+            //     ),
+            //     child: Icon(Icons.person, size: 50.sp,),
+            //   ),
+            // ),
+            SizedBox(height: 100.h,),
+            // Card(
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(16.0),
+            //     child: Column(
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: [
+            //         Text(contact.website, style: const TextStyle(color: Colors.grey)),
+            //         Text(contact.company, style: const TextStyle(color: Colors.grey)),
+            //         const SizedBox(height: 8.0),
+            //         Text(contact.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            //         Text(contact.role),
+            //         const SizedBox(height: 8.0),
+            //         Text(contact.email),
+            //         Text(contact.phone),
+            //       ],
+            //     ),
+            //   ),
+            // ),
+            BusinessCard(
+              
+              business: BusinessCardModel(
+                color: Colors.grey,
+                email: contact.website, 
+                website: contact.website,
+              name: contact.name,
+              jobTitle: contact.role, 
+              phoneNumber: contact.phone, 
+            )), 
             const Spacer(),
             Center(
-              child: ElevatedButton(
+              child: TextButton(
                 onPressed: () {},
-                style: ElevatedButton.styleFrom(
+                style: TextButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
+                    side: const BorderSide(color: Colors.white)
                   ),
                 ),
-                child: const Text('Added to contact'),
+                child: const Text('Added to contact', style: TextStyle(color: Colors.white),),
               ),
             ),
           ],
