@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:tapcard/controllers/cardcustom_controller.dart';
 import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/models/business_model.dart';
+import 'package:tapcard/services/local_storage_services.dart';
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/home/home.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
@@ -22,6 +24,16 @@ class CustomCard extends StatefulWidget {
 }
 
 class _CustomCardState extends State<CustomCard> {
+  late BusinessCardModel businessCardModel;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    businessCardModel = widget.business;
+  }
+
   @override
   Widget build(BuildContext context) {
     final CardCustomController cardcustomcontroller =
@@ -61,7 +73,14 @@ class _CustomCardState extends State<CustomCard> {
             ),
             GestureDetector(
               onTap: () {
-                _showalertdialog('good', context, homecontroller);
+                _showalertdialog(
+                  'good',
+                  context,
+                  homecontroller,
+                );
+
+                LocalStorageService.instance
+                    .updateMyCard(businessCardModel.toMap());
               },
               child: Row(
                 children: [
@@ -104,12 +123,13 @@ class _CustomCardState extends State<CustomCard> {
             addVerticalSpacing(8),
             BusinessCard(
               business: BusinessCardModel(
-                  name: widget.business.name,
-                  jobTitle: widget.business.jobTitle,
-                  website: widget.business.website,
-                  email: widget.business.email,
-                  phoneNumber: widget.business.phoneNumber,
-                  color: widget.business.color),
+                name: businessCardModel.name,
+                jobTitle: businessCardModel.jobTitle,
+                website: businessCardModel.website,
+                email: businessCardModel.email,
+                phoneNumber: businessCardModel.phoneNumber,
+                color: businessCardModel.color,
+              ),
             ),
 
             addVerticalSpacing(30),
@@ -162,7 +182,7 @@ class _CustomCardState extends State<CustomCard> {
                   onColorChanged: (Color color) async {
                     cardcustomcontroller.pickerColor.value = color;
                     setState(() {
-                      widget.business.color = color;
+                      businessCardModel.color = color;
                     });
 
                     // await cardcustomcontroller.setColor(color);
