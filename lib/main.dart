@@ -1,14 +1,16 @@
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tapcard/controllers/home_controller.dart';
+// import 'package:tapcard/controllers/nfc_manager_controller.dart';
 import 'package:tapcard/utils/themes.dart';
-
 import 'package:tapcard/views/splash_screen.dart';
+// import 'controllers/nfc_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Get.put(HomeController());
   //await Firebase.initializeApp();
 
   Get.put(HomeController());
@@ -21,7 +23,6 @@ class TapCardApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return ScreenUtilInit(
         designSize: const Size(430, 932),
         builder: (_, child) {
