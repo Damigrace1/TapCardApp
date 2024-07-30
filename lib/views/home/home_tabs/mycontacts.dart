@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tapcard/custom_button.dart';
 import 'package:tapcard/models/business_model.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
 
@@ -183,19 +184,13 @@ class ContactDetails extends StatelessWidget {
      appBar: AppBar(
       backgroundColor: Colors.grey.shade900,
        automaticallyImplyLeading: false,
-     ),
-     
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Align(
+       actions: [
+           Align(
               alignment: Alignment.topRight,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const Text('Close', style: TextStyle(color: Colors.white),), 
+                  const Text('Close', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),), 
                   IconButton(
                     icon: const Icon(Icons.close, color: Colors.white,),
                     onPressed: () {
@@ -205,9 +200,18 @@ class ContactDetails extends StatelessWidget {
                 ],
               ),
             ),
+       ],
+     ),
+     
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            
            
            
-            SizedBox(height: 100.h,),
+            SizedBox(height: 200.h,),
          
             BusinessCard(
               
@@ -220,18 +224,13 @@ class ContactDetails extends StatelessWidget {
               phoneNumber: contact.phone, 
             )), 
             const Spacer(),
-            Center(
-              child: TextButton(
-                onPressed: () {},
-                style: TextButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    side: const BorderSide(color: Colors.white)
-                  ),
-                ),
-                child: const Text('Added to contact', style: TextStyle(color: Colors.white),),
-              ),
-            ),
+          
+
+            CustomButton(
+              text: 'Added to Contact', 
+              filled: false,
+              
+            onPressed: (){})
           ],
         ),
       ),
