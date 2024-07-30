@@ -47,6 +47,8 @@ dependencies:
   rflutter_alert: ^2.0.7
   flex_color_picker: ^3.5.1
   flutter_advanced_switch: ^3.1.0
+  get_storage: ^2.1.1
+  localstorage: ^5.0.0
 
 
 dev_dependencies:

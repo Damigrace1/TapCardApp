@@ -1,6 +1,4 @@
-
 import 'package:localstore/localstore.dart';
-
 
 class LocalStorageService {
   static final Localstore _storageService = Localstore.instance;
@@ -12,9 +10,7 @@ class LocalStorageService {
 
 
   saveThemeValue(String val) async {
-    await themeRef.doc('themeRef').set({
-      "theme":val
-    }).then((value) {
+    await themeRef.doc('themeRef').set({"theme": val}).then((value) {
       print('value saved');
     }).catchError((err) {
       print('Error caught while saving data to localstore,$err');
@@ -22,31 +18,16 @@ class LocalStorageService {
   }
 
 
-  // saveMyCard(Map<String, dynamic> cardDoc) async {
-  //   await myCards.doc('myCards').set(cardDoc).then((value) {
-  //     print('value saved');
-  //   }).catchError((err) {
-  //     print('Error caught while saving data to localstore,$err');
-  //   });
-  // }
 
-  Future <String> getThemeVal() async {
-    final corDoc =  themeRef.doc('themeRef');
+  Future<String> getThemeVal() async {
+    final corDoc = themeRef.doc('themeRef');
     final r = await corDoc.get();
-    return r == null ?  'light' : r.values.firstOrNull;
-
+    return r == null ? 'light' : r.values.firstOrNull;
   }
 
 
-// Future  getMyCards() async {
-//   final corDoc =  myCards.doc('myCards');
-//   final r = await corDoc.get();
-//   print(r);
-//
-// }
-
-  saveMyCards(Map<String, dynamic> cardDoc, String id) {
-    myCards.doc(id).set(cardDoc).then((value) {
+  saveMyCards(Map<String, dynamic> cardDoc) {
+    myCards.doc(cardDoc['id'].toString()).set(cardDoc).then((value) {
       print('doc saved to local:$value');
     }).catchError((err) {
       print('Error caught while saving data to firestore,$err');
@@ -54,11 +35,25 @@ class LocalStorageService {
 
   }
 
-  Future getMyCards() async {
+  void updateMyCard(Map<String, dynamic> updatedCardDoc) {
+    myCards.doc(updatedCardDoc['id'].toString()).
+    set (updatedCardDoc,SetOptions(merge:true )).then((value) {
+      print('doc updated in local: $value');
+    }).catchError((err) {
+      print('Error caught while updating data in localstore: $err');
+    });
+  }
+  Future  getMyCards() async {
     final notes = await myCards.get();
     print( notes?.values.toList());
     return notes?.values.toList();
-  }
 
+  }
+  void deleteCard(String id){
+
+  }
+  void clearCards(){
+    myCards.delete();
+  }
   LocalStorageService._internal();
 }

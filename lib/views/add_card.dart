@@ -393,9 +393,9 @@ class _AddCardState extends State<AddCard> {
                                 email: email.text,
                                 phoneNumber: phone.text,
                                 color: const Color(0xff503dd4),
-                                company: company.text
+                                company: company.text,
+                                id: Random().nextInt(1000)
                               ).toMap(),
-                              Random().nextInt(1000).toString()
                             );
                             Get.dialog(
                               CardAdded()

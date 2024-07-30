@@ -25,98 +25,116 @@ class _HomeScreenState extends State<HomeScreen>
     _tabController = TabController(length: 2, vsync: this);
   }
 
-
-
-
   @override
   void dispose() {
     _tabController.dispose();
     super.dispose();
   }
+
   final _controller = ValueNotifier<bool>(false);
   @override
   Widget build(BuildContext context) {
-    return  DefaultTabController(
+    return DefaultTabController(
       length: 2,
-      child: GetBuilder<HomeController>(builder: ( controller) {
-        return Scaffold(
-          appBar:  AppBar
-            (
-            leadingWidth: 200.w,
-            leading:     Row(
-              children: [
-                SizedBox(width: 16.w,),
-                Image.asset('assets/images/app_logo.png',width: 41.61,),
-                Text('tapcard',style: TextStyle(fontSize: 22.2.sp),)
-              ],
-            ),
-            actions: [
-              AdvancedSwitch(
-                controller: _controller,
-                activeColor: currentTheme.primaryColor,
-                inactiveColor: currentTheme.primaryColor,
-                activeChild: Image.asset( _controller.value ? 'assets/icons/Moon.png' :
-                'assets/icons/SunDim.png',width: 19.12,),
-                inactiveChild: Image.asset( _controller.value ? 'assets/icons/Moon.png' :
-                'assets/icons/SunDim.png',width: 19.12,),
-                borderRadius: const BorderRadius.all(Radius.circular(15)),
-                width: 68.w,
-                height: 36.h,
-                enabled: true,
-                onChanged: (v){
-                  controller.themeMode = v ? ThemeMode.light : ThemeMode.dark;
-                  setState(() {
-
-                  });
-                },
-                thumb:  CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: ColorFiltered(
-                      colorFilter: ColorFilter.mode(currentTheme.primaryColor,
-                          BlendMode.srcATop),
-                      child: Image.asset(
-                        !_controller.value ? 'assets/icons/Moon.png' :
-                        'assets/icons/SunDim.png',width: 19.12,),
-                    )),
-                disabledOpacity: 0.5,
+      child: GetBuilder<HomeController>(
+        builder: (controller) {
+          return Scaffold(
+            appBar: AppBar(
+              leadingWidth: 200.w,
+              leading: Row(
+                children: [
+                  SizedBox(
+                    width: 16.w,
+                  ),
+                  Image.asset(
+                    'assets/images/app_logo.png',
+                    width: 41.61,
+                  ),
+                  Text(
+                    'tapcard',
+                    style: TextStyle(fontSize: 22.2.sp),
+                  )
+                ],
               ),
-              SizedBox(width: 16.w,),
-            ],
-            bottom: TabBar(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              tabAlignment: TabAlignment.fill,
-              indicatorSize: TabBarIndicatorSize.tab,
-              labelColor: Colors.purple,
-              labelStyle: TextStyle(color: currentTheme.primaryColor,
-              fontWeight: FontWeight.bold,fontSize: 16.sp),
-              unselectedLabelStyle: TextStyle(color: Colors.grey.shade400,
-                  fontWeight: FontWeight.w400,fontSize: 16.sp),
-              unselectedLabelColor: Colors.grey,
-              tabs: const [
-                Tab(text: 'My Cards'),
-                Tab(text: 'Contacts'),
+              actions: [
+                AdvancedSwitch(
+                  controller: _controller,
+                  activeColor: currentTheme.primaryColor,
+                  inactiveColor: currentTheme.primaryColor,
+                  activeChild: Image.asset(
+                    _controller.value
+                        ? 'assets/icons/Moon.png'
+                        : 'assets/icons/SunDim.png',
+                    width: 19.12,
+                  ),
+                  inactiveChild: Image.asset(
+                    _controller.value
+                        ? 'assets/icons/Moon.png'
+                        : 'assets/icons/SunDim.png',
+                    width: 19.12,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
+                  width: 68.w,
+                  height: 36.h,
+                  enabled: true,
+                  onChanged: (v) {
+                    controller.themeMode = v ? ThemeMode.light : ThemeMode.dark;
+                    setState(() {});
+                  },
+                  thumb: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: ColorFiltered(
+                        colorFilter: ColorFilter.mode(
+                            currentTheme.primaryColor, BlendMode.srcATop),
+                        child: Image.asset(
+                          !_controller.value
+                              ? 'assets/icons/Moon.png'
+                              : 'assets/icons/SunDim.png',
+                          width: 19.12,
+                        ),
+                      )),
+                  disabledOpacity: 0.5,
+                ),
+                SizedBox(
+                  width: 16.w,
+                ),
+              ],
+              bottom: TabBar(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                tabAlignment: TabAlignment.fill,
+                indicatorSize: TabBarIndicatorSize.tab,
+                labelColor: Colors.purple,
+                labelStyle: TextStyle(
+                    color: currentTheme.primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.sp),
+                unselectedLabelStyle: TextStyle(
+                    color: Colors.grey.shade400,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16.sp),
+                unselectedLabelColor: Colors.grey,
+                tabs: const [
+                  Tab(text: 'My Cards'),
+                  Tab(text: 'Contacts'),
+                ],
+              ),
+            ),
+            body: TabBarView(
+              children: [
+                // Note Team:
+                // My Cards and Contacts Tab statelesswidgets have been
+                // put in the home folder.
+                // Author: Toz.
+                MyCardsTab(),
+                ContactsTab()
               ],
             ),
-          ) ,
-          body:  TabBarView(
-            children: [
-
-              // Note Team: 
-              // My Cards and Contacts Tab statelesswidgets have been 
-              // put in the home folder. 
-              // Author: Toz. 
-               MyCardsTab(),
-              ContactsTab()
-            ],
-          ) ,
-        );
-      },),
+          );
+        },
+      ),
     );
   }
 }
-
-
-
 
 class AddNewCard extends StatelessWidget {
   const AddNewCard({super.key, required this.rebuilder});
@@ -124,9 +142,11 @@ class AddNewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+
       onTap: ()async{
        await  Get.to(()=>AddCard());
        rebuilder;
+
       },
       child: Container(
         height: 200.h,
@@ -136,7 +156,8 @@ class AddNewCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.grey[200],
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.grey[400]!, style: BorderStyle.solid),
+          border:
+              Border.all(color: Colors.grey[400]!, style: BorderStyle.solid),
         ),
         child: const Column(
           mainAxisSize: MainAxisSize.min,

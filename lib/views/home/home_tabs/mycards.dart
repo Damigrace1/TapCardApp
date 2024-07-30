@@ -35,8 +35,11 @@ class _MyCardsTabState extends State<MyCardsTab> {
     getCards();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
+
     return isLoading
         ? Center(
             child: CircularProgressIndicator(),
@@ -57,27 +60,7 @@ class _MyCardsTabState extends State<MyCardsTab> {
                           height: 15.h,
                         ),
                     itemCount: myCards.length),
-                //  BusinessCard(
-                //  business: BusinessCardModel(
-                //    name: 'Jonas Broms',
-                //    jobTitle: 'UX/UI Designer',
-                //    website: 'www.jonasbroms.com',
-                //    email: 'jonas.broms@jonasbroms.com',
-                //    phoneNumber: '+234 805 456 321',
-                //    color: const Color(0xff002214),
-                //  ),
-                // ),
-                //  BusinessCard(
-                // business: BusinessCardModel(
-                //   name: 'Jonas Brom',
-                //   jobTitle: 'UX/UI Designer',
-                //   website: 'www.jonasbroms.com',
-                //   email: 'jonas.broms@jonasbroms.com',
-                //   phoneNumber: '+234 805 456 321',
-                //
-                //   color: const Color(0xff503dd4),
-                // ),
-                // ),
+
                  AddNewCard(rebuilder: (){
                   getCards();
                 } ,),
