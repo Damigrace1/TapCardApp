@@ -17,14 +17,7 @@ class BusinessCard extends StatelessWidget {
   final String phoneNumber;
 
   BusinessCard({
-    super.key,
-    required this.name,
-    this.jobTitle,
-    this.website,
-    this.email,
-    required this.phoneNumber,
-    required this.color,
-  });
+   required this.business});
   ValueNotifier<bool> isTapped = ValueNotifier<bool>(false);
 
   @override
@@ -112,7 +105,7 @@ class BusinessCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                        SizedBox(height: 24.h),
-                      Divider(),
+                      const Divider(),
                       SizedBox(height: 24.h,),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 8.h,vertical:4.h ),
