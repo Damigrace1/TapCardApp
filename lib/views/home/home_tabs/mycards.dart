@@ -19,10 +19,13 @@ class MyCardsTab extends StatefulWidget {
 class _MyCardsTabState extends State<MyCardsTab> {
   final CardReceiverController controller = Get.put(CardReceiverController());
   List myCards = [];
+  bool isLoading = true;
   getCards() async {
-    myCards = [];
-    myCards = await LocalStorageService.instance.getMyCards();
-    setState(() {});
+    isLoading = true;
+    myCards = await LocalStorageService.instance.getMyCards()??[];
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -34,7 +37,7 @@ class _MyCardsTabState extends State<MyCardsTab> {
 
   @override
   Widget build(BuildContext context) {
-    return myCards.isEmpty
+    return isLoading
         ? Center(
             child: CircularProgressIndicator(),
           )
