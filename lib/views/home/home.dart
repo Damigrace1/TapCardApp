@@ -121,13 +121,14 @@ class _HomeScreenState extends State<HomeScreen>
 
 
 class AddNewCard extends StatelessWidget {
-  const AddNewCard({super.key});
-
+  const AddNewCard({super.key, required this.rebuilder});
+  final Function() rebuilder;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        Get.to(()=>AddCard());
+      onTap: ()async{
+       await  Get.to(()=>AddCard());
+       rebuilder;
       },
       child: Container(
         height: 200.h,
