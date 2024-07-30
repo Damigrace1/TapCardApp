@@ -7,6 +7,7 @@ class BusinessCardModel {
   String? website;
   String? email;
   String? phoneNumber;
+  String? company;
 
   BusinessCardModel({
     this.color,
@@ -15,6 +16,7 @@ class BusinessCardModel {
     this.website,
     this.email,
     this.phoneNumber,
+    this.company
   });
 
   Map<String, dynamic> toMap() {
@@ -24,6 +26,7 @@ class BusinessCardModel {
       'jobTitle': jobTitle,
       'website': website,
       'email': email,
+      'company': company,
       'phoneNumber': phoneNumber,
     };
   }
@@ -36,12 +39,15 @@ class BusinessCardModel {
       jobTitle: map['jobTitle'],
       website: map['website'],
       email: map['email'],
+      company: map['company'],
       phoneNumber: map['phoneNumber'],
     );
   }
 
   @override
   String toString() {
-    return 'BusinessCard(color: $color, name: $name, jobTitle: $jobTitle, website: $website, email: $email, phoneNumber: $phoneNumber)';
+    return 'BusinessCard(color: $color, name: $name, jobTitle: $jobTitle, '
+        'website: $website, email: $email,' 'company : $company'
+        ' phoneNumber: $phoneNumber)';
   }
 }
