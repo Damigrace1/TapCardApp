@@ -35,10 +35,10 @@ class CardsView extends GetView<CardsController> {
                 },
               )),
           Obx(() => Get.put(CardsController()).isSharing.value
-              ? ShareOverlay()
+              ? const ShareOverlay()
               : const SizedBox()),
           Obx(() => Get.put(CardsController()).isSharingSuccess.value
-              ? SuccessDialog()
+              ? const SuccessDialog()
               : const SizedBox()),
         ],
       ),

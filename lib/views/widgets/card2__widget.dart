@@ -3,7 +3,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:tapcard/controllers/home_controller.dart';
-// import 'package:tapcard/views/widgets/sharing_dialog.dart';
+// import 'package:tapcard/views/widgets/start_sharing.dart';
 //
 // import '../../custom_button.dart';
 //

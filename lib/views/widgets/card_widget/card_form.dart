@@ -49,36 +49,36 @@ class _CardFormState extends State<CardForm> {
           children: [
             TextFormField(
               controller: _nameController,
-              decoration: InputDecoration(labelText: 'Name'),
+              decoration: const InputDecoration(labelText: 'Name'),
               validator: (value) =>
                   value!.isEmpty ? 'Please enter a name' : null,
             ),
             TextFormField(
               controller: _titleController,
-              decoration: InputDecoration(labelText: 'Title'),
+              decoration: const InputDecoration(labelText: 'Title'),
               validator: (value) =>
                   value!.isEmpty ? 'Please enter a title' : null,
             ),
             TextFormField(
               controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              decoration: const InputDecoration(labelText: 'Email'),
               validator: (value) => value!.isEmpty || !value.contains('@')
                   ? 'Please enter a valid email'
                   : null,
             ),
             TextFormField(
               controller: _phoneController,
-              decoration: InputDecoration(labelText: 'Phone'),
+              decoration: const InputDecoration(labelText: 'Phone'),
               validator: (value) =>
                   value!.isEmpty ? 'Please enter a phone number' : null,
             ),
             TextFormField(
               controller: _websiteController,
-              decoration: InputDecoration(labelText: 'Website'),
+              decoration: const InputDecoration(labelText: 'Website'),
               validator: (value) =>
                   value!.isEmpty ? 'Please enter a website' : null,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
@@ -92,7 +92,7 @@ class _CardFormState extends State<CardForm> {
                   ));
                 }
               },
-              child: Text('Save'),
+              child: const Text('Save'),
             ),
           ],
         ),

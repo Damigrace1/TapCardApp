@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -26,6 +25,7 @@ class _EditCardState extends State<EditCard> {
       builder: (BuildContext context) {
         return Dialog(
           insetPadding: EdgeInsets.symmetric(horizontal: 10.0),
+
           child: Container(
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
@@ -37,14 +37,14 @@ class _EditCardState extends State<EditCard> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Changes have not been saved!',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -57,7 +57,7 @@ class _EditCardState extends State<EditCard> {
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(color: kgrey4),
                           ),
-                          child: Padding(
+                          child: const Padding(
                             padding: EdgeInsets.symmetric(
                               horizontal: 20,
                               vertical: 15,
@@ -96,7 +96,7 @@ class _EditCardState extends State<EditCard> {
                             borderRadius: BorderRadius.circular(10),
                             color: kpurple
                           ),
-                          child: Padding(
+                          child: const Padding(
                             padding: EdgeInsets.symmetric(
                               horizontal: 20,
                               vertical: 15,
@@ -128,6 +128,7 @@ class _EditCardState extends State<EditCard> {
       builder: (BuildContext context) {
         return Dialog(
           insetPadding: EdgeInsets.symmetric(horizontal: 10.0),
+
           child: Container(
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
@@ -140,16 +141,16 @@ class _EditCardState extends State<EditCard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center, // Center horizontally
                 children: [
-                  Icon(Icons.check_circle, color: Colors.green, size: 100),
-                  SizedBox(height: 20),
-                  Text(
+                  const Icon(Icons.check_circle, color: Colors.green, size: 100),
+                  const SizedBox(height: 20),
+                  const Text(
                     'Changes Saved!',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 20), // Add spacing between the text and the button
+                  const SizedBox(height: 20), // Add spacing between the text and the button
                   InkWell(
                     onTap: () {
                       HomeController.it.getCards();
@@ -161,7 +162,7 @@ class _EditCardState extends State<EditCard> {
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: Colors.grey[300]!),
                       ),
-                      child: Padding(
+                      child: const Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: 20,
                           vertical: 15,
@@ -234,6 +235,7 @@ class _EditCardState extends State<EditCard> {
       appBar: AppBar(
         elevation: 0.5,
         title: Text(
+
           'Change Details',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -245,8 +247,8 @@ class _EditCardState extends State<EditCard> {
             onTap: (){
               _showSaveDialog();
             },
-            child: Padding(
-              padding: const EdgeInsets.only(right: 10.0),
+            child: const Padding(
+              padding: EdgeInsets.only(right: 10.0),
               child: Row(
                 children: [
                   Text(
@@ -269,11 +271,11 @@ class _EditCardState extends State<EditCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Preview',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               BusinessCard(
@@ -288,8 +290,9 @@ class _EditCardState extends State<EditCard> {
                  linkedln: linkedln.text,
                  company: company.text
                ),
+
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
@@ -303,55 +306,58 @@ class _EditCardState extends State<EditCard> {
                         child:
                             Image.asset('assets/images/default_card_logo.png')),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
-                  Text(
+                  const Text(
                     'Change Company Logo',
                     style:
                         TextStyle(color: kpurple, fontWeight: FontWeight.bold),
                   )
                 ],
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Form(
                 key: _formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Full Name'),
+                    const Text('Full Name'),
                     TextFormField(
                       controller: name,
                       decoration: InputDecoration(
+
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Row(
                       children: [
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Company'),
+                              const Text('Company'),
                               TextFormField(
                                 controller: company,
                                 decoration: InputDecoration(
+
                                   border: OutlineInputBorder(),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Title'),
+                              const Text('Title'),
                               TextFormField(
                                 controller: jobTitle,
                                 decoration: InputDecoration(
+
                                   border: OutlineInputBorder(),
                                 ),
                               ),
@@ -360,24 +366,26 @@ class _EditCardState extends State<EditCard> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 16),
-                    Text('Email Address'),
+                    const SizedBox(height: 16),
+                    const Text('Email Address'),
                     TextFormField(
                       controller: email,
                       decoration: InputDecoration(
+
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 16),
-                    Text('Phone Number'),
+                    const SizedBox(height: 16),
+                    const Text('Phone Number'),
                     TextFormField(
                       controller: phone,
                       decoration: InputDecoration(
+
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 16),
-                    Text('Website'),
+                    const SizedBox(height: 16),
+                    const Text('Website'),
                     TextFormField(
                       controller: website,
                       decoration: InputDecoration(
@@ -386,6 +394,7 @@ class _EditCardState extends State<EditCard> {
                     ),
 
                     SizedBox(height: 24.h,),
+
 
                   ],
                 ),

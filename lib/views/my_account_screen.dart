@@ -20,7 +20,7 @@ class MyAccountScreen extends StatelessWidget {
         backgroundColor: Colors.grey[200],
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => Get.to(() => SignedInScreen()),
+          onPressed: () => Get.to(() => const SignedInScreen()),
         ),
       ),
       backgroundColor: Colors.grey[200],

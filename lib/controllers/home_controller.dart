@@ -10,6 +10,7 @@ import 'package:tapcard/views/customize/cardcustom.dart';
 import 'package:localstore/localstore.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 
+
 import 'package:tapcard/views/edit_card.dart';
 // import 'package:tapcard/views/widgets/card2__widget.dart';
 import '../custom_button.dart';
@@ -122,6 +123,7 @@ class HomeController extends GetxController {
         ],
       ),
     ));
+
   }
 
   var businessCards = <BusinessCardModel>[].obs;
@@ -145,7 +147,8 @@ class HomeController extends GetxController {
     try {
       bool isAvailable = await NfcManager.instance.isAvailable();
       if (!isAvailable) {
-        print('NFC is not available on this device');
+
+        Get.snackbar('Error','NFC is not available on this device');
         return;
       }
 
@@ -153,7 +156,7 @@ class HomeController extends GetxController {
         try {
           Ndef? ndef = Ndef.from(tag);
           if (ndef == null) {
-            print('Tag is not NDEF compatible');
+            Get.snackbar('Device Error', 'Tag is not NDEF compatible');
             return;
           }
 
@@ -186,8 +189,10 @@ class HomeController extends GetxController {
       NfcManager.instance.startSession(
           onDiscovered: (NfcTag tag) async
       {
+        Get.snackbar('NFC Read Seesion', 'Connection Discovered',duration: 1.5.seconds);
         try {
           Ndef? ndef = Ndef.from(tag);
+
           if (ndef == null) {
             print('Tag is not NDEF compatible');
             return;

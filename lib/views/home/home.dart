@@ -8,6 +8,7 @@ import '../../utils/themes.dart';
 import 'home_tabs/mycards.dart';
 import 'home_tabs/mycontacts.dart';
 
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -23,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    HomeController.it.readNfcTag();
   }
 
   @override
@@ -131,6 +133,7 @@ class _HomeScreenState extends State<HomeScreen>
             ),
           );
         },
+
       ),
     );
   }

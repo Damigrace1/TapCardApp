@@ -1,6 +1,6 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:tapcard/views/widgets/sharing_dialog.dart';
+// import 'package:tapcard/views/widgets/start_sharing.dart';
 //
 // import '../../controllers/home_controller.dart';
 // import '../../custom_button.dart';
@@ -175,11 +175,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tapcard/views/widgets/sharing_dialog.dart';
 
 import '../../controllers/home_controller.dart';
 import '../../custom_button.dart';
 import '../../models/business_model.dart';
+import 'dialogs/start_sharing.dart';
 
 class BusinessCard extends StatelessWidget {
 
@@ -201,7 +201,6 @@ class BusinessCard extends StatelessWidget {
           width: 390.w,
           child: Card(
             color: businessCard.color, // Custom dark green color
-
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16.r),
             ),
@@ -299,10 +298,10 @@ class BusinessCard extends StatelessWidget {
                               Expanded(
                                 child: CustomButton(text: 'Share',
                                   onPressed: (){
-                                  HomeController.it.shareBusinessCard(businessCard);
+                                 HomeController.it.shareBusinessCard(businessCard);
                                     showDialog(
                                       context: context,
-                                      builder: (context) => const SharingDialog(),
+                                      builder: (context) => const StartSharing(),
                                     );
                                   },),
                               ),
@@ -311,7 +310,6 @@ class BusinessCard extends StatelessWidget {
                                 child: CustomButton(filled:  false,
                                   onPressed :(){
                                     HomeController.it.showEditCardDialog(context,businessCard);
-
                                   },
                                   text: 'Edit',),
                               )

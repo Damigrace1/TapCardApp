@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:tapcard/utils/themes.dart';
 import 'package:tapcard/views/home/home.dart';
 
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff8E60DD),
+      backgroundColor: const Color(0xff8E60DD),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(),
+          const SizedBox(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -35,7 +33,7 @@ class SplashScreen extends StatelessWidget {
                 width: 382.w,
                 child: ElevatedButton(
                   onPressed: (){
-                    Get.to(()=> HomeScreen());
+                    Get.to(()=> const HomeScreen());
 
                   },
                   style: ElevatedButton.styleFrom(

@@ -12,8 +12,8 @@ class CardItem extends GetView<CardsController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(8),
-      padding: EdgeInsets.all(16),
+      margin: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: card.color,
         borderRadius: BorderRadius.circular(12),
@@ -22,30 +22,30 @@ class CardItem extends GetView<CardsController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(card.name,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.white)),
-          Text(card.title, style: TextStyle(color: Colors.white)),
-          SizedBox(height: 8),
-          Text(card.email, style: TextStyle(color: Colors.white)),
-          Text(card.phone, style: TextStyle(color: Colors.white)),
-          Text(card.website, style: TextStyle(color: Colors.white)),
-          SizedBox(height: 8),
+          Text(card.title, style: const TextStyle(color: Colors.white)),
+          const SizedBox(height: 8),
+          Text(card.email, style: const TextStyle(color: Colors.white)),
+          Text(card.phone, style: const TextStyle(color: Colors.white)),
+          Text(card.website, style: const TextStyle(color: Colors.white)),
+          const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
                 onPressed: () => controller.shareCard(card),
-                child: Text('Share'),
                 style: ElevatedButton.styleFrom(
                     foregroundColor: card.color, backgroundColor: Colors.white),
+                child: const Text('Share'),
               ),
               ElevatedButton(
                 onPressed: () => controller.editCard(card),
-                child: Text('Edit'),
                 style: ElevatedButton.styleFrom(
                     foregroundColor: card.color, backgroundColor: Colors.white),
+                child: const Text('Edit'),
               ),
               // ElevatedButton(
               //   onPressed: () => _confirmDelete(context),
@@ -79,17 +79,17 @@ class CardItem extends GetView<CardsController> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Delete Card'),
-          content: Text('Are you sure you want to delete this card?'),
+          title: const Text('Delete Card'),
+          content: const Text('Are you sure you want to delete this card?'),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text('Delete'),
+              child: const Text('Delete'),
               onPressed: () {
                 controller.deleteCard(index);
                 Navigator.of(context).pop();
