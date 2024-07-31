@@ -1,28 +1,61 @@
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:tapcard/controllers/cardcustom_controller.dart';
+import 'package:tapcard/controllers/home_controller.dart';
+import 'package:tapcard/models/business_model.dart';
+import 'package:tapcard/services/local_storage_services.dart';
 import 'package:tapcard/utils/const.dart';
+import 'package:tapcard/views/home/home.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
 import 'package:tapcard/views/widgets/spacing.dart';
-import 'package:tapcard/views/widgets/textfield.dart';
 
-class CustomCard extends StatelessWidget {
-  const CustomCard({super.key});
+class CustomCard extends StatefulWidget {
+  const CustomCard({super.key, required this.business});
+
+  final BusinessCardModel business;
+
+  @override
+  State<CustomCard> createState() => _CustomCardState();
+}
+
+class _CustomCardState extends State<CustomCard> {
+  late BusinessCardModel businessCardModel;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    businessCardModel = widget.business;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final CardCustomController cardcustomcontroller =
+        Get.put(CardCustomController());
+    final HomeController homecontroller = Get.put(HomeController());
+
     return Scaffold(
-      backgroundColor: kwhite,
       appBar: AppBar(
-        systemOverlayStyle:
-            const SystemUiOverlayStyle(statusBarColor: Colors.white),
-        backgroundColor: kwhite,
+
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.asset(
-              'assets/images/back.png',
-              height: 15,
-              width: 15,
+            GestureDetector(
+              onTap: () {
+//                homecontroller.getColor();
+                Navigator.pop(context);
+              },
+              child: Image.asset(
+                'assets/images/back.png',
+                height: 15,
+                width: 15,
+              ),
             ),
             addHorizontalSpacing(10),
             const Expanded(
@@ -35,7 +68,16 @@ class CustomCard extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                _showalertdialog(
+                  'good',
+                  context,
+                  homecontroller,
+                );
+
+                LocalStorageService.instance
+                    .updateMyCard(businessCardModel.toMap());
+              },
               child: Row(
                 children: [
                   const Text(
@@ -67,7 +109,7 @@ class CustomCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Preview',
               style: TextStyle(
                   fontFamily: 'Inter',
@@ -76,35 +118,120 @@ class CustomCard extends StatelessWidget {
             ),
             addVerticalSpacing(8),
             BusinessCard(
-              name: 'Jonas Broms',
-              jobTitle: 'UX/UI Designer',
-              website: 'www.jonasbroms.com',
-              email: 'jonas.broms@jonasbroms.com',
-              phoneNumber: '+234 805 456 321',
-              color: Color(0xff002214),
+              businessCard: BusinessCardModel(
+                name: businessCardModel.name,
+                jobTitle: businessCardModel.jobTitle,
+                website: businessCardModel.website,
+                email: businessCardModel.email,
+                phoneNumber: businessCardModel.phoneNumber,
+                color: businessCardModel.color,
+              ),
             ),
+
             addVerticalSpacing(30),
-            Container(
-              height: 50,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(14), color: kpurple),
-              child: const Center(
-                child: Text(
-                  'Change color',
-                  style: TextStyle(
-                      color: kwhite,
-                      fontFamily: 'Inter',
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
+            // GestureDetector(
+            //   onTap: () {},
+            //   child: Container(
+            //     height: 50,
+            //     width: double.infinity,
+            //     decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(14), color: kpurple),
+            //     child: const Center(
+            //       child: Text(
+            //         'Change color',
+            //         style: TextStyle(
+            //             color: kwhite,
+            //             fontFamily: 'Inter',
+            //             fontSize: 18,
+            //             fontWeight: FontWeight.w600),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            addHorizontalSpacing(21),
+
+            const Text(
+              'Color',
+              style: TextStyle(
+                  fontFamily: 'Inter',
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600),
+            ),
+            SizedBox(
+              // width: double.infinity,
+
+              child: Card(
+                color: kwhite,
+                elevation: 0,
+                child: ColorPicker(
+                  padding: EdgeInsets.zero,
+                  pickersEnabled: const <ColorPickerType, bool>{
+                    ColorPickerType.both: false,
+                    ColorPickerType.primary: false,
+                    ColorPickerType.accent: false,
+                    ColorPickerType.bw: false,
+                    ColorPickerType.custom: false,
+                    ColorPickerType.wheel: false,
+                  },
+                  enableShadesSelection: false,
+                  color: cardcustomcontroller.pickerColor.value,
+                  onColorChanged: (Color color) async {
+                    cardcustomcontroller.pickerColor.value = color;
+                    setState(() {
+                      businessCardModel.color = color;
+                    });
+
+                    // await cardcustomcontroller.setColor(color);
+                  },
+                  spacing: 15.w,
+                  width: 40,
+                  height: 40,
+                  borderRadius: 16,
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
+
+  _showalertdialog(
+      String successMsg, BuildContext context, HomeController homecontroller) {
+    return Alert(
+      context: context,
+      type: AlertType.success,
+
+      title: 'Customization complete',
+      style: AlertStyle(
+        alertElevation: 100,
+        descStyle: TextStyle(
+            color: kblack.withOpacity(0.6),
+            fontSize: 20,
+            fontFamily: 'Inter',
+            fontWeight: FontWeight.w600),
+        titleStyle: const TextStyle(
+            color: kblack, fontSize: 18, fontWeight: FontWeight.w600),
+      ),
+
+      // desc: errorMsg,
+      buttons: [
+        DialogButton(
+          color: Colors.transparent,
+          border: Border.all(color: kgrey5),
+          onPressed: () {
+            (Get.to(HomeScreen()));
+          },
+          width: 250,
+          child: const Text(
+            "Done!",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          ),
+        )
+      ],
+    ).show();
+  }
+}
   // Future<bool> colorPickerDialog(BuildContext context) async {
   //   return ColorPicker(
   //     /// The active color selection when the color picker is created.
@@ -604,4 +731,4 @@ class CustomCard extends StatelessWidget {
   //     constraints: _constraints,
   //   );
   // }
-}
+

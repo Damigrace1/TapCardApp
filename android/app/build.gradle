@@ -39,11 +39,8 @@ android {
         applicationId = "com.tapcad.app"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-<<<<<<< HEAD
+
         minSdk = 26
-=======
-        minSdk = 23
->>>>>>> 393f9cc379bc9300a5a5ef20ecbdd1f74f6591e0
         targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
