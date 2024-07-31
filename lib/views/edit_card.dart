@@ -5,10 +5,12 @@ import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/models/business_model.dart';
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
+import 'package:tapcard/views/widgets/custom_textfield.dart';
 import 'package:tapcard/views/widgets/dialogs/received_card.dart';
 
 import '../custom_button.dart';
 import '../services/local_storage_services.dart';
+import '../utils/validators.dart';
 
 class EditCard extends StatefulWidget {
   EditCard({super.key, required this.cardModel});
@@ -251,6 +253,7 @@ class _EditCardState extends State<EditCard> {
         actions: [
           GestureDetector(
             onTap: (){
+              if(!_formKey.currentState!.validate())return;
               _showSaveDialog();
             },
             child: const Padding(
@@ -301,106 +304,69 @@ class _EditCardState extends State<EditCard> {
               const SizedBox(
                 height: 20,
               ),
-              Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: kgrey4,
-                    radius: 50,
-                    child: SizedBox(
-                        height: 50,
-                        width: 50,
-                        child:
-                            Image.asset('assets/images/default_card_logo.png')),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  const Text(
-                    'Change Company Logo',
-                    style:
-                        TextStyle(color: kpurple, fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),
+              // Row(
+              //   children: [
+              //     CircleAvatar(
+              //       backgroundColor: kgrey4,
+              //       radius: 50,
+              //       child: SizedBox(
+              //           height: 50,
+              //           width: 50,
+              //           child:
+              //               Image.asset('assets/images/default_card_logo.png')),
+              //     ),
+              //     const SizedBox(
+              //       width: 20,
+              //     ),
+              //     const Text(
+              //       'Change Company Logo',
+              //       style:
+              //           TextStyle(color: kpurple, fontWeight: FontWeight.bold),
+              //     )
+              //   ],
+              // ),
               const SizedBox(height: 20,),
               Form(
                 key: _formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Full Name'),
-                    TextFormField(
+                    CustomTextField(
+                      title: 'Full Name',
                       controller: name,
-                      decoration: InputDecoration(
-
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
+                      validator: (v)=>TapCardValidators.isValidInput(v),),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('Company'),
-                              TextFormField(
-                                controller: company,
-                                decoration: InputDecoration(
-
-                                  border: OutlineInputBorder(),
-                                ),
-                              ),
-                            ],
-                          ),
+                          child: CustomTextField(
+                            title: 'Company',
+                            controller: company,
+                            validator: (v)=>TapCardValidators.isValidInput(v),),
                         ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('Title'),
-                              TextFormField(
-                                controller: jobTitle,
-                                decoration: InputDecoration(
 
-                                  border: OutlineInputBorder(),
-                                ),
-                              ),
-                            ],
-                          ),
+                        SizedBox(width: 16.w),
+                        Expanded(
+                          child: CustomTextField(
+                            title: 'Title',
+                            controller: jobTitle,
+                            validator: (v)=>TapCardValidators.isValidInput(v),),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
-                    const Text('Email Address'),
-                    TextFormField(
+                    CustomTextField(
+                      title: 'Email Address',
                       controller: email,
-                      decoration: InputDecoration(
-
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    const Text('Phone Number'),
-                    TextFormField(
+                      validator: (v)=>TapCardValidators.emailValidator(v),),
+                    CustomTextField(
+                      title: 'Phone Number',
+                      inputType: TextInputType.number,
                       controller: phone,
-                      decoration: InputDecoration(
-
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    const Text('Website'),
-                    TextFormField(
+                      validator: (v)=>TapCardValidators.phoneValidator(v),),
+                    CustomTextField(
+                      title: 'Website',
                       controller: website,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                      ),
                     ),
-
-                    SizedBox(height: 24.h,),
-
 
                   ],
                 ),

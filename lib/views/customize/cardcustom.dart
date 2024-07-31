@@ -43,7 +43,7 @@ class _CustomCardState extends State<CustomCard> {
 
     return Scaffold(
       appBar: AppBar(
-
+        automaticallyImplyLeading: false,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

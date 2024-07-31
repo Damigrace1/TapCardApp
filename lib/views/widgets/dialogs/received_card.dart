@@ -36,11 +36,11 @@ final BusinessCardModel businessCardModel;
                 businessCard: businessCardModel,
               ),
               const SizedBox(height: 20),
-              const Text(
+               Text(
                 'You received a business card!',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                  fontSize: 16.sp,
                 ),
               ),
               const SizedBox(height: 20),
@@ -50,17 +50,17 @@ final BusinessCardModel businessCardModel;
                   InkWell(
                     onTap: () {
                       Navigator.of(context).pop();
-                      HomeController.it.readBusinessCard();// Discard action
+                     // HomeController.it.readBusinessCard();// Discard action
                     },
                     child: Container(
                       width: 169.w,
+                      alignment: Alignment.center,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: kgrey4),
                       ),
                       child: const Padding(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 20,
                           vertical: 15,
                         ),
                         child: Text(
@@ -81,16 +81,16 @@ final BusinessCardModel businessCardModel;
                         context: context,
                         builder: (context) => const ContactSaved(),
                       );
-                      HomeController.it.readBusinessCard();
+                     // HomeController.it.readBusinessCard();
                     },
                     child: Container(
                       width: 169.w,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: kpurple),
+                      alignment: Alignment.center,
                       child: const Padding(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 20,
                           vertical: 15,
                         ),
                         child: Text(

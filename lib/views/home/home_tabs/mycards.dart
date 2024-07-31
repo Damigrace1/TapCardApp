@@ -27,7 +27,7 @@ class _MyCardsTabState extends State<MyCardsTab> {
     // TODO: implement initState
     super.initState();
 HomeController.it.getMyCards();
-HomeController.it.readBusinessCard();
+//HomeController.it.readBusinessCard();
   }
 
   @override

@@ -13,6 +13,7 @@ import 'package:nfc_manager/nfc_manager.dart';
 
 import 'package:tapcard/views/edit_card.dart';
 import 'package:tapcard/views/widgets/dialogs/received_card.dart';
+import 'package:tapcard/views/widgets/dialogs/scan_incoming_card.dart';
 // import 'package:tapcard/views/widgets/card2__widget.dart';
 import '../custom_button.dart';
 import '../model/nfc_service_model.dart';
@@ -90,6 +91,7 @@ class HomeController extends GetxController {
             ),
             title: Text('Customize Card'),
             onTap: () {
+              Navigator.pop(context);
               Get.to(() => CustomCard(business: cardModel));
             },
           ),
@@ -195,7 +197,8 @@ class HomeController extends GetxController {
         Get.snackbar('Sorry', 'NFC is not available on this device');
         return null;
       }
-
+      showDialog(context: Get.context!, builder: (context)=>
+      ScanIncomingCard());
       NfcManager.instance.startSession(
           onDiscovered: (NfcTag tag) async
       {
@@ -203,6 +206,7 @@ class HomeController extends GetxController {
           Ndef? ndef = Ndef.from(tag);
 
           if (ndef == null) {
+            Navigator.pop(Get.context!);
             Get.snackbar('Device Error', 'Tag is not NDEF compatible');
             return ;
           }
@@ -210,6 +214,7 @@ class HomeController extends GetxController {
           NdefMessage? message = await ndef.read();
           // Get.snackbar('NFC data', message.toString());
           if (message == null) {
+            Navigator.pop(Get.context!);
             Get.snackbar('OOps', 'No NDEF message found on the tag');
             return;
           }
@@ -219,11 +224,11 @@ class HomeController extends GetxController {
                 record.type.elementAt(0) == 0x54) {
               // 'T' for Text
               String payload = String.fromCharCodes(record.payload.sublist(3));
-              Get.snackbar('Incoming Card' , 'Card from ${jsonDecode(payload)['name']}');
 
               try {
                 bm.BusinessCardModel card =
                     bm.BusinessCardModel.fromMap(jsonDecode(payload));
+                Navigator.pop(Get.context!);
                 showDialog(
                   context: Get.context!,
                   builder: (context) =>  ReceivedCard(businessCardModel: card,),

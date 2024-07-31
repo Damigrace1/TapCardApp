@@ -1,11 +1,16 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tapcard/controllers/home_controller.dart';
+import 'package:tapcard/models/business_model.dart';
+import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/add_card.dart';
+import 'package:tapcard/views/widgets/dialogs/received_card.dart';
 import '../../services/local_storage_services.dart';
 import '../../utils/themes.dart';
+import '../widgets/dialogs/scan_incoming_card.dart';
 import 'home_tabs/mycards.dart';
 import 'home_tabs/mycontacts.dart';
 
@@ -129,6 +134,19 @@ class _HomeScreenState extends State<HomeScreen>
                 ContactsTab()
               ],
             ),
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: FloatingActionButton(onPressed: () {
+
+              HomeController.it.readBusinessCard();
+            },child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset('assets/icons/scan_card.png',width: 24.w,),
+                Text('Scan',style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w600,color:
+                kpurple1),)
+              ],
+            ),
+            ),
           );
         },
 
@@ -148,33 +166,40 @@ class AddNewCard extends StatelessWidget {
        await  Get.to(()=>AddCard());
 
       },
-      child: Container(
-        height: 200.h,
-        width: double.infinity,
-        margin:  EdgeInsets.symmetric(vertical: 16.h,horizontal: 6.w),
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color:  HomeController.it.themeMode == ThemeMode.light ? Colors.grey.shade200 : currentTheme.highlightColor,
-          borderRadius: BorderRadius.circular(12),
-          border:
-              Border.all(color: Colors.grey[400]!, style: BorderStyle.solid),
-        ),
-        child: const Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.add_circle_outline, size: 48, color: Color(0xff8e60dd)),
-            SizedBox(height: 8),
-            Text(
-              'Add New Card',
-              style: TextStyle(
-                color: Color(0xff8e60dd),
-                fontWeight: FontWeight.w700,
-              ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8.w,vertical: 15.h),
+        child: DottedBorder(
+          borderType: BorderType.RRect,
+          color:  Colors.grey[400]!,
+
+          radius: Radius.circular(12.r),
+          padding: EdgeInsets.zero,
+          child: Container(
+            height: 200.h,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.r),
+              color:  HomeController.it.themeMode == ThemeMode.light ? Colors.grey.shade200 : currentTheme.highlightColor,
             ),
-          ],
+            child:const Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.add_circle_outline, size: 48, color: Color(0xff8e60dd)),
+                SizedBox(height: 8),
+                Text(
+                  'Add New Card',
+                  style: TextStyle(
+                    color: Color(0xff8e60dd),
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
-      ),
+      )
+
     );
   }
 }

@@ -8,7 +8,9 @@ import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/custom_button.dart';
 import 'package:tapcard/models/business_model.dart';
 import 'package:tapcard/utils/const.dart';
+import 'package:tapcard/utils/validators.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
+import 'package:tapcard/views/widgets/custom_textfield.dart';
 import 'package:tapcard/views/widgets/dialogs/card_saved.dart';
 import 'package:tapcard/views/widgets/dialogs/contact_saved.dart';
 
@@ -92,111 +94,83 @@ class _AddCardState extends State<AddCard> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: kgrey4,
-                          radius: 50,
-                          child: SizedBox(
-                              height: 50,
-                              width: 50,
-                              child:
-                              Image.asset('assets/images/default_card_logo.png')),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Upload your Logo',
-                              style:
-                              TextStyle(color: kpurple, fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 207.w,
-                              child: Text(
-                                  'Accepted file types: JPG, PNG. Maximum file size: 2MB.',
-                                style: (TextStyle(fontSize: 12.sp,color: Colors.grey.shade600)),
-                              ),
-                            )
-                          ],
-                        ),
-                    
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     CircleAvatar(
+                    //       backgroundColor: kgrey4,
+                    //       radius: 50,
+                    //       child: SizedBox(
+                    //           height: 50,
+                    //           width: 50,
+                    //           child:
+                    //           Image.asset('assets/images/default_card_logo.png')),
+                    //     ),
+                    //     SizedBox(
+                    //       width: 20,
+                    //     ),
+                    //     Column(
+                    //       crossAxisAlignment: CrossAxisAlignment.start,
+                    //       children: [
+                    //         Text(
+                    //           'Upload your Logo',
+                    //           style:
+                    //           TextStyle(color: kpurple, fontWeight: FontWeight.bold),
+                    //         ),
+                    //         SizedBox(
+                    //           width: 207.w,
+                    //           child: Text(
+                    //               'Accepted file types: JPG, PNG. Maximum file size: 2MB.',
+                    //             style: (TextStyle(fontSize: 12.sp,color: Colors.grey.shade600)),
+                    //           ),
+                    //         )
+                    //       ],
+                    //     ),
+                    //
+                    //   ],
+                    // ),
                     SizedBox(height: 20,),
                     Form(
                       key: _formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Full Name'),
-                          TextFormField(
+                          CustomTextField(
+                            title: 'Full Name',
                             controller: name,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-                          SizedBox(height: 16),
+                            validator: (v)=>TapCardValidators.isValidInput(v),),
                           Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Company'),
-                                    TextFormField(
-                                      controller: company,
-                                      decoration: InputDecoration(
-                                        border: OutlineInputBorder(),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                child: CustomTextField(
+                                  title: 'Company',
+                                  controller: company,
+                                  validator: (v)=>TapCardValidators.isValidInput(v),),
                               ),
-                              SizedBox(width: 16),
+
+                              SizedBox(width: 16.w),
                               Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Title'),
-                                    TextFormField(
-                                      controller: jobTitle,
-                                      decoration: InputDecoration(
-                                        border: OutlineInputBorder(),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                child: CustomTextField(
+                                  title: 'Title',
+                                  controller: jobTitle,
+                                  validator: (v)=>TapCardValidators.isValidInput(v),),
                               ),
                             ],
                           ),
-                          SizedBox(height: 16),
-                          Text('Email Address'),
-                          TextFormField(
+                          CustomTextField(
+                            title: 'Email Address',
                             controller: email,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-                          SizedBox(height: 16),
-                          Text('Phone Number'),
-                          TextFormField(
+                            validator: (v)=>TapCardValidators.emailValidator(v),),
+                          CustomTextField(
+                            title: 'Phone Number',
+                            inputType: TextInputType.number,
                             controller: phone,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-                          SizedBox(height: 16),
-                          Text('Website'),
-                          TextFormField(
+                            validator: (v)=>TapCardValidators.phoneValidator(v),),
+                          CustomTextField(
+                            title: 'Website',
                             controller: website,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
                             ),
-                          ),
+
                           // SizedBox(height: 16),
                           // Text('Social Links'),
                           // Column(
@@ -235,6 +209,7 @@ class _AddCardState extends State<AddCard> {
                             (name.text == '' || phone.text == '') ?
                              false : true,
                             text: 'Save Card', onPressed: (){
+                              if(!_formKey.currentState!.validate()) return;
                             LocalStorageService.instance.saveMyCards(
                               BusinessCardModel(
                                 name: name.text,
@@ -269,4 +244,5 @@ class _AddCardState extends State<AddCard> {
     );
   }
 }
+
 

@@ -15,10 +15,10 @@ class AddNewCard extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return GestureDetector(
-      
+
       onTap: () => _showAddCardForm,
-      
-      child: Container(
+      child:
+      Container(
         height: 200.h,
         margin: const EdgeInsets.all(16),
         padding: const EdgeInsets.all(16),

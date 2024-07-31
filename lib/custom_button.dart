@@ -23,8 +23,9 @@ class CustomButton extends StatelessWidget {
     return SizedBox(
       width: width ?? double.infinity,
       child: ElevatedButton(
-        onPressed: enabled ? onPressed : null,
+        onPressed:onPressed,
         style: ElevatedButton.styleFrom(
+
           backgroundColor: filled
               ? fillColor?.withOpacity(enabled ? 1 : 0.4) ??
                   Colors.black.withOpacity(enabled ? 1 : 0.4)

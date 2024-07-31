@@ -99,7 +99,7 @@ class ContactController extends GetxController {
 
   void getContacts() async {
     final List localContactsDocs =
-        await LocalStorageService.instance.getMyCards()??[];
+        await LocalStorageService.instance.getOthersCards()??[];
     List<BusinessCardModel> cardModels =
         localContactsDocs.map((lC) => BusinessCardModel.fromMap(lC)).toList();
     contacts.value = cardModels
