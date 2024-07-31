@@ -1,6 +1,6 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:tapcard/views/widgets/sharing_dialog.dart';
+// import 'package:tapcard/views/widgets/start_sharing.dart';
 //
 // import '../../controllers/home_controller.dart';
 // import '../../custom_button.dart';
@@ -175,33 +175,33 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tapcard/views/widgets/sharing_dialog.dart';
 
 import '../../controllers/home_controller.dart';
 import '../../custom_button.dart';
 import '../../models/business_model.dart';
+import 'dialogs/start_sharing.dart';
 
 class BusinessCard extends StatelessWidget {
 
   final BusinessCardModel businessCard;
 
   BusinessCard({
-    required this.businessCard});
+    required this.businessCard,this.tappable = false});
   ValueNotifier<bool> isTapped = ValueNotifier<bool>(false);
+  final bool tappable;
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(valueListenable: isTapped, builder: (context,
         val,_){
       return GestureDetector(
-        onTap: () {
+        onTap: tappable ?  () {
           isTapped.value = !isTapped.value;
-        },
+        } : null,
         child: SizedBox(
           width: 390.w,
           child: Card(
             color: businessCard.color, // Custom dark green color
-
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16.r),
             ),
@@ -288,7 +288,7 @@ class BusinessCard extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(height: 24.h),
-                        const Divider(),
+                         Divider(color: Colors.grey.shade500,),
                         SizedBox(height: 24.h,),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 8.h,vertical:4.h ),
@@ -299,11 +299,8 @@ class BusinessCard extends StatelessWidget {
                               Expanded(
                                 child: CustomButton(text: 'Share',
                                   onPressed: (){
-                                  HomeController.it.shareBusinessCard(businessCard);
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => const SharingDialog(),
-                                    );
+                                 HomeController.it.shareBusinessCard(businessCard);
+
                                   },),
                               ),
                               SizedBox(width: 12.w,),
@@ -311,7 +308,6 @@ class BusinessCard extends StatelessWidget {
                                 child: CustomButton(filled:  false,
                                   onPressed :(){
                                     HomeController.it.showEditCardDialog(context,businessCard);
-
                                   },
                                   text: 'Edit',),
                               )

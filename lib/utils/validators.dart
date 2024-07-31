@@ -1,33 +1,56 @@
-import 'package:email_validator/email_validator.dart';
+class TapCardValidators {
+  static String? isValidInput(String? data, {int minLength = 1}) {
 
-class Validators {
-  // email validsator
+    if(data == null) return 'Input cannot be empty';
+    if (data.isEmpty) return 'Input cannot be empty';
+    if (data.length < minLength) {
+      return 'Input is lesser than $minLength characters.';
+    }
+
+    return null;
+  }
+
+  static String? phoneValidator(String? phone) {
+    if (phone == null  || phone.isEmpty) {
+      return 'Enter a phone number';
+    } else if (!phone.verifyPhoneNo) {
+      return 'Enter a valid phone number';
+    }
+    return null;
+  }
+
   static String? emailValidator(String? email) {
-    final regExp = RegExp(
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
-
-    if (email!.isEmpty && !EmailValidator.validate(email)) {
-      return 'Enter your email';
-    } else if (regExp.hasMatch(email.trim())) {
-      'good';
+    if (email == null || email.isEmpty) {
+      return 'Enter an email';
+    } else if (!email.verifyEmail) {
+      return 'Please enter a valid email ';
     }
     return null;
   }
 
-//password validator
-  static String? passwordValidator(String? password) {
-    if (password!.isEmpty) {
-      return 'Enter your password';
-    } else if (password.length < 6) {
-      return "Password can't be smaller than 6 characters";
-    }
-    return null;
+}
+
+extension ES on String {
+  bool get verifyEmail {
+    final emailRegExp = RegExp(
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    return emailRegExp.hasMatch(this);
   }
 
-  static String? validateTextField(String? val) {
-    if (val!.isEmpty) {
-      return 'Required Field';
+
+
+  bool get verifyPhoneNo {
+    final phoneRegExp =
+    RegExp(r'^(?:\+?\d{1,4}[\s-]?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$');
+    return phoneRegExp.hasMatch(this);
+  }
+
+  String  shorten(int length){
+    if(this.length > length){
+      return "${substring(0,length)} ....";
     }
-    return null;
+    else{
+      return this;
+    }
   }
 }

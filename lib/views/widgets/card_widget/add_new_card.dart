@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tapcard/controllers/cards_controller.dart';
+import 'package:tapcard/services/local_storage_services.dart';
 
 import 'card_form.dart';
 
@@ -12,11 +13,13 @@ class AddNewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
-      
+
       onTap: () => _showAddCardForm,
-      
-      child: Container(
+      child:
+      Container(
+        height: 200.h,
         margin: const EdgeInsets.all(16),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(

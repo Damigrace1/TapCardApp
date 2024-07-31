@@ -10,7 +10,7 @@
 // import 'package:tapcard/utils/const.dart';
 // import 'package:tapcard/views/login/login.dart';
 // import 'package:tapcard/views/widgets/spacing.dart';
-// import 'package:tapcard/views/widgets/textfield.dart';
+// import 'package:tapcard/views/widgets/custom_textfield.dart';
 //
 // class Signup extends StatelessWidget {
 //   const Signup({super.key});

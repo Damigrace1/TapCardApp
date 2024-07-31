@@ -9,7 +9,7 @@ import 'my_account_screen.dart';
 import 'widgets/bottom_navigation_bar.dart';
 
 class SignedInScreen extends StatefulWidget {
-  SignedInScreen({super.key});
+  const SignedInScreen({super.key});
 
   @override
   State<SignedInScreen> createState() => _SignedInScreenState();
