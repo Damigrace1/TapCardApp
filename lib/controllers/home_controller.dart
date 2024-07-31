@@ -186,8 +186,10 @@ class HomeController extends GetxController {
       NfcManager.instance.startSession(
           onDiscovered: (NfcTag tag) async
       {
+        Get.snackbar('NFC Read Seesion', 'Connection Discovered',duration: 1.5.seconds);
         try {
           Ndef? ndef = Ndef.from(tag);
+
           if (ndef == null) {
             print('Tag is not NDEF compatible');
             return;
