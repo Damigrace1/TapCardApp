@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,7 +11,7 @@ ListTile buildSettingsTile(
     ) {
   return ListTile(
       contentPadding: EdgeInsets.zero,
-      visualDensity: VisualDensity(vertical: -4),
+      visualDensity: const VisualDensity(vertical: -4),
       title: Text(title),
       trailing:value
   );
@@ -39,7 +38,7 @@ Column buildSettingsColumn({
             itemBuilder: (BuildContext context, int index) {
               return children[index];
             }, separatorBuilder: (BuildContext context, int index) {
-            return Divider();
+            return const Divider();
           }, itemCount: children.length,)
       ),
     ],

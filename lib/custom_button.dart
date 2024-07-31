@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -34,7 +33,7 @@ class CustomButton extends StatelessWidget {
                       Colors.black.withOpacity(enabled ? 1 : 0)
                   : Colors.grey.shade400.withOpacity(enabled ? 1 : 0)),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(16.r),
           ),
         ),
         child: Text(

@@ -104,7 +104,7 @@ class _CustomCardState extends State<CustomCard> {
         elevation: 20,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,6 +118,7 @@ class _CustomCardState extends State<CustomCard> {
             ),
             addVerticalSpacing(8),
             BusinessCard(
+
               businessCard: BusinessCardModel(
                 name: businessCardModel.name,
                 jobTitle: businessCardModel.jobTitle,
@@ -126,6 +127,7 @@ class _CustomCardState extends State<CustomCard> {
                 phoneNumber: businessCardModel.phoneNumber,
                 color: businessCardModel.color,
               ),
+
             ),
 
             addVerticalSpacing(30),
