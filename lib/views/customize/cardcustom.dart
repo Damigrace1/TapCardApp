@@ -42,14 +42,14 @@ class _CustomCardState extends State<CustomCard> {
 
     return Scaffold(
       appBar: AppBar(
-
+        automaticallyImplyLeading: false,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GestureDetector(
               onTap: () {
 //                homecontroller.getColor();
-                Navigator.pop(context);
+                (Get.offAll(HomeScreen()));
               },
               child: Image.asset(
                 'assets/images/back.png',
@@ -220,7 +220,7 @@ class _CustomCardState extends State<CustomCard> {
           color: Colors.transparent,
           border: Border.all(color: kgrey5),
           onPressed: () {
-            (Get.to(HomeScreen()));
+            (Get.offAll(HomeScreen()));
           },
           width: 250,
           child: const Text(
