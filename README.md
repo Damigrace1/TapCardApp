@@ -13,12 +13,6 @@ Welcome to Tapcard! Tapcard is a powerful and user-friendly application designed
 - **Contact Management**: Save and manage contacts within the app, making follow-ups and networking more efficient.
 - **Privacy and Security**: Control what information you share and with whom, ensuring your data stays private and secure.
 
-## Contributors
-1. Damilare Ogunwehin - Team Lead
-2. David Ohimai Ohiosimuan
-3. Ezeukwu Chukwudumebi
-4. Olaleye Nathaniel Oluwatosin
-5. Tosin Ezekeil
 
 ## Getting Started
 
@@ -30,7 +24,9 @@ To start using Tapcard, follow these simple steps:
 - Make sure your device supports NFC, if you wish to use these features.
 
 ### Download
-- [APK DOWNLOAD](https://drive.google.com/file/d/13TxF7Qsc1Du18hsoJyhIMYkEgU5ODG2Y/view?usp=drivesdk)
+
+- **[APK Download]:** (https://drive.google.com/file/d/13TxF7Qsc1Du18hsoJyhIMYkEgU5ODG2Y/view?usp=drivesdk).
+- **GitHub**:(https://github.com/Damigrace1/TapCardApp)
 
 ### Usage
 
@@ -68,6 +64,16 @@ To start using Tapcard, follow these simple steps:
 4. **Run the application**:
    
     flutter run
+
+
+
+## Colaborators
+
+1. Damilare Ogunwehin - Team Lead
+2. David Ohimai Ohiosimuan
+3. Ezekiel Chukwudumebi
+4. Olaleye Nathaniel Oluwatosin
+5. Tosin Ezekiel
 
 # License
 
