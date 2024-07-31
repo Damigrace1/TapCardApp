@@ -5,6 +5,7 @@ import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/models/business_model.dart';
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
+import 'package:tapcard/views/widgets/dialogs/received_card.dart';
 
 import '../custom_button.dart';
 import '../services/local_storage_services.dart';
@@ -25,17 +26,16 @@ class _EditCardState extends State<EditCard> {
       builder: (BuildContext context) {
         return Dialog(
           insetPadding: EdgeInsets.symmetric(horizontal: 10.0),
-
           child: Container(
+
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(16.r),
             ),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
                     'Changes have not been saved!',
@@ -48,11 +48,14 @@ class _EditCardState extends State<EditCard> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+
                       InkWell(
                         onTap: () {
                           Navigator.of(context).pop(); // Discard action
                         },
                         child: Container(
+                          width: 169.w,
+                          alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(color: kgrey4),
@@ -85,16 +88,19 @@ class _EditCardState extends State<EditCard> {
                                 twitter: twitter.text,
                                 linkedln: linkedln.text,
                                 company: company.text,
-                              id: widget.cardModel.id
+                                dateTime: widget.cardModel.dateTime,
+                                id: widget.cardModel.id
                             ).toMap(),
                           );
                           _showSuccessDialog();
 
                         },
                         child: Container(
+                          width: 169.w,
+                          alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: kpurple
+                              borderRadius: BorderRadius.circular(10),
+                              color: kpurple
                           ),
                           child: const Padding(
                             padding: EdgeInsets.symmetric(
@@ -153,7 +159,7 @@ class _EditCardState extends State<EditCard> {
                   const SizedBox(height: 20), // Add spacing between the text and the button
                   InkWell(
                     onTap: () {
-                      HomeController.it.getCards();
+                      HomeController.it.getMyCards();
                       Navigator.of(context).pop(); // Close the dialog
                       Navigator.of(context).pop(); // Close the dialog
                     },

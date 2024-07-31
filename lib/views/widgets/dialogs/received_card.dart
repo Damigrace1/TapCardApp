@@ -1,14 +1,20 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/custom_button.dart';
 import 'package:tapcard/models/business_model.dart';
+import 'package:tapcard/services/local_storage_services.dart';
 import 'package:tapcard/utils/const.dart';
+import 'package:tapcard/views/home/home_tabs/mycontacts.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
+import 'package:tapcard/views/widgets/dialogs/contact_saved.dart';
 
 class ReceivedCard extends StatelessWidget {
-  const ReceivedCard({Key? key}) : super(key: key);
-
+  const ReceivedCard({Key? key, required this.businessCardModel}) : super(key: key);
+final BusinessCardModel businessCardModel;
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -27,14 +33,7 @@ class ReceivedCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               BusinessCard(
-                businessCard: BusinessCardModel(
-                  name: 'Jonas Broms',
-                  jobTitle: 'UX/UI Designer',
-                  website: 'www.jonasbroms.com',
-                  email: 'jonas.broms@jonasbroms.com',
-                  phoneNumber: '+234 805 456 321',
-                  color: const Color(0xff002214),
-                ),
+                businessCard: businessCardModel,
               ),
               const SizedBox(height: 20),
               const Text(
@@ -50,9 +49,11 @@ class ReceivedCard extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.of(context).pop(); // Discard action
+                      Navigator.of(context).pop();
+                      HomeController.it.readBusinessCard();// Discard action
                     },
                     child: Container(
+                      width: 169.w,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: kgrey4),
@@ -73,10 +74,17 @@ class ReceivedCard extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
+                      LocalStorageService.instance.saveOthersCards(businessCardModel.toMap());
+                      Get.put(ContactController()).getContacts();
                       Navigator.of(context).pop();
-                      // _showSuccessDialog();
+                      showDialog(
+                        context: context,
+                        builder: (context) => const ContactSaved(),
+                      );
+                      HomeController.it.readBusinessCard();
                     },
                     child: Container(
+                      width: 169.w,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: kpurple),

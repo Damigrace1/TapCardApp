@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tapcard/utils/const.dart';
+import 'package:tapcard/utils/themes.dart';
 
 class CustomButton extends StatelessWidget {
   CustomButton(
@@ -26,7 +28,7 @@ class CustomButton extends StatelessWidget {
           backgroundColor: filled
               ? fillColor?.withOpacity(enabled ? 1 : 0.4) ??
                   Colors.black.withOpacity(enabled ? 1 : 0.4)
-              : Colors.white,
+              : currentTheme.scaffoldBackgroundColor,
           side: BorderSide(
               color: filled
                   ? fillColor?.withOpacity(enabled ? 1 : 0) ??
@@ -38,7 +40,8 @@ class CustomButton extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: TextStyle(color: filled ? Colors.white : Colors.black),
+          style: TextStyle(color: filled ? kwhite.withOpacity(enabled ? 1 : 0.5) :
+          currentTheme.colorScheme.onSurface.withOpacity(enabled ? 1 : 0.5)),
         ),
       ),
     );

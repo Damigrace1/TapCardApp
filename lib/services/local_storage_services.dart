@@ -7,6 +7,7 @@ class LocalStorageService {
 
   static CollectionRef themeRef = _storageService.collection('themeRef');
   static CollectionRef myCards = _storageService.collection('myCards');
+  static CollectionRef othersCards = _storageService.collection('othersCards');
 
   saveThemeValue(String val) async {
     await themeRef.doc('themeRef').set({"theme": val}).then((value) {
@@ -29,6 +30,13 @@ class LocalStorageService {
       print('Error caught while saving data to firestore,$err');
     });
   }
+  saveOthersCards (Map<String, dynamic> cardDoc) {
+    othersCards.doc(cardDoc['id'].toString()).set(cardDoc).then((value) {
+      print('doc saved to local:$value');
+    }).catchError((err) {
+      print('Error caught while saving data to firestore,$err');
+    });
+  }
 
   void updateMyCard(Map<String, dynamic> updatedCardDoc) {
     myCards
@@ -43,16 +51,20 @@ class LocalStorageService {
 
   Future getMyCards() async {
     final notes = await myCards.get();
-    print(notes?.values.toList());
     return notes?.values.toList();
   }
 
-  void deleteCard(String id){
+  Future getOthersCards() async {
+    final notes = await othersCards.get();
+    return notes?.values.toList();
+  }
+
+  void deleteMyCard(String id){
     myCards.doc(id).delete();
     HomeController.it.update();
   }
 
-  void clearCards(){
+  void clearMyCards(){
 
     myCards.delete();
   }

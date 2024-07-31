@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tapcard/utils/const.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -8,7 +9,10 @@ TapCardThemes.lightTheme : TapCardThemes.darkTheme;
 
 class TapCardThemes {
   static final lightTheme = ThemeData(
-
+    scaffoldBackgroundColor: kwhite,
+    appBarTheme: AppBarTheme().copyWith(
+      backgroundColor: kwhite
+    ),
       fontFamily: 'Inter',
       textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
@@ -25,7 +29,10 @@ class TapCardThemes {
           onTertiary: Colors.orange));
 
   static final darkTheme = ThemeData(
-
+    scaffoldBackgroundColor: kblack,
+    appBarTheme: AppBarTheme().copyWith(
+        backgroundColor: kblack
+    ),
     fontFamily: 'Inter',
     textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(

@@ -9,6 +9,8 @@ import 'package:tapcard/custom_button.dart';
 import 'package:tapcard/models/business_model.dart';
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
+import 'package:tapcard/views/widgets/dialogs/card_saved.dart';
+import 'package:tapcard/views/widgets/dialogs/contact_saved.dart';
 
 import '../services/local_storage_services.dart';
 
@@ -21,158 +23,6 @@ class AddCard extends StatefulWidget {
 
 class _AddCardState extends State<AddCard> {
   final _formKey = GlobalKey<FormState>();
-
-  void _showSaveDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          insetPadding: EdgeInsets.symmetric(horizontal: 10.0),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Changes have not been saved!',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).pop(); // Discard action
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: kgrey4),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 15,
-                            ),
-                            child: Text(
-                              'Discard',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                          _showSuccessDialog();
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: kpurple
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 15,
-                            ),
-                            child: Text(
-                              'Save Changes',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  void _showSuccessDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          backgroundColor: Colors.transparent,
-          insetPadding: EdgeInsets.symmetric(horizontal: 10.0),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center, // Center horizontally
-                children: [
-                  Icon(Icons.check_circle, color: Colors.green, size: 100),
-                  SizedBox(height: 20),
-                  Text(
-                    'Changes Saved!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 20), // Add spacing between the text and the button
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).pop(); // Close the dialog
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.grey[300]!),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 15,
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Saved',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
 
 
   final TextEditingController name = TextEditingController();
@@ -388,6 +238,7 @@ class _AddCardState extends State<AddCard> {
                             LocalStorageService.instance.saveMyCards(
                               BusinessCardModel(
                                 name: name.text,
+                                dateTime: DateTime.now(),
                                 jobTitle: jobTitle.text,
                                 website: website.text,
                                 email: email.text,
@@ -398,9 +249,9 @@ class _AddCardState extends State<AddCard> {
                               ).toMap(),
                             );
 
-                            Get.dialog(
-                              CardAdded()
-                            );
+                            showDialog(
+                                context: context,
+                                builder: (context) => CardSaved());
 
                           },
                             fillColor: kpurple,
@@ -419,31 +270,3 @@ class _AddCardState extends State<AddCard> {
   }
 }
 
-class CardAdded extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      insetPadding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.check_circle, color: Colors.green, size: 87.75),
-            SizedBox(height: 16.h),
-            Text('New card added successfully!',
-                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600)),
-            SizedBox(height: 24.h,),
-            CustomButton(text: 'Done',
-                filled: false,
-                onPressed: (){
-              Navigator.pop(context);
-              Navigator.pop(context);
-              HomeController.it.getCards();
-            })
-          ],
-        ),
-      ),
-    );
-  }
-}

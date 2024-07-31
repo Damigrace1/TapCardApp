@@ -4,11 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/utils/themes.dart';
 
-import '../../../services/local_storage_services.dart';
 
 
-class ContactSaved extends StatelessWidget {
-  const ContactSaved({Key? key}) : super(key: key);
+class CardSaved extends StatelessWidget {
+  const CardSaved({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class ContactSaved extends StatelessWidget {
               const Icon(Icons.check_circle, color: Colors.green, size: 100),
               const SizedBox(height: 20),
               const Text(
-                'Contact Saved!',
+                'New card added successfully!',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -43,6 +42,8 @@ class ContactSaved extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                  HomeController.it.getMyCards();
                 },
                 child: Container(
                   decoration: BoxDecoration(

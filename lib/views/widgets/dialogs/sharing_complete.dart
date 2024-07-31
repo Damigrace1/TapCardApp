@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tapcard/views/widgets/dialogs/incoming_card_dialog.dart';
+import '../../../utils/themes.dart';
 
 class SharingComplete extends StatelessWidget {
   const SharingComplete({super.key});
@@ -15,7 +15,7 @@ class SharingComplete extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: currentTheme.scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -38,12 +38,6 @@ class SharingComplete extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).pop(); // Close the dialog
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return const IncomingCard();
-                        },
-                      );
                     },
                     child: Container(
                       decoration: BoxDecoration(

@@ -1,14 +1,16 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/utils/themes.dart';
+import 'package:tapcard/views/home/home.dart';
 
 import '../../../services/local_storage_services.dart';
 
 
-class ContactSaved extends StatelessWidget {
-  const ContactSaved({Key? key}) : super(key: key);
+class CustomizationComplete extends StatelessWidget {
+  const CustomizationComplete({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class ContactSaved extends StatelessWidget {
               const Icon(Icons.check_circle, color: Colors.green, size: 100),
               const SizedBox(height: 20),
               const Text(
-                'Contact Saved!',
+                'Customization complete',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -42,7 +44,7 @@ class ContactSaved extends StatelessWidget {
                   height: 20), // Add spacing between the text and the button
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pop();
+                 Get.offAll(()=>HomeScreen());
                 },
                 child: Container(
                   decoration: BoxDecoration(

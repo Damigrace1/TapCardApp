@@ -33,7 +33,7 @@ class SplashScreen extends StatelessWidget {
                 width: 382.w,
                 child: ElevatedButton(
                   onPressed: (){
-                    Get.to(()=> const HomeScreen());
+                    Get.offAll(()=> const HomeScreen());
 
                   },
                   style: ElevatedButton.styleFrom(

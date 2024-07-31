@@ -3,6 +3,8 @@ import 'package:tapcard/custom_button.dart';
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/widgets/dialogs/sharing_complete.dart';
 
+import '../../../utils/themes.dart';
+
 class StartSharing extends StatelessWidget {
   const StartSharing({super.key});
 
@@ -14,7 +16,7 @@ class StartSharing extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: currentTheme.scaffoldBackgroundColor,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Padding(
@@ -45,10 +47,6 @@ class StartSharing extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: CustomButton(text: 'Cancel sharing',onPressed: (){
                     Navigator.pop(context);
-                    showDialog(
-                      context: context,
-                      builder: (context) => const SharingComplete(),
-                    );
                   },fillColor: kpurple,)
               ),
               const SizedBox(height: 20),

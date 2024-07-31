@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/views/add_card.dart';
+import '../../services/local_storage_services.dart';
 import '../../utils/themes.dart';
 import 'home_tabs/mycards.dart';
 import 'home_tabs/mycontacts.dart';
@@ -24,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
-    HomeController.it.readNfcTag();
+    //HomeController.it.readBusinessCard();
   }
 
   @override
@@ -123,10 +124,7 @@ class _HomeScreenState extends State<HomeScreen>
             ),
             body: TabBarView(
               children: [
-                // Note Team:
-                // My Cards and Contacts Tab statelesswidgets have been
-                // put in the home folder.
-                // Author: Toz.
+
                 MyCardsTab(),
                 ContactsTab()
               ],
@@ -140,6 +138,7 @@ class _HomeScreenState extends State<HomeScreen>
 }
 
 class AddNewCard extends StatelessWidget {
+
   const AddNewCard({super.key,});
   @override
   Widget build(BuildContext context) {
@@ -155,7 +154,7 @@ class AddNewCard extends StatelessWidget {
         margin:  EdgeInsets.symmetric(vertical: 16.h,horizontal: 6.w),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.grey[200],
+          color:  HomeController.it.themeMode == ThemeMode.light ? Colors.grey.shade200 : currentTheme.highlightColor,
           borderRadius: BorderRadius.circular(12),
           border:
               Border.all(color: Colors.grey[400]!, style: BorderStyle.solid),

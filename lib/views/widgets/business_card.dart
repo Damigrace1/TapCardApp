@@ -186,17 +186,18 @@ class BusinessCard extends StatelessWidget {
   final BusinessCardModel businessCard;
 
   BusinessCard({
-    required this.businessCard});
+    required this.businessCard,this.tappable = false});
   ValueNotifier<bool> isTapped = ValueNotifier<bool>(false);
+  final bool tappable;
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(valueListenable: isTapped, builder: (context,
         val,_){
       return GestureDetector(
-        onTap: () {
+        onTap: tappable ?  () {
           isTapped.value = !isTapped.value;
-        },
+        } : null,
         child: SizedBox(
           width: 390.w,
           child: Card(
@@ -287,7 +288,7 @@ class BusinessCard extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(height: 24.h),
-                        const Divider(),
+                         Divider(color: Colors.grey.shade500,),
                         SizedBox(height: 24.h,),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 8.h,vertical:4.h ),
@@ -299,10 +300,7 @@ class BusinessCard extends StatelessWidget {
                                 child: CustomButton(text: 'Share',
                                   onPressed: (){
                                  HomeController.it.shareBusinessCard(businessCard);
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => const StartSharing(),
-                                    );
+
                                   },),
                               ),
                               SizedBox(width: 12.w,),
