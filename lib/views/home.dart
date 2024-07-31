@@ -18,19 +18,19 @@ class Home extends StatelessWidget {
               website: 'www.jonasbroms.com',
               email: 'jonas.broms@jonasbroms.com',
               phoneNumber: '+234 805 456 321',
-              color: Color(0xff002214),
+              color: const Color(0xff002214),
             ),
             GestureDetector(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => EditCard()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const EditCard()));
               },
               child: Container(
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.black),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(20.0),
                   child: Text(
                     'Edit Card',
                     style: TextStyle(

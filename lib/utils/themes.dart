@@ -19,7 +19,7 @@ class TapCardThemes {
       ) ,
       colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.light,
-          seedColor: Color(0xff8E60DD),
+          seedColor: const Color(0xff8E60DD),
           surface: Colors.white,
           error: Colors.red,
           onTertiary: Colors.orange));
@@ -29,7 +29,7 @@ class TapCardThemes {
     fontFamily: 'Inter',
     textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
                 color: Color(0xff283618)
             )
         )
@@ -37,7 +37,7 @@ class TapCardThemes {
     colorScheme: ColorScheme.fromSeed(
 
         brightness: Brightness.dark,
-        seedColor: Color(0xff8E60DD),
+        seedColor: const Color(0xff8E60DD),
          surface: Colors.black,
         error: Colors.red,
         // secondary: ,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tapcard/views/edit_card.dart';
-import 'package:tapcard/views/widgets/card2__widget.dart';
 
 import '../custom_button.dart';
 import '../services/local_storage_services.dart';
@@ -47,32 +46,32 @@ class HomeController extends GetxController {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                visualDensity: VisualDensity(vertical: -4),
+                visualDensity: const VisualDensity(vertical: -4),
                 contentPadding: EdgeInsets.zero,
                 leading: Image.asset('assets/icons/edit.png',
                   width: 18.5.w,),
-                title: Text('Change Details'),
+                title: const Text('Change Details'),
                 onTap: () {
                   Navigator.pop(context);
-                  Get.to(()=>EditCard());
+                  Get.to(()=>const EditCard());
                 },
               ),
               ListTile(
-                visualDensity: VisualDensity(vertical: -4),
+                visualDensity: const VisualDensity(vertical: -4),
                 contentPadding: EdgeInsets.zero,
                 leading:Image.asset('assets/icons/palette.png',
                   width: 18.5.w,),
-                title: Text('Customize Card'),
+                title: const Text('Customize Card'),
                 onTap: () {
                   // Handle customize card
                 },
               ),
               ListTile(
-                visualDensity: VisualDensity(vertical: -4),
+                visualDensity: const VisualDensity(vertical: -4),
                 contentPadding: EdgeInsets.zero,
                 leading: Image.asset('assets/icons/delete.png',
                   width: 18.5.w,),
-                title: Text('Delete'),
+                title: const Text('Delete'),
                 onTap: () {
                   // Handle delete
                 },

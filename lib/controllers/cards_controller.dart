@@ -9,11 +9,6 @@ class CardsController extends GetxController {
   final isSharingSuccess = false.obs;
   //final storage = GetStorage();
 
-  @override
-  void onInit() {
-    super.onInit();
-   // loadCards();
-  }
 
   void loadCards() {
     final storedCards =

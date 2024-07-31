@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
 import 'package:tapcard/views/widgets/spacing.dart';
-import 'package:tapcard/views/widgets/textfield.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({super.key});
@@ -62,12 +61,12 @@ class CustomCard extends StatelessWidget {
         elevation: 20,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Preview',
               style: TextStyle(
                   fontFamily: 'Inter',
@@ -81,7 +80,7 @@ class CustomCard extends StatelessWidget {
               website: 'www.jonasbroms.com',
               email: 'jonas.broms@jonasbroms.com',
               phoneNumber: '+234 805 456 321',
-              color: Color(0xff002214),
+              color: const Color(0xff002214),
             ),
             addVerticalSpacing(30),
             Container(

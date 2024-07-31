@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
 
 class EditCard extends StatefulWidget {
-  EditCard({super.key});
+  const EditCard({super.key});
 
   @override
   State<EditCard> createState() => _EditCardState();
@@ -20,7 +18,7 @@ class _EditCardState extends State<EditCard> {
       builder: (BuildContext context) {
         return Dialog(
           backgroundColor: Colors.transparent,
-          insetPadding: EdgeInsets.symmetric(horizontal: 10.0),
+          insetPadding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Container(
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
@@ -33,14 +31,14 @@ class _EditCardState extends State<EditCard> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Changes have not been saved!',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -53,7 +51,7 @@ class _EditCardState extends State<EditCard> {
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(color: kgrey4),
                           ),
-                          child: Padding(
+                          child: const Padding(
                             padding: EdgeInsets.symmetric(
                               horizontal: 20,
                               vertical: 15,
@@ -77,7 +75,7 @@ class _EditCardState extends State<EditCard> {
                             borderRadius: BorderRadius.circular(10),
                             color: kpurple
                           ),
-                          child: Padding(
+                          child: const Padding(
                             padding: EdgeInsets.symmetric(
                               horizontal: 20,
                               vertical: 15,
@@ -109,7 +107,7 @@ class _EditCardState extends State<EditCard> {
       builder: (BuildContext context) {
         return Dialog(
           backgroundColor: Colors.transparent,
-          insetPadding: EdgeInsets.symmetric(horizontal: 10.0),
+          insetPadding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Container(
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
@@ -123,16 +121,16 @@ class _EditCardState extends State<EditCard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center, // Center horizontally
                 children: [
-                  Icon(Icons.check_circle, color: Colors.green, size: 100),
-                  SizedBox(height: 20),
-                  Text(
+                  const Icon(Icons.check_circle, color: Colors.green, size: 100),
+                  const SizedBox(height: 20),
+                  const Text(
                     'Changes Saved!',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 20), // Add spacing between the text and the button
+                  const SizedBox(height: 20), // Add spacing between the text and the button
                   InkWell(
                     onTap: () {
                       Navigator.of(context).pop(); // Close the dialog
@@ -142,7 +140,7 @@ class _EditCardState extends State<EditCard> {
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: Colors.grey[300]!),
                       ),
-                      child: Padding(
+                      child: const Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: 20,
                           vertical: 15,
@@ -176,7 +174,7 @@ class _EditCardState extends State<EditCard> {
       appBar: AppBar(
         elevation: 0.5,
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           'Change Details',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -188,8 +186,8 @@ class _EditCardState extends State<EditCard> {
             onTap: (){
               _showSaveDialog();
             },
-            child: Padding(
-              padding: const EdgeInsets.only(right: 10.0),
+            child: const Padding(
+              padding: EdgeInsets.only(right: 10.0),
               child: Row(
                 children: [
                   Text(
@@ -212,11 +210,11 @@ class _EditCardState extends State<EditCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Preview',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               BusinessCard(
@@ -225,9 +223,9 @@ class _EditCardState extends State<EditCard> {
                 website: 'www.jonasbroms.com',
                 email: 'jonas.broms@jonasbroms.com',
                 phoneNumber: '+234 805 456 321',
-                color: Color(0xff002214),
+                color: const Color(0xff002214),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
@@ -241,55 +239,55 @@ class _EditCardState extends State<EditCard> {
                         child:
                             Image.asset('assets/images/default_card_logo.png')),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
-                  Text(
+                  const Text(
                     'Change Company Logo',
                     style:
                         TextStyle(color: kpurple, fontWeight: FontWeight.bold),
                   )
                 ],
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Form(
                 key: _formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Full Name'),
+                    const Text('Full Name'),
                     TextFormField(
                       initialValue: 'Jonas Broms',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Row(
                       children: [
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Company'),
+                              const Text('Company'),
                               TextFormField(
                                 initialValue: 'Random',
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Title'),
+                              const Text('Title'),
                               TextFormField(
                                 initialValue: 'UI/UX Designer',
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                 ),
                               ),
@@ -298,59 +296,59 @@ class _EditCardState extends State<EditCard> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 16),
-                    Text('Email Address'),
+                    const SizedBox(height: 16),
+                    const Text('Email Address'),
                     TextFormField(
                       initialValue: 'jonas.broms@jonasbroms.com',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 16),
-                    Text('Phone Number'),
+                    const SizedBox(height: 16),
+                    const Text('Phone Number'),
                     TextFormField(
                       initialValue: '09041234567',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 16),
-                    Text('Website'),
+                    const SizedBox(height: 16),
+                    const Text('Website'),
                     TextFormField(
                       initialValue: 'Jonasbroms.com',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 16),
-                    Text('Social Links'),
+                    const SizedBox(height: 16),
+                    const Text('Social Links'),
                     Column(
                       children: [
                         TextFormField(
                           initialValue: 'Twitter.com',
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             prefixIcon: Icon(Icons.link),
                           ),
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         TextFormField(
                           initialValue: 'LinkedIn.com',
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             prefixIcon: Icon(Icons.link),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Container(
                       decoration: BoxDecoration(
                         border: Border.all(color: kgrey4),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Text('Add social link'),
                       ),
                     ),

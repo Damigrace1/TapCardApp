@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tapcard/utils/const.dart';
+import 'package:tapcard/views/widgets/done_dialog.dart';
 
 class SharingDialog extends StatelessWidget {
   const SharingDialog({super.key});
@@ -15,13 +15,13 @@ class SharingDialog extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           backgroundColor: Colors.white,
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.9, // Adjust the width as needed
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Text(
                     'Bring phones closer\nfor sharing!',
                     textAlign: TextAlign.center,
@@ -44,6 +44,12 @@ class SharingDialog extends StatelessWidget {
                   child: GestureDetector(
                     onTap: (){
                       Navigator.pop(context);
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const CloseDialog();
+                        },
+                      );
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -52,7 +58,7 @@ class SharingDialog extends StatelessWidget {
                       ),
                       width: MediaQuery.of(context).size.width,
                       height: 40,
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Cancel Sharing',
                           style: TextStyle(

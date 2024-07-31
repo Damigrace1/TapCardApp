@@ -5,9 +5,10 @@ import 'package:get/get.dart';
 import 'package:tapcard/controllers/home_controller.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
 import '../../utils/themes.dart';
-import '../widgets/card2__widget.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -56,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen>
                 'assets/icons/SunDim.png',width: 19.12,),
                 inactiveChild: Image.asset( _controller.value ? 'assets/icons/Moon.png' :
                 'assets/icons/SunDim.png',width: 19.12,),
-                borderRadius: BorderRadius.all(const Radius.circular(15)),
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
                 width: 68.w,
                 height: 36.h,
                 enabled: true,
@@ -89,13 +90,13 @@ class _HomeScreenState extends State<HomeScreen>
               unselectedLabelStyle: TextStyle(color: Colors.grey.shade400,
                   fontWeight: FontWeight.w400,fontSize: 16.sp),
               unselectedLabelColor: Colors.grey,
-              tabs: [
+              tabs: const [
                 Tab(text: 'My Cards'),
                 Tab(text: 'Contacts'),
               ],
             ),
           ) ,
-          body: TabBarView(
+          body: const TabBarView(
             children: [
               MyCardsTab(),
               ContactsTab()
@@ -108,6 +109,8 @@ class _HomeScreenState extends State<HomeScreen>
 }
 
 class MyCardsTab extends StatelessWidget {
+  const MyCardsTab({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -119,7 +122,7 @@ class MyCardsTab extends StatelessWidget {
             website: 'www.jonasbroms.com',
             email: 'jonas.broms@jonasbroms.com',
             phoneNumber: '+234 805 456 321',
-            color: Color(0xff002214),
+            color: const Color(0xff002214),
           ),
            BusinessCard(
             name: 'Jonas Brom',
@@ -127,9 +130,9 @@ class MyCardsTab extends StatelessWidget {
             website: 'www.jonasbroms.com',
             email: 'jonas.broms@jonasbroms.com',
             phoneNumber: '+234 805 456 321',
-            color: Color(0xff503dd4),
+            color: const Color(0xff503dd4),
           ),
-          AddNewCard(),
+          const AddNewCard(),
           
         ],
       ),
@@ -138,15 +141,19 @@ class MyCardsTab extends StatelessWidget {
 }
 
 class ContactsTab extends StatelessWidget {
+  const ContactsTab({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Contacts'),
     );
   }
 }
 
 class AddNewCard extends StatelessWidget {
+  const AddNewCard({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(

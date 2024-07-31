@@ -38,7 +38,7 @@ class BusinessCard extends StatelessWidget {
       child: SizedBox(
         width: 390.w,
         child: Card(
-          color: color ?? Color(0xFF002B27), // Custom dark green color
+          color: color ?? const Color(0xFF002B27), // Custom dark green color
 
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.r),
@@ -112,7 +112,7 @@ class BusinessCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                        SizedBox(height: 24.h),
-                      Divider(),
+                      const Divider(),
                       SizedBox(height: 24.h,),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 8.h,vertical:4.h ),
