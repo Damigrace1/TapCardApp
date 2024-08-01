@@ -33,73 +33,12 @@ class Contact {
 }
 
 class ContactController extends GetxController {
-  // var contacts = <Contact>[
-  //   Contact(
-  //     id: '1',
-  //     name: 'Isaac',
-  //     role: 'UI/UX Designer @ HNG',
-  //     date: 'July 28, 2024',
-  //     email: 'isaac@example.com',
-  //     phone: '+234 805 456 321',
-  //     website: 'www.isaac.com',
-  //     company: 'GreenBolt',
-  //   ),
-  //   Contact(
-  //     id: '2',
-  //     name: 'Yetunde',
-  //     role: 'UI/UX Designer @ HNG',
-  //     date: 'July 28, 2024',
-  //     email: 'yetunde@example.com',
-  //     phone: '+234 805 456 322',
-  //     website: 'www.yetunde.com',
-  //     company: 'TechCorp',
-  //   ),
-  //   Contact(
-  //     id: '3',
-  //     name: 'Jethro',
-  //     role: 'UI/UX Designer @ HNG',
-  //     date: 'July 28, 2024',
-  //     email: 'jethro@example.com',
-  //     phone: '+234 805 456 323',
-  //     website: 'www.jethro.com',
-  //     company: 'DesignHub',
-  //   ),
-  //   Contact(
-  //     id: '4',
-  //     name: 'Ifeoluwa',
-  //     role: 'UI/UX Designer @ HNG',
-  //     date: 'June 20, 2024',
-  //     email: 'ifeoluwa@example.com',
-  //     phone: '+234 805 456 324',
-  //     website: 'www.ifeoluwa.com',
-  //     company: 'Creatives Inc.',
-  //   ),
-  //   Contact(
-  //     id: '5',
-  //     name: 'Favor',
-  //     role: 'UI/UX Designer @ HNG',
-  //     date: 'June 20, 2024',
-  //     email: 'favor@example.com',
-  //     phone: '+234 805 456 325',
-  //     website: 'www.favor.com',
-  //     company: 'InnovateX',
-  //   ),
-  //   Contact(
-  //     id: '6',
-  //     name: 'Eskor',
-  //     role: 'UI/UX Designer @ HNG',
-  //     date: 'June 20, 2024',
-  //     email: 'eskor@example.com',
-  //     phone: '+234 805 456 326',
-  //     website: 'www.eskor.com',
-  //     company: 'Creative Minds',
-  //   ),
-  // ].obs;
+
   var contacts = <Contact>[].obs;
 
   void getContacts() async {
     final List localContactsDocs =
-        await LocalStorageService.instance.getOthersCards()??[];
+        await LocalStorageService.instance.getMyCards()??[];
     List<BusinessCardModel> cardModels =
         localContactsDocs.map((lC) => BusinessCardModel.fromMap(lC)).toList();
     contacts.value = cardModels

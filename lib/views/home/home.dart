@@ -135,7 +135,9 @@ class _HomeScreenState extends State<HomeScreen>
               ],
             ),
             floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-            floatingActionButton: FloatingActionButton(onPressed: () {
+            floatingActionButton: FloatingActionButton(
+              backgroundColor: kgrey6.withOpacity(1),
+              onPressed: () {
 
               HomeController.it.readBusinessCard();
             },child: Column(
