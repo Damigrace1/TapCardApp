@@ -25,8 +25,9 @@ To start using Tapcard, follow these simple steps:
 
 ### Download
 
-- **[APK Download]:** (https://drive.google.com/file/d/13TxF7Qsc1Du18hsoJyhIMYkEgU5ODG2Y/view?usp=drivesdk).
-- **GitHub**:(https://github.com/Damigrace1/TapCardApp)
+- **[APK Download]:** (https://drive.google.com/file/d/13TxF7Qsc1Du18hsoJyhIMYkEgU5ODG2Y/view?usp=drivesdk)
+- **[GitHub]**:(https://github.com/Damigrace1/TapCardApp)
+- **[Figma Design]**:(https://www.figma.com/design/IQcbrxkevs9FzEweXbOH3v/TEAM-KIMIKO-(TELEX)---NFC-PROJECTS?node-id=1203-5993&t=2YiFAagW3O2boMqf-0)
 
 ### Usage
 
@@ -71,7 +72,7 @@ To start using Tapcard, follow these simple steps:
 
 1. Damilare Ogunwehin - Team Lead
 2. David Ohimai Ohiosimuan
-3. Ezekiel Chukwudumebi
+3. Ezeukwu Chukwudumebi
 4. Olaleye Nathaniel Oluwatosin
 5. Tosin Ezekiel
 
