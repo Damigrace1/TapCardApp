@@ -71,7 +71,7 @@ To start using Tapcard, follow these simple steps:
 
 1. Damilare Ogunwehin - Team Lead
 2. David Ohimai Ohiosimuan
-3. Ezekiel Chukwudumebi
+3. Ezeukwu Chukwudumebi
 4. Olaleye Nathaniel Oluwatosin
 5. Tosin Ezekiel
 
