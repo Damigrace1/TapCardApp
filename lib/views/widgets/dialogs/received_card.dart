@@ -12,6 +12,8 @@ import 'package:tapcard/views/home/home_tabs/mycontacts.dart';
 import 'package:tapcard/views/widgets/business_card.dart';
 import 'package:tapcard/views/widgets/dialogs/contact_saved.dart';
 
+import '../../../utils/themes.dart';
+
 class ReceivedCard extends StatelessWidget {
   const ReceivedCard({Key? key, required this.businessCardModel}) : super(key: key);
 final BusinessCardModel businessCardModel;
@@ -23,7 +25,7 @@ final BusinessCardModel businessCardModel;
       child: Container(
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: currentTheme.scaffoldBackgroundColor,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Padding(

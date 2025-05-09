@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -9,7 +11,6 @@ import 'package:tapcard/utils/const.dart';
 import 'package:tapcard/views/customize/cardcustom.dart';
 import 'package:localstore/localstore.dart';
 import 'package:nfc_manager/nfc_manager.dart';
-
 
 import 'package:tapcard/views/edit_card.dart';
 import 'package:tapcard/views/widgets/dialogs/received_card.dart';
@@ -27,10 +28,9 @@ class HomeController extends GetxController {
   List myCards = [];
 
   getMyCards() async {
-    myCards = await LocalStorageService.instance.getMyCards()??[];
+    myCards = await LocalStorageService.instance.getMyCards() ?? [];
     update();
   }
-
 
   @override
   void onInit() async {
@@ -55,9 +55,8 @@ class HomeController extends GetxController {
     update();
   }
 
-
-  void showEditCardDialog(BuildContext context, bm.BusinessCardModel cardModel) {
-
+  void showEditCardDialog(
+      BuildContext context, bm.BusinessCardModel cardModel) {
     Get.dialog(AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
@@ -79,7 +78,9 @@ class HomeController extends GetxController {
             title: Text('Change Details'),
             onTap: () {
               Navigator.pop(context);
-              Get.to(() => EditCard(cardModel: cardModel,));
+              Get.to(() => EditCard(
+                    cardModel: cardModel,
+                  ));
             },
           ),
           ListTile(
@@ -104,7 +105,8 @@ class HomeController extends GetxController {
             ),
             title: Text('Delete'),
             onTap: () {
-              LocalStorageService.instance.deleteMyCard(cardModel.id.toString());
+              LocalStorageService.instance
+                  .deleteMyCard(cardModel.id.toString());
               HomeController.it.getMyCards();
               Navigator.pop(context);
             },
@@ -112,46 +114,68 @@ class HomeController extends GetxController {
           SizedBox(
             width: double.infinity,
             child: CustomButton(
-                text: 'Close',
-                filled: false,
-                onPressed: () {
-                  Navigator.pop(context);
-                }),
-            // child: CustomButton(
-            //     text: 'Close',
-            //     filled: false,
-            //     onPressed: () {
-            //       Navigator.pop(context);
-            //     }),
-          )
+              text: 'Close',
+              filled: false,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
         ],
       ),
     ));
-
   }
 
   var businessCards = <BusinessCardModel>[].obs;
 
-  // void fetchCardsFromDatabase() async {
-  //   final items = await _db.collection('businessCards').get();
-  //   if (items != null) {
-  //     businessCards.value =
-  //         items.values.map((item) => BusinessCardModel.fromJson(item)).toList();
+  // Future<void> shareBusinessCard(bm.BusinessCardModel card) async {
+  //   try {
+  //     bool isAvailable = await NfcManager.instance.isAvailable();
+  //     if (!isAvailable) {
+  //       Get.snackbar('Error', 'NFC is not available on this device');
+  //       return;
+  //     }
+  //     showDialog(
+  //       context: Get.context!,
+  //       builder: (context) => const StartSharing(),
+  //     );
+  //     NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
+  //       try {
+  //         Ndef? ndef = Ndef.from(tag);
+  //         if (ndef == null) {
+  //           Get.snackbar('Device Error', 'Tag is not NDEF compatible');
+  //           return;
+  //         }
+
+  //         NdefMessage message = NdefMessage([
+  //           NdefRecord.createText(jsonEncode(card.toMap())),
+  //         ]);
+
+  //         await ndef.write(message);
+  //         Navigator.pop(Get.context!);
+  //         // Get.snackbar('Write Success ' , 'Card data written successfully');
+
+  //         showDialog(
+  //           context: Get.context!,
+  //           builder: (context) => const SharingComplete(),
+  //         );
+  //         NfcManager.instance.stopSession();
+  //       } catch (e) {
+  //         print('Error writing to NFC tag: $e');
+  //         NfcManager.instance.stopSession(errorMessage: e.toString());
+  //       }
+  //     });
+  //   } catch (e) {
+  //     print('Error starting NFC session: $e');
   //   }
   // }
 
-  // void addBusinessCard(BusinessCardModel card) async {
-  //   final id = _db.collection('businessCards').doc().id;
-  //   await _db.collection('businessCards').doc(id).set(card.toJson());
-  //   businessCards.add(card);
-  // }
-
+  // Added this here
   Future<void> shareBusinessCard(bm.BusinessCardModel card) async {
     try {
       bool isAvailable = await NfcManager.instance.isAvailable();
       if (!isAvailable) {
-
-        Get.snackbar('Error','NFC is not available on this device');
+        Get.snackbar('Error', 'NFC is not available on this device');
         return;
       }
       showDialog(
@@ -159,33 +183,39 @@ class HomeController extends GetxController {
         builder: (context) => const StartSharing(),
       );
       NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
+        print('Discovered NFC tag');
         try {
           Ndef? ndef = Ndef.from(tag);
-          if (ndef == null) {
-            Get.snackbar('Device Error', 'Tag is not NDEF compatible');
-            return;
+          if (ndef != null) {
+            // NDEF compatible device
+            NdefMessage message = NdefMessage([
+              NdefRecord.createText(jsonEncode(card.toMap())),
+            ]);
+            await ndef.write(message);
+          } else {
+            // Non-NDEF device, try Android Beam or HCE
+            if (Platform.isAndroid) {
+              await shareViaAndroidBeam(card);
+            } else {
+              // For iOS or other platforms, you might need a different approach
+              Get.snackbar('Error', 'Unsupported device for non-NDEF sharing');
+            }
           }
-
-          NdefMessage message = NdefMessage([
-            NdefRecord.createText(jsonEncode(card.toMap())),
-          ]);
-
-          await ndef.write(message);
           Navigator.pop(Get.context!);
-         // Get.snackbar('Write Success ' , 'Card data written successfully');
-
           showDialog(
             context: Get.context!,
             builder: (context) => const SharingComplete(),
           );
-          NfcManager.instance.stopSession();
         } catch (e) {
-          print('Error writing to NFC tag: $e');
-          NfcManager.instance.stopSession(errorMessage: e.toString());
+          print('Error sharing card: $e');
+          Get.snackbar('Error', 'Failed to share card: $e');
+        } finally {
+          NfcManager.instance.stopSession();
         }
       });
     } catch (e) {
       print('Error starting NFC session: $e');
+      Get.snackbar('Error', 'Failed to start NFC session: $e');
     }
   }
 
@@ -193,22 +223,20 @@ class HomeController extends GetxController {
     try {
       bool isAvailable = await NfcManager.instance.isAvailable();
       if (!isAvailable) {
-
         Get.snackbar('Sorry', 'NFC is not available on this device');
         return null;
       }
-      showDialog(context: Get.context!, builder: (context)=>
-      ScanIncomingCard());
-      NfcManager.instance.startSession(
-          onDiscovered: (NfcTag tag) async
-      {
+      showDialog(
+          context: Get.context!, builder: (context) => ScanIncomingCard());
+      NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
+        print('Discovered NFC tag');
         try {
           Ndef? ndef = Ndef.from(tag);
 
           if (ndef == null) {
             Navigator.pop(Get.context!);
             Get.snackbar('Device Error', 'Tag is not NDEF compatible');
-            return ;
+            return;
           }
 
           NdefMessage? message = await ndef.read();
@@ -231,9 +259,10 @@ class HomeController extends GetxController {
                 Navigator.pop(Get.context!);
                 showDialog(
                   context: Get.context!,
-                  builder: (context) =>  ReceivedCard(businessCardModel: card,),
+                  builder: (context) => ReceivedCard(
+                    businessCardModel: card,
+                  ),
                 );
-
               } catch (e) {
                 print('Error parsing business card data: $e');
               }
@@ -253,5 +282,33 @@ class HomeController extends GetxController {
     return null;
   }
 
+  Future<void> shareViaAndroidBeam(bm.BusinessCardModel card) async {
+    try {
+      NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
+        var ndef = Ndef.from(tag);
+        if (ndef == null) {
+          Get.snackbar('Error', 'Tag is not NDEF compatible');
+          return;
+        }
 
+        NdefMessage message = NdefMessage([
+          NdefRecord.createMime(
+            'application/vnd.com.example.businesscard',
+            Uint8List.fromList(jsonEncode(card.toMap()).codeUnits),
+          ),
+        ]);
+
+        try {
+          ndef.isWritable;
+          Get.snackbar('Success', 'Card shared successfully');
+        } catch (e) {
+          Get.snackbar('Error', 'Failed to share card: $e');
+        } finally {
+          NfcManager.instance.stopSession();
+        }
+      });
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to start NFC session: $e');
+    }
+  }
 }
